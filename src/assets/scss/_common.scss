@@ -2,3 +2,7 @@
   @apply text-white bg-primary border-primary
   hover:border-primary-dark hover:bg-primary-dark border rounded text-base px-4 py-2;
 }
+.slider-content
+{
+  @apply top-1/2 left-1/2;
+}
