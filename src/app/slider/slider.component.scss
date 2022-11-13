@@ -1,0 +1,45 @@
+.slider-inner {
+  @apply grid place-items-center relative w-screen h-screen;
+}
+
+.slider-content {
+  @apply text-center absolute;
+
+  >.slider-title {
+    @apply w-fit m-auto;
+
+    >h2 {
+      @apply font-montserrat px-5 py-[10px] text-black uppercase text-sm text-center;
+      background: #f8f2ec;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+  }
+
+  >.slider-sub-title {
+    @apply w-fit m-auto;
+
+    >h2 {
+      @apply font-playfairDisplay px-5 py-[10px] text-black text-center;
+      background: RGBA(248, 242, 236, 0.78);
+      font-size: 237.5%;
+      line-height: 1.4;
+    }
+  }
+
+  .slider-botton-black {
+    @apply py-3 px-6 text-white bg-gray-800 border-gray-800;
+
+    &:hover {
+      @apply bg-black border-black;
+    }
+  }
+
+  .slider-botton-orange {
+    @apply py-3 px-6 text-white bg-primary border-primary;
+
+    &:hover {
+      @apply bg-primary-dark border-primary-dark;
+    }
+  }
+}

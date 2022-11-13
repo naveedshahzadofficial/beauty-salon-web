@@ -30,7 +30,13 @@ module.exports = {
       colors: {
                 'primary': '#f78e2f',
                 'primary-dark': '#e77e1f',
+								'primary-heading':'#f97500',
+								'secondary':'#444444',
             },
+			  fontFamily: {
+        montserrat: ['Montserrat', 'serif'],
+        playfairDisplay: [ 'Playfair Display', 'serif'],
+      }, 
       zIndex: {
                 1: '1',
                 2: '2',
@@ -42,5 +48,7 @@ module.exports = {
 	plugins: [
 		 require('@tailwindcss/typography'),
 		 require('@tailwindcss/forms'),
+		 require('@tailwindcss/aspect-ratio'),
+
 	],
 }

@@ -1,0 +1,11 @@
+.owl-nav {
+  @apply absolute top-1/2 w-full;
+
+  .owl-prev {
+    @apply float-left;
+  }
+
+  .owl-next {
+    @apply float-right;
+  }
+}

@@ -1,0 +1,21 @@
+<div class="slider-outter overflow-hidden">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let slider of sliders">
+      <div class="slider-inner">
+        <img [src]="slider.slider_file" class="object-fill" alt="slider image" />
+        <div class="slider-content">
+          <div class="slider-title">
+            <h2>{{ slider.title }}</h2>
+          </div>
+          <div class="slider-sub-title">
+            <h2>{{ slider.sub_title }}</h2>
+          </div>
+          <div class="slider-buttons mt-8">
+            <a href="#" class="slider-botton-black">Register Now</a>
+            <a href="#" class="slider-botton-orange">Book Appointment</a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</div>

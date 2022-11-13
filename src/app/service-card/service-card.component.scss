@@ -1,0 +1,25 @@
+.service-cards {
+  @apply flex justify-center flex-wrap;
+
+  .service-card {
+    @apply px-4 text-center w-1/3;
+
+    figure {
+      margin: 0 0 1rem;
+      display: inline-block;
+
+      >.figure-card {
+        @apply bg-white py-4 px-6 text-center text-base relative w-[90%] -mt-10 ml-[5%];
+        box-shadow: 0 3px 8px -1px rgb(0 0 0 / 20%);
+
+        >figcaption {
+          @apply font-playfairDisplay text-primary-heading text-xl font-medium;
+        }
+
+        .more-info {
+          @apply px-1 py-1;
+        }
+      }
+    }
+  }
+}

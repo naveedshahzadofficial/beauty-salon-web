@@ -2,7 +2,12 @@
   @apply text-white bg-primary border-primary
   hover:border-primary-dark hover:bg-primary-dark border rounded text-base px-4 py-2;
 }
-.slider-content
-{
-  @apply absolute top-1/2 left-1/2;
+.btn-secondary{
+  @apply text-white bg-secondary border-secondary hover:border-primary-dark hover:bg-primary-dark border rounded text-base
+}
+h1, .heading{
+  @apply text-primary-heading font-playfairDisplay text-[2rem] font-medium;
+}
+.lead{
+  @apply font-normal text-xl;
 }
