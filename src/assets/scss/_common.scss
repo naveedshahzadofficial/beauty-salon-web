@@ -5,9 +5,13 @@
 .btn-secondary{
   @apply text-white bg-secondary border-secondary hover:border-primary-dark hover:bg-primary-dark border rounded text-base
 }
-h1, .heading{
+h1,h2,.heading{
   @apply text-primary-heading font-playfairDisplay text-[2rem] font-medium;
 }
-.lead{
-  @apply font-normal text-xl;
+
+
+h3{
+  @apply mt-0 font-playfairDisplay text-[1.75rem] font-medium leading-5;
 }
+
+

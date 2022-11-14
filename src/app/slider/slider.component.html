@@ -2,7 +2,7 @@
   <owl-carousel-o [options]="customOptions">
     <ng-template carouselSlide *ngFor="let slider of sliders">
       <div class="slider-inner">
-        <img [src]="slider.slider_file" class="object-fill" alt="slider image" />
+        <img [src]="slider.slider_file" class="object-cover" alt="slider image" />
         <div class="slider-content">
           <div class="slider-title">
             <h2>{{ slider.title }}</h2>

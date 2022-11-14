@@ -1,0 +1,26 @@
+.lead {
+  @apply font-normal text-xl;
+}
+// get apps
+.get-apps {
+  background-color: #fdc99b;
+
+  .italic-big-text {
+    font-family: 'ATC Ripley', sans-serif;
+    color: #333;
+    font-size: 5rem;
+    vertical-align: middle;
+    text-shadow: 0 1px 1px rgb(255 255 255 / 40%);
+    margin-right: 8px;
+  }
+
+  .heart {
+    display: inline-block;
+    fill: crimson;
+    position: relative;
+    top: 5px;
+    width: 52px;
+    -webkit-animation: pulse 1s ease infinite;
+    animation: pulse 1s ease infinite;
+  }
+}
