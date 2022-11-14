@@ -127,5 +127,20 @@
 <section class="how-to-work py-12">
   <div class="container">
     <h2 class="text-center pb-6">How #GharPar works?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div *ngFor="let card of help_cards; let number = index">
+            <div class="flex justify-center">
+              <div class="rounded-lg shadow-lg bg-white max-w-sm">
+                <div class="relative">
+                <img class="rounded-t-lg" [src]="card.image_file" [alt]="card.title" />
+                <div class="absolute bottom-0 text-center font-playfairDisplay text-5xl px-4 pb-4 bg-[rgba(253,196,155,.9)]">{{ number>9?number+1:'0'+(number+1) }}</div>
+                </div>
+                <div class="p-2 text-center">
+                  <div class="mb-0 text-lg font-playfairDisplay">{{ card.title }}</div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
   </div>
 </section>
