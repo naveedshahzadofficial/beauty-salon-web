@@ -10,6 +10,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HomeComponent } from './home/home.component';
 import { SliderComponent } from './slider/slider.component';
 import { ServiceCardComponent } from './service-card/service-card.component';
+import { HeaderComponent } from './header/header.component';
+import { TopBarComponent } from './header/top-bar/top-bar.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ServiceCardComponent } from './service-card/service-card.component';
     AppComponent,
     HomeComponent,
     SliderComponent,
-    ServiceCardComponent
+    ServiceCardComponent,
+    HeaderComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,

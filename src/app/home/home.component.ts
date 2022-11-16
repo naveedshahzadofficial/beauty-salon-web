@@ -25,4 +25,20 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  stories = [
+    {
+      "title":"How to Use Setting Spray for Long-lasting Makeup",
+      "image_file":"assets/images/stories/1.jpg",
+      "stories_categories":"Makeup & Hair, Tips and Myths"
+    },{
+      "title":"Hair Dye Allergy - Symptoms and Home Remedies",
+      "image_file":"assets/images/stories/2.jpg",
+      "stories_categories":"Makeup & Hair, Tips and Myths"
+    },{
+      "title":"Benefits of Humidifiers for Skin in Winter",
+      "image_file":"assets/images/stories/3.jpg",
+      "stories_categories":"Makeup & Hair, Tips and Myths"
+    }
+  ];
+
 }
