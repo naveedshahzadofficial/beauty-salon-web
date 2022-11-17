@@ -6,13 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { HomeComponent } from './home/home.component';
-import { SliderComponent } from './slider/slider.component';
-import { ServiceCardComponent } from './service-card/service-card.component';
-import { HeaderComponent } from './header/header.component';
-import { TopBarComponent } from './header/top-bar/top-bar.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './layouts/client-layout/header/header.component';
+import { TopBarComponent } from './layouts/client-layout/header/top-bar/top-bar.component';
+import { FooterComponent } from './layouts/client-layout/footer/footer.component';
+import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 
 @NgModule({
@@ -21,18 +19,16 @@ import { FooterComponent } from './footer/footer.component';
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
-    SliderComponent,
-    ServiceCardComponent,
     HeaderComponent,
     TopBarComponent,
-    FooterComponent
+    FooterComponent,
+    ClientLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
