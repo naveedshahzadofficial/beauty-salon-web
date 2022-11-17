@@ -41,4 +41,32 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  features = [
+    {
+      "title":"How Pakistan can diversify, digitally",
+      "link":"http://blogs.worldbank.org/psd/how-pakistan-can-diversify-digitally",
+      "image_file":"assets/images/features/world-bank-logo.svg"
+    },
+    {
+      "title":"Tevta",
+      "link":null,
+      "image_file":"assets/images/features/tevta_logo.png"
+    },
+    {
+      "title":"BBC News",
+      "link":null,
+      "image_file":"assets/images/features/bbc-news.png"
+    },
+    {
+      "title":"ARY News",
+      "link":null,
+      "image_file":"assets/images/features/ary-news.png"
+    },
+    {
+      "title":"ProPakistani",
+      "link":null,
+      "image_file":"assets/images/features/pro-pakistani.png"
+    },
+  ]
+
 }

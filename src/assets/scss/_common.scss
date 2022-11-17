@@ -1,13 +1,21 @@
 .btn-primary{
-  @apply text-white bg-primary border-primary
-  hover:border-primary-dark hover:bg-primary-dark border rounded text-base px-4 py-2;
+	@apply text-white bg-primary border-primary
+	hover:border-primary-dark hover:bg-primary-dark border rounded text-base px-4 py-2;
 }
 .btn-secondary{
-  @apply text-white bg-secondary border-secondary hover:border-primary-dark hover:bg-primary-dark border rounded text-base
+	@apply text-white bg-secondary border-secondary hover:border-primary-dark hover:bg-primary-dark border rounded text-base;
 }
 h1,h2,.heading{
-  @apply text-primary-heading font-playfairDisplay text-[2rem] font-medium;
+	@apply text-primary-heading font-playfairDisplay text-[2rem] font-medium;
 }
 h3{
-  @apply mt-0 font-playfairDisplay text-[1.75rem] font-medium leading-5;
+	@apply mt-0 font-playfairDisplay text-[1.75rem] font-medium leading-5;
+}
+h5
+{
+	font-weight: 600;
+	font-size: 1.25rem;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	line-height: 1.2;
 }

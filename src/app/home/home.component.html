@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <app-slider></app-slider>
 <section class="intro container">
   <div class="py-12 text-center font-light mx-[8.3%]">
@@ -97,3 +98,14 @@
 </div>
 
 </section>
+
+<section class="py-12 bg-gray-100 text-center">
+<h2 class="pb-6">Proudly Featured In</h2>
+<ng-container *ngFor="let feature of features">
+<span class="p-4 inline-table sm:inline-block">
+  <a [href]="feature.link??'#'" [target]="feature.link?'_blank':''"><img [src]="feature.image_file" [alt]="feature.title" class="h-16 w-auto"></a>
+</span>
+</ng-container>
+</section>
+
+<app-footer></app-footer>

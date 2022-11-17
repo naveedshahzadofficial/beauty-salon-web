@@ -12,6 +12,7 @@ import { SliderComponent } from './slider/slider.component';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { HeaderComponent } from './header/header.component';
 import { TopBarComponent } from './header/top-bar/top-bar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TopBarComponent } from './header/top-bar/top-bar.component';
     SliderComponent,
     ServiceCardComponent,
     HeaderComponent,
-    TopBarComponent
+    TopBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
