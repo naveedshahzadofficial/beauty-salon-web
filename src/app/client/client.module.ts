@@ -7,6 +7,8 @@ import { SliderComponent } from './slider/slider.component';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { LoginComponent } from './login/login.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PageServicesComponent } from './page-services/page-services.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     SliderComponent,
     ServiceCardComponent,
     LoginComponent,
+    PageServicesComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

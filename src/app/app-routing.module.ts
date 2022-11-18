@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
 const routes: Routes = [
+
+
   // Client Routes
   {
     path: '',
@@ -11,11 +13,11 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      redirectTo: '/home',
+      redirectTo: '/client',
       pathMatch: 'full'
     },
   {
-    path: 'home',
+    path: 'client',
     loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
   }]
   },
@@ -25,12 +27,12 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [{
       path: '',
-      redirectTo: '/dashboard',
+      redirectTo: '/admin',
       pathMatch: 'full',
 
     },
     {
-      path: 'dashboard',
+      path: 'admin',
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
     }
   ]
