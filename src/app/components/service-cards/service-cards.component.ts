@@ -1,3 +1,4 @@
+import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./service-cards.component.scss']
 })
 export class ServiceCardsComponent implements OnInit {
-
-  constructor() { }
+  categories!: any[];
+  constructor(private categoryService: CategoryService) {
+    categoryService.getCategories().subscribe(response => {
+      this.categories = response.data;
+      console.log(response);
+    });
+   }
 
   ngOnInit(): void {
   }
-
-  categories = [
-    {},{},{},{},{},{},{},{},{},
-  ]
 
 }

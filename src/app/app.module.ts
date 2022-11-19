@@ -1,6 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,10 +12,12 @@ import { TopBarComponent } from './layouts/client-layout/header/top-bar/top-bar.
 import { FooterComponent } from './layouts/client-layout/footer/footer.component';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   schemas: [
-  CUSTOM_ELEMENTS_SCHEMA
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA
   ],
   declarations: [
     AppComponent,
@@ -28,8 +31,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    CategoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
