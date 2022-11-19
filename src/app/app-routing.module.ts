@@ -4,8 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
 const routes: Routes = [
-
-
+  // Default Routes
+  {
+    path: '',
+    component: ClientLayoutComponent,
+    children: [{
+    path:'',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+    }]
+  },
   // Client Routes
   {
     path: '',
@@ -36,7 +43,8 @@ const routes: Routes = [
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
     }
   ]
-  }
+  },
+  
 
 ];
 

@@ -12,7 +12,6 @@ import { FooterComponent } from './layouts/client-layout/footer/footer.component
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-
 @NgModule({
   schemas: [
   CUSTOM_ELEMENTS_SCHEMA
