@@ -1,3 +1,5 @@
+import { ErrorHandler } from '@angular/core';
+import { AppErrorHandler } from './common/app-error-handler';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +36,8 @@ import { CategoryService } from './services/category.service';
     HttpClientModule,
   ],
   providers: [
-    CategoryService
+    CategoryService,
+    {provide:ErrorHandler, useClass:AppErrorHandler}
   ],
   bootstrap: [AppComponent]
 })

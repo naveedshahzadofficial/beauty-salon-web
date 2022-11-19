@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
-
-
+import { Injectable } from '@angular/core';
+import { ICategory } from '../interfaces/category.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
-
-  constructor(private http: HttpClient) { }
-
-  getCategories(){
-    return this.http.get<any>('http://beauty-salon.test/api/v1/categories');
-  }
+export class CategoryService extends DataService<ICategory> {
+  constructor(http: HttpClient) {
+    super('categories',http);
+   }
 }
