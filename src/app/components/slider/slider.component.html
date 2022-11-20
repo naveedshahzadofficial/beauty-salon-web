@@ -1,8 +1,8 @@
 <div class="slider-outter overflow-hidden" [ngClass]="isDefault?'home-slider':'quote-slider'">
   <owl-carousel-o [options]="customOptions">
+    <ng-container *ngIf="isDefault">
     <ng-template carouselSlide *ngFor="let slider of sliders">
-
-      <div *ngIf="isDefault" class="slider-inner">
+      <div class="slider-inner">
         <img [src]="slider.slider_file" class="object-cover" alt="slider image" />
         <div class="slider-content">
           <div class="slider-title">
@@ -17,26 +17,25 @@
           </div>
         </div>
       </div>
-
-      <ng-container *ngIf="!isDefault">
+    </ng-template>
+    </ng-container>
+    <ng-container *ngIf="!isDefault">
+    <ng-template carouselSlide *ngFor="let slider of review_sliders">
         <div class="flex flex-col md:flex-row">
           <div class="basis-full m-auto md:basis-1/4 relative md:pl-4 md:ml-[8.83%]">
             <img class="w-16 absolute top-0" src="assets/images/blockquote.svg" alt="">
-            <img class="aspect-h-1 w-40 h-40 rounded-full mt-1 ml-8" src="assets/images/reviews/roshaneh-1.jpg" alt="">
+            <img class="aspect-h-1 w-40 h-40 rounded-full mt-1 ml-8" [src]="slider.photo_file" alt="">
           </div>
           <div class="basis-full md:basis-3/4">
-            <p class="text-justify">GharPar is truly a revolution in Pakistan's beauty scene! Such great customer service, well trained staff, hygiene
-              equipment and most all amazing services! It truly is the best combination of convenience and value! Highly
-              recommended!</p>
-              <br>
-              <blockquote class="mb-4 text-xl text-left">
-                <p class="font-playfairDisplay italic text-gray-500 text-[.875em] -mt-4 before:content-['-']">Sumrina Khan</p>
-              </blockquote>
-
+            <p class="text-justify">{{ slider.review }}</p>
+            <br>
+            <blockquote class="mb-4 text-xl text-left">
+              <p class="font-playfairDisplay italic text-gray-500 text-[.875em] -mt-4 before:content-['-']">{{ slider.name }}</p>
+            </blockquote>
+    
           </div>
         </div>
-      </ng-container>
-
     </ng-template>
+    </ng-container>
   </owl-carousel-o>
 </div>

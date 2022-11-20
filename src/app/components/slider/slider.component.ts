@@ -1,6 +1,7 @@
+import { IReviewSlider } from './../../interfaces/review-slider.interface';
+import { ISlider } from './../../interfaces/slider.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Slider } from './slider.model';
 
 @Component({
   selector: 'app-slider',
@@ -9,27 +10,9 @@ import { Slider } from './slider.model';
 })
 export class SliderComponent implements OnInit {
   @Input() isDefault: boolean = true;
+  @Input() sliders: ISlider[] = [];
+  @Input() review_sliders: IReviewSlider[] = [];
 
-  sliders: Slider[] = [
-    {
-      id: 1,
-      title: "PAKISTAN'S NO. 1 BEAUTY SERVICES",
-      sub_title:"Professional Beauty Services at Home",
-      slider_file:"assets/slider/slider-1.jpg"
-    },
-    {
-      id: 2,
-      title: "PAKISTAN'S NO. 1 BEAUTY SERVICES",
-      sub_title:"Professional Beauty Services at Home",
-      slider_file:"assets/slider/slider-2.jpg"
-    },
-    {
-      id: 3,
-      title: "PAKISTAN'S NO. 1 BEAUTY SERVICES",
-      sub_title:"Introducing Hydra Skin Treatment at Home",
-      slider_file:"assets/slider/slider-3.jpg"
-    }
-  ]
   constructor() { }
 
   ngOnInit(): void {

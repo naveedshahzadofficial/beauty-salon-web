@@ -1,4 +1,4 @@
-<app-slider></app-slider>
+<app-slider [sliders]="sliders"></app-slider>
 <section class="intro container">
   <div class="py-12 text-center font-light mx-[8.3%]">
       <h1 class="heading">Professional Beauty Services at Home</h1>
@@ -68,7 +68,7 @@
 <section class="reviews bg-gray-100 py-12">
   <h2 class="text-center pb-6">What people say about SavvySalon</h2>
   <div class="container text-center">
-  <app-slider [isDefault]="false"></app-slider>
+  <app-slider [isDefault]="false" [review_sliders]="review_sliders"></app-slider>
   </div>
 </section>
 

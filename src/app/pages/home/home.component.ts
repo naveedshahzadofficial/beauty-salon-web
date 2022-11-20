@@ -1,3 +1,7 @@
+import { IReviewSlider } from './../../interfaces/review-slider.interface';
+import { ISlider } from './../../interfaces/slider.interface';
+import { ICategory } from './../../interfaces/category.interface';
+import { PageService } from './../../services/page.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  categories!: ICategory[];
+  sliders!: ISlider[];
+  review_sliders!: IReviewSlider[];
 
-  constructor() { }
+  constructor(private pageService:PageService) { }
 
   ngOnInit(): void {
+    this.pageService.homePage().subscribe((resp:any) =>{
+      this.categories = resp.categories;
+      this.sliders = resp.sliders;
+      this.review_sliders = resp.review_sliders;
+    });
   }
 
   help_cards = [

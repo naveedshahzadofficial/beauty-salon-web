@@ -1,3 +1,4 @@
+import { IResponses } from './../../interfaces/responses.interface';
 import { ICategory } from './../../interfaces/category.interface';
 import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,9 +13,9 @@ export class ServiceCardsComponent implements OnInit {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService.getAll().subscribe((response:ICategory[]) => {
-      this.categories = response;
-      console.log(response);
+    this.categoryService.getAll().subscribe((resp:IResponses<ICategory>) => {
+      this.categories = resp.data;
+      console.log(resp);
     });
   }
 
