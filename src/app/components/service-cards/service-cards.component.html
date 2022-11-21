@@ -2,8 +2,8 @@
   <div *ngFor="let category of categories" class="service-card">
     <figure class="text-center min-h-[440px]">
       <img [src]="category.category_picture"
-        class="border-[3px] border-white  w-[416px] h-[275]" [alt]="category.category_name">
-      <div class="figure-card">
+        class="border-[3px] border-white aspect-2  w-[416px] h-[275]" [alt]="category.category_name">
+      <div class="figure-card min-h-[11.3rem]">
         <figcaption class="text-center pb-2">{{ category.category_name }}</figcaption>
         <p class="mb-4">{{ category.short_description }}</p>
         <div class="text-center">
