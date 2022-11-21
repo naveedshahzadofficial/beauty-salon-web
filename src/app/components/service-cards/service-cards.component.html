@@ -1,12 +1,11 @@
 <div class="service-cards">
   <div *ngFor="let category of categories" class="service-card">
     <figure class="text-center min-h-[440px]">
-      <img src="assets/images/services/massage-during-pregnancy.jpg"
-        class="border-[3px] border-white  w-[416px] h-[275]" alt="">
+      <img [src]="category.category_picture"
+        class="border-[3px] border-white  w-[416px] h-[275]" [alt]="category.category_name">
       <div class="figure-card">
-        <figcaption class="text-center pb-2">Woman Massage</figcaption>
-        <p class="mb-4">Relax those nerves with a GharPar massage. All our masseuses come equipped with a massage table!
-        </p>
+        <figcaption class="text-center pb-2">{{ category.category_name }}</figcaption>
+        <p class="mb-4">{{ category.short_description }}</p>
         <div class="text-center">
           <a class="btn-secondary mx-auto more-info" href="#">More Info</a>
         </div>

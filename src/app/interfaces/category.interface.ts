@@ -4,6 +4,7 @@ export interface ICategory {
     category_picture:  string;
     category_pdf_icon: string;
     category_svg_icon: string;
+    short_description:       null | string;
     description:       null | string;
     is_deal:           number;
     is_active:         number;
