@@ -26,8 +26,8 @@ export class PageService {
     .pipe(retry(1), catchError(this.handleError));
   }
 
-  storiesPage(per_page:number): Observable<any>{
-    return this.http.post(`${this.base_url}/pages/stories`,{per_page: per_page})
+  storiesPage(per_page:number, page:number): Observable<any>{
+    return this.http.post(`${this.base_url}/pages/stories`,{per_page: per_page, page:page})
     .pipe(map((response: any) => response.data))
     .pipe(retry(1), catchError(this.handleError));
   }
