@@ -15,7 +15,19 @@ export class PageService {
   constructor(private http: HttpClient) { }
 
   homePage(): Observable<any>{
-    return this.http.get(`${this.base_url}/pages/home`)
+    return this.http.post(`${this.base_url}/pages/home`,{})
+    .pipe(map((response: any) => response.data))
+    .pipe(retry(1), catchError(this.handleError));
+  }
+
+  servicesPage(): Observable<any>{
+    return this.http.post(`${this.base_url}/pages/services`,{})
+    .pipe(map((response: any) => response.data))
+    .pipe(retry(1), catchError(this.handleError));
+  }
+
+  storiesPage(per_page:number): Observable<any>{
+    return this.http.post(`${this.base_url}/pages/stories`,{per_page: per_page})
     .pipe(map((response: any) => response.data))
     .pipe(retry(1), catchError(this.handleError));
   }

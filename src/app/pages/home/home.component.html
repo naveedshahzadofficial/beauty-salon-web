@@ -76,20 +76,7 @@
 <section class="latest-blog container py-12">
 <h2 class="py-6 text-center">Latest Stories</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-  <div class="border border-color-[rgba(0,0,0,.125)] rounded-lg" *ngFor="let story of stories;">
-    <div class="flex justify-center">
-      <div class="rounded-lg shadow-lg bg-white max-w-sm">
-        <a href="#">
-          <img class="rounded-t-lg" [src]="story.image_file" [alt]="story.title" />
-        </a>
-        <div class="p-2 text-center">
-          <div class="mb-0 text-lg font-playfairDisplay">{{ story.title }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-story-cards [stories]="stories"></app-story-cards>
 
 <div class="text-center pt-12">
   <a href="#" class="btn-primary shadow-sm text-xl">More Stories</a>

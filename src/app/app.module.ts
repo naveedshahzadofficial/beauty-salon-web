@@ -4,6 +4,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +36,7 @@ import { CategoryService } from './services/category.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [
     CategoryService,

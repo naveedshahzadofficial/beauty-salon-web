@@ -1,0 +1,16 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <ng-container *ngFor="let story of stories;">
+    <div class="border border-color-[rgba(0,0,0,.125)] rounded-lg">
+      <div class="flex justify-center">
+        <div class="rounded-lg shadow-lg bg-white max-w-sm">
+          <a href="#">
+            <img class="rounded-t-lg" [src]="story.story_file" [alt]="story.title" />
+          </a>
+          <div class="p-2 text-center min-h-[4.5rem]">
+            <div class="mb-0 text-lg font-playfairDisplay"><a href="">{{ story.title }}</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

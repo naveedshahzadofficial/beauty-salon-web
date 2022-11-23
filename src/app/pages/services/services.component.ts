@@ -1,3 +1,5 @@
+import { ICategory } from './../../interfaces/category.interface';
+import { PageService } from './../../services/page.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit {
+  categories: ICategory[] = [];
 
-  constructor() { }
+  constructor(private pageService:PageService) { }
 
   ngOnInit(): void {
+    this.pageService.homePage().subscribe((resp:any) =>{
+      this.categories = resp.categories;
+    });
   }
 
 }

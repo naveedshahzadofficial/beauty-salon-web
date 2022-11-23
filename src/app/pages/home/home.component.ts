@@ -1,3 +1,4 @@
+import { IStory } from './../../interfaces/story.interface';
 import { IReviewSlider } from './../../interfaces/review-slider.interface';
 import { ISlider } from './../../interfaces/slider.interface';
 import { ICategory } from './../../interfaces/category.interface';
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   categories: ICategory[] = [];
   sliders: ISlider[] = [];
   review_sliders: IReviewSlider[] = [];
+  stories: IStory[] = [];
 
   constructor(private pageService:PageService) { }
 
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
       this.categories = resp.categories;
       this.sliders = resp.sliders;
       this.review_sliders = resp.review_sliders;
+      this.stories = resp.stories;
     });
   }
 
@@ -37,21 +40,6 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  stories = [
-    {
-      "title":"How to Use Setting Spray for Long-lasting Makeup",
-      "image_file":"assets/images/stories/1.jpg",
-      "stories_categories":"Makeup & Hair, Tips and Myths"
-    },{
-      "title":"Hair Dye Allergy - Symptoms and Home Remedies",
-      "image_file":"assets/images/stories/2.jpg",
-      "stories_categories":"Makeup & Hair, Tips and Myths"
-    },{
-      "title":"Benefits of Humidifiers for Skin in Winter",
-      "image_file":"assets/images/stories/3.jpg",
-      "stories_categories":"Makeup & Hair, Tips and Myths"
-    }
-  ];
 
   features = [
     {
