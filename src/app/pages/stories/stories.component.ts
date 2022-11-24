@@ -32,5 +32,9 @@ export class StoriesComponent implements OnInit {
     });
   }
 
+  pageChange(){
+    console.log('page has been changed.');
+  }
+
 
 }
