@@ -29,12 +29,31 @@ export class StoriesComponent implements OnInit {
       this.stories = resp.data;
       this.links = resp.links;
       this.meta = resp.meta;
+      this.meta.links = this.meta.links.map(link => {
+        if(link.label === '&laquo; Previous'){
+          link.label = '«';
+        }else if(link.label === 'Next &raquo;')
+        {
+          link.label = '»';
+        }
+        if(link.url){
+         let url = new URL(link.url);
+         let page = url.searchParams.get("page");
+         link.url = page?.toString();
+        }
+        return link;
+      });
     });
   }
 
-  pageChange(){
-    console.log('page has been changed.');
+  pageChange(page: string){
+    this.page = parseInt(page);
+    this.getStories();
   }
+  scroll(el: HTMLElement) {
+    console.log(el);
+    el.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+ }
 
 
 }
