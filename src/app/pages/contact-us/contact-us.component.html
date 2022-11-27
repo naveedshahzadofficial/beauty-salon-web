@@ -1,1 +1,137 @@
-<p>contact-us works!</p>
+<section class="py-12">
+  <h1 class="text-center">Contact Us</h1>
+  <div class="container">
+    <div class="grid grid-cols-12 gap-4">
+    <p class="pb-5 text-center pt-4 col-start-2 col-span-10 text-lg font-normal leading-8">Have questions? Please send our friendly support team a message
+      via our handy contact form. Your feedback helps us continue to work better for you. You may use any of the other
+      methods of your choice to reach to us.</p>
+      </div>
+
+
+      <!-- Section: Design Block -->
+      <section>
+            <div class="grid grid-cols-2 gap-8">
+              <div class="md:mt-12 lg:mt-0 mb-12 lg:mb-0">
+                <div class="block rounded-lg shadow-lg px-6 py-12">
+
+                  <form>
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="full_name">
+                        Full Name
+                      </label>
+                      <input type="text"
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none "
+                        id="full_name" placeholder="Full Name" />
+                    </div>
+
+                    
+
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="issue_nature">
+                        Nature of the Issue?
+                      </label>
+
+                      <select id="issue_nature"
+                        class="bg-white border border-solid border-gray-300 text-gray-700 text-base font-normal rounded focus:ring-0 focus:border-primary block w-full px-3 py-1.5">
+                        <option selected>Choose a nature</option>
+                        <option value="Suggestion">Suggestion</option>
+                        <option value="Bug Report">Bug Report</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="Other">Other</option>
+                      </select>
+                     
+                    </div>
+
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
+                        Email
+                      </label>
+                      <input type="email"
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                        id="email" placeholder="Email address" />
+                    </div>
+                    
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="mobile_no">
+                        Mobile No.
+                      </label>
+                      <input type="text"
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                        id="mobile_no" placeholder="Mobile No" />
+                    </div>
+
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="subject">
+                        Subject
+                      </label>
+                      <input type="text"
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                        id="subject" placeholder="Subject" />
+                    </div>
+
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="message">
+                        Message
+                      </label>
+
+                      <textarea
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0  focus:outline-none"
+                        id="message" rows="3" placeholder="Message"></textarea>
+                    </div>
+
+                    <div class="form-group mb-6">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        How would you like to be contacted?
+                      </label>
+                      
+                      <div class="flex flex-wrap">                          
+                        <div class="flex items-center mr-4">
+                          <input id="communication_email" type="radio" value="Email" name="communication_mode"
+                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
+                          <label for="communication_email" class="ml-2 text-sm font-medium text-gray-900">Email</label>
+                        </div>
+
+                        <div class="flex items-center mr-4">
+                          <input id="communication_mobile_no" type="radio" value="Email" name="communication_mode"
+                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
+                          <label for="communication_mobile_no" class="ml-2 text-sm font-medium text-gray-900">Mobile No</label>
+                        </div>
+
+                        <div class="flex items-center mr-4">
+                          <input id="communication_whatsup" type="radio" value="Email" name="communication_mode"
+                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:ring-primary focus:bg-primary focus:ring-2 ">
+                          <label for="communication_whatsup" class="ml-2 text-sm font-medium text-gray-900">WhatsApp</label>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+                    <div class="form-group form-check text-center mb-6">
+                      <input type="checkbox"
+                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-primary checked:border-primary focus:ring-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
+                        id="is_copy" checked />
+                      <label class="form-check-label cursor-pointer inline-block text-gray-800" for="is_copy">Send me a copy of this
+                        message</label>
+                    </div>
+                    <button type="submit"
+                      class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                      Send
+                    </button>
+                  </form>
+                </div>
+              </div>
+              
+              <div class="h-[500px] map-container shadow-lg rounded-lg">
+                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  class="h-full w-full rounded-lg" frameborder="0" allowfullscreen></iframe>
+              </div>
+
+            </div>
+      </section>
+      <!-- Section: Design Block -->
+
+  </div>
+</section>
