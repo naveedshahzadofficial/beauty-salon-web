@@ -14,6 +14,7 @@ import { StoriesComponent } from './stories/stories.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PageService } from '../services/page.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -37,6 +38,7 @@ import { PageService } from '../services/page.service';
     PagesRoutingModule,
     CarouselModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers:[
     PageService

@@ -32,6 +32,12 @@ export class PageService {
     .pipe(retry(1), catchError(this.handleError));
   }
 
+  contactUsForm(contact_us_form: any): Observable<any>{
+    return this.http.post(`${this.base_url}/pages/contact-us-form`,contact_us_form)
+    .pipe(map((response: any) => response.data))
+    .pipe(retry(1), catchError(this.handleError));
+  }
+
   protected handleError(error:HttpErrorResponse) {
     if(error.status === 400)
       return throwError(() => new BadInput());

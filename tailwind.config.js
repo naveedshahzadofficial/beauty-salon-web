@@ -31,7 +31,8 @@ module.exports = {
                 'primary': '#f78e2f',
                 'primary-dark': '#e77e1f',
 								'primary-heading':'#f97500',
-								'secondary':'#444444',
+                'primary-light': 'rgba(246,141,47,.4)',
+								'secondary':'#444444'
             },
 			  fontFamily: {
         montserrat: ['Montserrat', 'serif'],
@@ -45,7 +46,7 @@ module.exports = {
                 lg: '0 10px 25px -3px rgb(60 72 88 / 0.15)',
                 xl: '0 20px 25px -5px rgb(60 72 88 / 0.1), 0 8px 10px -6px rgb(60 72 88 / 0.1)',
                 '2xl': '0 25px 50px -12px rgb(60 72 88 / 0.25)',
-                inner: 'inset 0 2px 4px 0 rgb(60 72 88 / 0.05)',
+                inner: 'inset 0 2px 4px 0 rgb(60 72 88 / 0.05)'
             },
       zIndex: {
                 1: '1',

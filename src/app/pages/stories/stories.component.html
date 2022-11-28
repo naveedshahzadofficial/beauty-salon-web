@@ -9,8 +9,8 @@
         <li *ngIf="page_meta.url || ['...'].includes(page_meta.label)">
           <a
             (click)="page_meta.url && !page_meta.active && pageChange(page_meta.url); scroll(target)"
-            [ngClass]="{'cursor-pointer':(page_meta.url && !page_meta.active), 'cursor-default text-white bg-primary border-primary hover:bg-primary hover:border-primary hover:text-white z-10':page_meta.active}"
-            class="px-2 py-1 mr-1 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-300 hover:text-gray-700">
+
+            class="px-2 py-1 mr-1 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-300 hover:text-gray-700" [ngClass]="{'cursor-pointer':(page_meta.url && !page_meta.active), 'cursor-default text-white bg-primary border-primary hover:bg-primary hover:border-primary hover:text-white z-10':page_meta.active}">
             <span *ngIf="page_meta.label === '«'" class="sr-only">Previous</span>
             <span *ngIf="page_meta.label === '»'" class="sr-only">Next</span>
             {{ page_meta.label }}</a>
