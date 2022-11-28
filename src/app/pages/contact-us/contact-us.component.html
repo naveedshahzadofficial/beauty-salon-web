@@ -2,199 +2,321 @@
   <h1 class="text-center">Contact Us</h1>
   <div class="container">
     <div class="grid grid-cols-12 gap-4">
-    <p class="pb-5 text-center pt-4 col-start-2 col-span-10 text-lg font-normal leading-8">Have questions? Please send our friendly support team a message
-      via our handy contact form. Your feedback helps us continue to work better for you. You may use any of the other
-      methods of your choice to reach to us.</p>
-      </div>
+      <p
+        class="pb-5 text-center pt-4 col-start-2 col-span-10 text-lg font-normal leading-8"
+      >
+        Have questions? Please send our friendly support team a message via our
+        handy contact form. Your feedback helps us continue to work better for
+        you. You may use any of the other methods of your choice to reach to us.
+      </p>
+    </div>
 
+    <!-- Section: Design Block -->
+    <section>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="md:mt-12 lg:mt-0 mb-12 lg:mb-0">
+          <div class="block rounded-lg shadow-lg px-6 py-12">
+            <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('full_name') }"
+                  for="full_name"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  formControlName="full_name"
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                  [ngClass]="{ 'border-red-500': is_valid('full_name') }"
+                  id="full_name"
+                  placeholder="Full Name"
+                />
+                <span
+                  *ngIf="is_valid('full_name')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please enter your full name.</span
+                >
+              </div>
 
-      <!-- Section: Design Block -->
-      <section>
-            <div class="grid grid-cols-2 gap-8">
-              <div class="md:mt-12 lg:mt-0 mb-12 lg:mb-0">
-                <div class="block rounded-lg shadow-lg px-6 py-12">
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('issue_nature') }"
+                  for="issue_nature"
+                >
+                  Nature of the Issue?
+                </label>
 
-                  <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()" >
-                    <div class="form-group mb-6">
-                      <label class="block uppercase text-gray-700 tracking-wide  text-xs font-bold mb-2"
-                      [ngClass]="{'text-red-500':is_valid('full_name')}" for="full_name">
-                        Full Name
-                      </label>
-                      <input type="text"
-                        formControlName="full_name"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none "
-                        [ngClass]="{'border-red-500':is_valid('full_name')}"
-                        id="full_name" placeholder="Full Name" />
-                        <span *ngIf="is_valid('full_name')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please enter your full name.</span>
-                    </div>
+                <select
+                  id="issue_nature"
+                  formControlName="issue_nature"
+                  [ngClass]="{ 'border-red-500': is_valid('issue_nature') }"
+                  class="bg-white border border-solid border-gray-300 text-gray-700 text-base font-normal rounded focus:ring-0 focus:border-primary block w-full px-3 py-1.5"
+                >
+                  <option selected value="">Choose a nature</option>
+                  <option value="Suggestion">Suggestion</option>
+                  <option value="Bug Report">Bug Report</option>
+                  <option value="Complaint">Complaint</option>
+                  <option value="Feature Request">Feature Request</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span
+                  *ngIf="is_valid('issue_nature')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please select your nature of issue.</span
+                >
+              </div>
 
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('email') }"
+                  for="email"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  [ngClass]="{ 'border-red-500': is_valid('email') }"
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                  id="email"
+                  placeholder="Email address"
+                />
+                <span
+                  *ngIf="is_valid('email')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please enter your valid email address.</span
+                >
+              </div>
 
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('mobile_no') }"
+                  for="mobile_no"
+                >
+                  Mobile No.
+                </label>
+                <input
+                  type="text"
+                  formControlName="mobile_no"
+                  [ngClass]="{ 'border-red-500': is_valid('mobile_no') }"
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                  id="mobile_no"
+                  placeholder="Mobile No"
+                />
+                <span
+                  *ngIf="is_valid('mobile_no')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please enter your valid mobile number.</span
+                >
+              </div>
 
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('issue_nature')}"  for="issue_nature" >
-                        Nature of the Issue?
-                      </label>
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('subject') }"
+                  for="subject"
+                >
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  formControlName="subject"
+                  [ngClass]="{ 'border-red-500': is_valid('subject') }"
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                  id="subject"
+                  placeholder="Subject"
+                />
+                <span
+                  *ngIf="is_valid('subject')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please enter your subject.</span
+                >
+              </div>
 
-                      <select id="issue_nature"
-                      formControlName="issue_nature"
-                       [ngClass]="{'border-red-500':is_valid('issue_nature')}"
-                        class="bg-white border border-solid border-gray-300 text-gray-700 text-base font-normal rounded focus:ring-0 focus:border-primary block w-full px-3 py-1.5">
-                        <option selected value="">Choose a nature</option>
-                        <option value="Suggestion">Suggestion</option>
-                        <option value="Bug Report">Bug Report</option>
-                        <option value="Complaint">Complaint</option>
-                        <option value="Feature Request">Feature Request</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      <span *ngIf="is_valid('issue_nature')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please select your nature of issue.</span>
-                    </div>
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('message') }"
+                  for="message"
+                >
+                  Message
+                </label>
 
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('email')}" for="email">
-                        Email
-                      </label>
-                      <input type="email"
-                      formControlName="email"
-                      [ngClass]="{'border-red-500':is_valid('email')}"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
-                        id="email" placeholder="Email address" />
-                        <span *ngIf="is_valid('email')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please enter your valid email address.</span>
-                    </div>
+                <textarea
+                  formControlName="message"
+                  [ngClass]="{ 'border-red-500': is_valid('message') }"
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+                  id="message"
+                  rows="3"
+                  placeholder="Message"
+                ></textarea>
+                <span
+                  *ngIf="is_valid('message')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please enter your message.</span
+                >
+              </div>
 
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('mobile_no')}"  for="mobile_no">
-                        Mobile No.
-                      </label>
-                      <input type="text"
-                      formControlName="mobile_no"
-                      [ngClass]="{'border-red-500':is_valid('mobile_no')}"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
-                        id="mobile_no" placeholder="Mobile No" />
-                        <span *ngIf="is_valid('mobile_no')"  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please enter your valid mobile number.</span>
-                    </div>
+              <div class="form-group mb-6">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  [ngClass]="{ 'text-red-500': is_valid('communication_mode') }"
+                >
+                  How would you like to be contacted?
+                </label>
 
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('subject')}" for="subject">
-                        Subject
-                      </label>
-                      <input type="text"
-                      formControlName="subject"
-                      [ngClass]="{'border-red-500':is_valid('subject')}"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
-                        id="subject" placeholder="Subject" />
-                        <span *ngIf="is_valid('subject')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please enter your subject.</span>
-                    </div>
-
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('message')}" for="message">
-                        Message
-                      </label>
-
-                      <textarea
-                        formControlName="message"
-                         [ngClass]="{'border-red-500':is_valid('message')}"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0  focus:outline-none"
-                        id="message" rows="3" placeholder="Message"></textarea>
-                        <span *ngIf="is_valid('message')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please enter your message.</span>
-                    </div>
-
-                    <div class="form-group mb-6">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" [ngClass]="{'text-red-500':is_valid('communication_mode')}" >
-                        How would you like to be contacted?
-                      </label>
-
-                      <div class="flex flex-wrap">
-                        <div class="flex items-center mr-4">
-                          <input id="communication_email"
-                          formControlName="communication_mode"
-                            type="radio" value="Email" name="communication_mode"
-                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
-                          <label for="communication_email" class="ml-2 text-sm font-medium text-gray-900">Email</label>
-                        </div>
-
-                        <div class="flex items-center mr-4">
-                          <input id="communication_mobile_no"
-                          formControlName="communication_mode"
-                          type="radio" value="Mobile No" name="communication_mode"
-                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
-                          <label for="communication_mobile_no" class="ml-2 text-sm font-medium text-gray-900">Mobile No</label>
-                        </div>
-
-                        <div class="flex items-center mr-4">
-                          <input id="communication_whatsup"
-                          formControlName="communication_mode"
-                          type="radio" value="WhatsApp" name="communication_mode"
-                            class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:ring-primary focus:bg-primary focus:ring-2 ">
-                          <label for="communication_whatsup" class="ml-2 text-sm font-medium text-gray-900">WhatsApp</label>
-                        </div>
-
-                      </div>
-
-                      <span *ngIf="is_valid('communication_mode')" class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1">Please choice your communication mode.</span>
-
-                    </div>
-
-                    <div class="form-group form-check text-center mb-6">
-                      <input type="checkbox"
-                        formControlName="is_copy"
-                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-primary checked:border-primary focus:ring-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-                        id="is_copy" checked />
-                      <label class="form-check-label cursor-pointer inline-block text-gray-800" for="is_copy">Send me a copy of this
-                        message</label>
-                    </div>
-                    <button [disabled]="contactUsForm.invalid" type="submit"
-                      class="w-full px-6 py-2.5 bg-primary text-white font-medium text-xs leading-tight uppercase rounded shadow-md
-                      disabled:bg-orange-300 hover:bg-primary-dark hover:shadow-lg focus:bg-primary-dark focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-dark active:shadow-lg transition duration-150 ease-in-out">
-                      Send
-                    </button>
-                  </form>
-
-                  <div *ngIf="is_submitted" class="mt-4 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md relative"
-                    role="alert">
-                    <div class="flex">
-                      <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20">
-                          <path
-                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                        </svg></div>
-                      <div>
-                        <p class="font-bold">Your message has been sent!</p>
-                        <p class="text-sm">We will get you soon as possible.</p>
-                      </div>
-                    </div>
-                    <span (click)="is_submitted = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                      <svg class="fill-current h-6 w-6 text-teal-500" role="button" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20">
-                        <title>Close</title>
-                        <path
-                          d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-                      </svg>
-                    </span>
+                <div class="flex flex-wrap">
+                  <div class="flex items-center mr-4">
+                    <input
+                      id="communication_email"
+                      formControlName="communication_mode"
+                      type="radio"
+                      value="Email"
+                      name="communication_mode"
+                      class="w-4 h-4 text-primary checked:bg-primary bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2"
+                    />
+                    <label
+                      for="communication_email"
+                      class="ml-2 text-sm font-medium text-gray-900"
+                      >Email</label
+                    >
                   </div>
 
+                  <div class="flex items-center mr-4">
+                    <input
+                      id="communication_mobile_no"
+                      formControlName="communication_mode"
+                      type="radio"
+                      value="Mobile No"
+                      name="communication_mode"
+                      class="w-4 h-4 text-primary checked:bg-primary bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2"
+                    />
+                    <label
+                      for="communication_mobile_no"
+                      class="ml-2 text-sm font-medium text-gray-900"
+                      >Mobile No</label
+                    >
+                  </div>
+
+                  <div class="flex items-center mr-4">
+                    <input
+                      id="communication_whatsup"
+                      formControlName="communication_mode"
+                      type="radio"
+                      value="WhatsApp"
+                      name="communication_mode"
+                      class="w-4 h-4 text-primary checked:bg-primary bg-gray-100 border-gray-300 focus:ring-primary focus:bg-primary focus:ring-2"
+                    />
+                    <label
+                      for="communication_whatsup"
+                      class="ml-2 text-sm font-medium text-gray-900"
+                      >WhatsApp</label
+                    >
+                  </div>
                 </div>
+
+                <span
+                  *ngIf="is_valid('communication_mode')"
+                  class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                  >Please choice your communication mode.</span
+                >
               </div>
 
-              <div class="h-[51rem] map-container shadow-lg rounded-lg">
-
-                <div class="border p-6">
-                    <p class="mt-6"><fa-icon class="text-lg" [icon]="faPhoneAlt"></fa-icon> +92 304 111 44 27</p>
-                    <p class="mt-6">
-                      <fa-icon class="text-lg" [icon]="faEnvelope"></fa-icon> customercare@savvysalon.co
-                    </p>
-                    <p class="mt-6">
-                      <fa-icon class="text-lg" [icon]="faBuilding"></fa-icon> Q Block, Phase 2, DHA, Lahore.
-                    </p>
-                </div>
-
-                <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(map_url)'
-                  class="h-full w-full rounded-lg" frameborder="0" allowfullscreen></iframe>
-
+              <div class="form-group form-check text-center mb-6">
+                <input
+                  type="checkbox"
+                  formControlName="is_copy"
+                  class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-primary checked:border-primary focus:ring-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
+                  id="is_copy"
+                  checked
+                />
+                <label
+                  class="form-check-label cursor-pointer inline-block text-gray-800"
+                  for="is_copy"
+                  >Send me a copy of this message</label
+                >
               </div>
+              <button
+                [disabled]="contactUsForm.invalid"
+                type="submit"
+                class="w-full px-6 py-2.5 bg-primary text-white font-medium text-xs leading-tight uppercase rounded shadow-md disabled:bg-orange-300 hover:bg-primary-dark hover:shadow-lg focus:bg-primary-dark focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-dark active:shadow-lg transition duration-150 ease-in-out"
+              >
+                Send
+              </button>
+            </form>
 
+            <div
+              *ngIf="is_submitted"
+              class="mt-4 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md relative"
+              role="alert"
+            >
+              <div class="flex">
+                <div class="py-1">
+                  <svg
+                    class="fill-current h-6 w-6 text-teal-500 mr-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-bold">Your message has been sent!</p>
+                  <p class="text-sm">We will get you soon as possible.</p>
+                </div>
+              </div>
+              <span
+                (click)="is_submitted = false"
+                class="absolute top-0 bottom-0 right-0 px-4 py-3"
+              >
+                <svg
+                  class="fill-current h-6 w-6 text-teal-500"
+                  role="button"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <title>Close</title>
+                  <path
+                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+                  />
+                </svg>
+              </span>
             </div>
-      </section>
-      <!-- Section: Design Block -->
+          </div>
+        </div>
 
+        <div class="h-[51rem] map-container shadow-lg rounded-lg">
+          <div class="border p-6">
+            <p class="mt-6">
+              <fa-icon class="text-lg" [icon]="faPhoneAlt"></fa-icon> +92 304
+              111 44 27
+            </p>
+            <p class="mt-6">
+              <fa-icon class="text-lg" [icon]="faEnvelope"></fa-icon>
+              customercare@savvysalon.co
+            </p>
+            <p class="mt-6">
+              <fa-icon class="text-lg" [icon]="faBuilding"></fa-icon> Q Block,
+              Phase 2, DHA, Lahore.
+            </p>
+          </div>
+
+          <iframe
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(map_url)"
+            class="h-full w-full rounded-lg"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+    <!-- Section: Design Block -->
   </div>
 </section>
