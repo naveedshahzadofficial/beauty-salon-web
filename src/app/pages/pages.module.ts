@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -35,6 +36,7 @@ import { PageService } from '../services/page.service';
     CommonModule,
     PagesRoutingModule,
     CarouselModule,
+    ReactiveFormsModule,
   ],
   providers:[
     PageService

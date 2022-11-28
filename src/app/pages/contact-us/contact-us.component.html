@@ -14,12 +14,13 @@
               <div class="md:mt-12 lg:mt-0 mb-12 lg:mb-0">
                 <div class="block rounded-lg shadow-lg px-6 py-12">
 
-                  <form>
+                  <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()" >
                     <div class="form-group mb-6">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="full_name">
                         Full Name
                       </label>
                       <input type="text"
+                        formControlName="full_name"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none "
                         id="full_name" placeholder="Full Name" />
                     </div>
@@ -32,6 +33,7 @@
                       </label>
 
                       <select id="issue_nature"
+                      formControlName="issue_nature"
                         class="bg-white border border-solid border-gray-300 text-gray-700 text-base font-normal rounded focus:ring-0 focus:border-primary block w-full px-3 py-1.5">
                         <option selected>Choose a nature</option>
                         <option value="Suggestion">Suggestion</option>
@@ -48,6 +50,7 @@
                         Email
                       </label>
                       <input type="email"
+                      formControlName="email"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
                         id="email" placeholder="Email address" />
                     </div>
@@ -57,6 +60,7 @@
                         Mobile No.
                       </label>
                       <input type="text"
+                      formControlName="mobile_no"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
                         id="mobile_no" placeholder="Mobile No" />
                     </div>
@@ -66,6 +70,7 @@
                         Subject
                       </label>
                       <input type="text"
+                      formControlName="subject"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
                         id="subject" placeholder="Subject" />
                     </div>
@@ -76,6 +81,7 @@
                       </label>
 
                       <textarea
+                        formControlName="message"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0  focus:outline-none"
                         id="message" rows="3" placeholder="Message"></textarea>
                     </div>
@@ -87,19 +93,25 @@
                       
                       <div class="flex flex-wrap">                          
                         <div class="flex items-center mr-4">
-                          <input id="communication_email" type="radio" value="Email" name="communication_mode"
+                          <input id="communication_email" 
+                          formControlName="communication_mode"
+                            type="radio" value="Email" name="communication_mode"
                             class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
                           <label for="communication_email" class="ml-2 text-sm font-medium text-gray-900">Email</label>
                         </div>
 
                         <div class="flex items-center mr-4">
-                          <input id="communication_mobile_no" type="radio" value="Email" name="communication_mode"
+                          <input id="communication_mobile_no" 
+                          formControlName="communication_mode"
+                          type="radio" value="Email" name="communication_mode"
                             class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:bg-primary focus:ring-primary focus:ring-2 ">
                           <label for="communication_mobile_no" class="ml-2 text-sm font-medium text-gray-900">Mobile No</label>
                         </div>
 
                         <div class="flex items-center mr-4">
-                          <input id="communication_whatsup" type="radio" value="Email" name="communication_mode"
+                          <input id="communication_whatsup" 
+                          formControlName="communication_mode"
+                          type="radio" value="Email" name="communication_mode"
                             class="w-4 h-4 text-primary checked:bg-primary  bg-gray-100 border-gray-300 focus:ring-primary focus:bg-primary focus:ring-2 ">
                           <label for="communication_whatsup" class="ml-2 text-sm font-medium text-gray-900">WhatsApp</label>
                         </div>
@@ -111,13 +123,14 @@
 
                     <div class="form-group form-check text-center mb-6">
                       <input type="checkbox"
+                        formControlName="is_copy"
                         class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-primary checked:border-primary focus:ring-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
                         id="is_copy" checked />
                       <label class="form-check-label cursor-pointer inline-block text-gray-800" for="is_copy">Send me a copy of this
                         message</label>
                     </div>
                     <button type="submit"
-                      class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                      class="w-full px-6 py-2.5 bg-primary text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary-dark focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-dark active:shadow-lg transition duration-150 ease-in-out">
                       Send
                     </button>
                   </form>
@@ -125,7 +138,7 @@
               </div>
               
               <div class="h-[500px] map-container shadow-lg rounded-lg">
-                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(map_url)'
                   class="h-full w-full rounded-lg" frameborder="0" allowfullscreen></iframe>
               </div>
 
