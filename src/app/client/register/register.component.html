@@ -6,7 +6,7 @@
       <h2 class="text-center text-3xl font-bold tracking-tight">Sign Up</h2>
       <form
         [formGroup]="registerForm"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onSubmit($event)"
         class="mt-4 space-y-6"
         autocomplete="off"
       >
@@ -15,10 +15,13 @@
             <label
               for="first_name"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('first_name') }"
               >First Name</label
             >
 
             <input
+              formControlName="first_name"
+              [ngClass]="{ 'border-red-500': is_valid('first_name') }"
               id="first_name"
               name="first_name"
               type="text"
@@ -26,15 +29,32 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="First Name"
             />
+
+            <span
+              *ngIf="is_valid('first_name') && errorType('first_name')"
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Please enter your first name.</span
+            >
+
+            <span
+              *ngIf="
+                is_valid('first_name') && errorType('first_name', 'minlength')
+              "
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >First name should be minimum 3 characters long.</span
+            >
           </div>
 
           <div>
             <label
               for="last_name"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('last_name') }"
               >Last Name</label
             >
             <input
+              formControlName="last_name"
+              [ngClass]="{ 'border-red-500': is_valid('last_name') }"
               id="last_name"
               name="last_name"
               type="text"
@@ -42,15 +62,25 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Last Name"
             />
+
+            <span
+              *ngIf="is_valid('last_name') && errorType('last_name')"
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Please enter your last name.</span
+            >
           </div>
 
           <div>
             <label
               for="mobile_no"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('mobile_no') }"
               >Mobile No.</label
             >
             <input
+              formControlName="mobile_no"
+              [inputMask]="mobileInputMask"
+              [ngClass]="{ 'border-red-500': is_valid('mobile_no') }"
               id="mobile_no"
               name="mobile_no"
               type="text"
@@ -58,15 +88,23 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="03XX XXXXXXX"
             />
+            <span
+              *ngIf="is_valid('mobile_no') && errorType('mobile_no')"
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Please enter your mobile no.</span
+            >
           </div>
 
           <div>
             <label
               for="password"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('password') }"
               >Password</label
             >
             <input
+              formControlName="password"
+              [ngClass]="{ 'border-red-500': is_valid('password') }"
               id="password"
               name="password"
               type="password"
@@ -74,15 +112,30 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Enter Password"
             />
+            <span
+              *ngIf="is_valid('password') && errorType('password')"
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Please enter your password.</span
+            >
+            <span
+              *ngIf="is_valid('password') && errorType('password', 'minlength')"
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Password should be minimum 6 characters long.</span
+            >
           </div>
 
           <div>
             <label
               for="password_confirmation"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('password_confirmation') }"
               >Confirm Password</label
             >
             <input
+              formControlName="password_confirmation"
+              [ngClass]="{
+                'border-red-500': is_valid('password_confirmation')
+              }"
               id="password_confirmation"
               name="password_confirmation"
               type="password"
@@ -90,12 +143,31 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Confirm Password"
             />
+            <span
+              *ngIf="
+                is_valid('password_confirmation') &&
+                errorType('password_confirmation')
+              "
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Please enter your confirm password.</span
+            >
+
+            <span
+              *ngIf="
+                is_valid('password_confirmation') &&
+                errorType('password_confirmation', 'confirmed')
+              "
+              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+              >Password and confirm password should match.</span
+            >
           </div>
         </div>
 
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input
+              formControlName="term_and_condition"
+              [ngClass]="{ 'border-red-500': is_valid('term_and_condition') }"
               id="term_and_condition"
               name="term_and_condition"
               type="checkbox"
@@ -104,14 +176,17 @@
             <label
               for="term_and_condition"
               class="ml-2 block text-sm text-gray-900 cursor-pointer"
+              [ngClass]="{ 'text-red-500': is_valid('term_and_condition') }"
+              value="true"
               >Terms & Conditions</label
             >
           </div>
 
           <div>
             <button
+              [disabled]="registerForm.invalid"
               type="submit"
-              class="px-3 py-2 bg-primary hover:bg-primary-light shadow-md shadow-primary rounded-lg"
+              class="px-3 py-2 bg-primary hover:bg-primary-light shadow-md shadow-primary rounded-lg disabled:bg-orange-300"
             >
               <fa-icon
                 class="text-xl text-white"

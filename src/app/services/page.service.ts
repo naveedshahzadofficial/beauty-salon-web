@@ -8,42 +8,47 @@ import { BadInput } from '../common/bad-input';
 import { NotFoundError } from './../common/not-found-error';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PageService {
   protected base_url = environment.base_url;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  homePage(): Observable<any>{
-    return this.http.post(`${this.base_url}/pages/home`,{})
-    .pipe(map((response: any) => response.data))
-    .pipe(retry(1), catchError(this.handleError));
+  homePage(): Observable<any> {
+    return this.http
+      .post(`${this.base_url}/pages/home`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  servicesPage(): Observable<any>{
-    return this.http.post(`${this.base_url}/pages/services`,{})
-    .pipe(map((response: any) => response.data))
-    .pipe(retry(1), catchError(this.handleError));
+  servicesPage(): Observable<any> {
+    return this.http
+      .post(`${this.base_url}/pages/services`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  storiesPage(per_page:number, page:number): Observable<any>{
-    return this.http.post(`${this.base_url}/pages/stories`,{per_page: per_page, page:page})
-    .pipe(map((response: any) => response.data))
-    .pipe(retry(1), catchError(this.handleError));
+  storiesPage(per_page: number, page: number): Observable<any> {
+    return this.http
+      .post(`${this.base_url}/pages/stories`, {
+        per_page: per_page,
+        page: page,
+      })
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  contactUsForm(contact_us_form: any): Observable<any>{
-    return this.http.post(`${this.base_url}/pages/contact-us-form`,contact_us_form)
-    .pipe(map((response: any) => response.data))
-    .pipe(retry(1), catchError(this.handleError));
+  contactUsForm(contact_us_form: any): Observable<any> {
+    return this.http
+      .post(`${this.base_url}/pages/contact-us-form`, contact_us_form)
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  protected handleError(error:HttpErrorResponse) {
-    if(error.status === 400)
-      return throwError(() => new BadInput());
+  protected handleError(error: HttpErrorResponse) {
+    if (error.status === 400) return throwError(() => new BadInput());
 
-    if(error.status === 404)
-      return throwError(() => new NotFoundError());
+    if (error.status === 404) return throwError(() => new NotFoundError());
 
     return throwError(() => new AppError(error));
   }

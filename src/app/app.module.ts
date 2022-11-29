@@ -1,12 +1,14 @@
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './common/app-error-handler';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import {NgxPaginationModule} from 'ngx-pagination';
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,17 +21,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { CategoryService } from './services/category.service';
 
 @NgModule({
-  schemas: [
-  CUSTOM_ELEMENTS_SCHEMA,
-  NO_ERRORS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   declarations: [
     AppComponent,
     HeaderComponent,
     TopBarComponent,
     FooterComponent,
     ClientLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +39,8 @@ import { CategoryService } from './services/category.service';
   ],
   providers: [
     CategoryService,
-    {provide:ErrorHandler, useClass:AppErrorHandler}
+    { provide: ErrorHandler, useClass: AppErrorHandler },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
