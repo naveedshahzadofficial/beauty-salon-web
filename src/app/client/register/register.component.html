@@ -78,18 +78,18 @@
               >Mobile No.</label
             >
             <input
-              formControlName="mobile_no"
+              formControlName="mobile"
               [inputMask]="mobileInputMask"
-              [ngClass]="{ 'border-red-500': is_valid('mobile_no') }"
-              id="mobile_no"
-              name="mobile_no"
+              [ngClass]="{ 'border-red-500': is_valid('mobile') }"
+              id="mobile"
+              name="mobile"
               type="text"
               required
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="03XX XXXXXXX"
             />
             <span
-              *ngIf="is_valid('mobile_no') && errorType('mobile_no')"
+              *ngIf="is_valid('mobile') && errorType('mobile')"
               class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
               >Please enter your mobile no.</span
             >
