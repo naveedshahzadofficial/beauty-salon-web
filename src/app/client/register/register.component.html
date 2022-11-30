@@ -29,20 +29,15 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="First Name"
             />
-
-            <span
-              *ngIf="is_valid('first_name') && errorType('first_name')"
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Please enter your first name.</span
-            >
-
-            <span
-              *ngIf="
-                is_valid('first_name') && errorType('first_name', 'minlength')
-              "
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >First name should be minimum 3 characters long.</span
-            >
+            <ng-container *ngFor="let error of error_messages.first_name">
+              <span
+                *ngIf="
+                  is_valid('first_name') && errorType('first_name', error.type)
+                "
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
 
           <div>
@@ -63,11 +58,15 @@
               placeholder="Last Name"
             />
 
-            <span
-              *ngIf="is_valid('last_name') && errorType('last_name')"
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Please enter your last name.</span
-            >
+            <ng-container *ngFor="let error of error_messages.last_name">
+              <span
+                *ngIf="
+                  is_valid('last_name') && errorType('last_name', error.type)
+                "
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
 
           <div>
@@ -88,11 +87,13 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="03XX XXXXXXX"
             />
-            <span
-              *ngIf="is_valid('mobile') && errorType('mobile')"
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Please enter your mobile no.</span
-            >
+            <ng-container *ngFor="let error of error_messages.mobile">
+              <span
+                *ngIf="is_valid('mobile') && errorType('mobile', error.type)"
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
 
           <div>
@@ -112,16 +113,15 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Enter Password"
             />
-            <span
-              *ngIf="is_valid('password') && errorType('password')"
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Please enter your password.</span
-            >
-            <span
-              *ngIf="is_valid('password') && errorType('password', 'minlength')"
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Password should be minimum 6 characters long.</span
-            >
+            <ng-container *ngFor="let error of error_messages.password">
+              <span
+                *ngIf="
+                  is_valid('password') && errorType('password', error.type)
+                "
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
 
           <div>
@@ -143,23 +143,18 @@
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Confirm Password"
             />
-            <span
-              *ngIf="
-                is_valid('password_confirmation') &&
-                errorType('password_confirmation')
-              "
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Please enter your confirm password.</span
+            <ng-container
+              *ngFor="let error of error_messages.password_confirmation"
             >
-
-            <span
-              *ngIf="
-                is_valid('password_confirmation') &&
-                errorType('password_confirmation', 'confirmed')
-              "
-              class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-              >Password and confirm password should match.</span
-            >
+              <span
+                *ngIf="
+                  is_valid('password_confirmation') &&
+                  errorType('password_confirmation', error.type)
+                "
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
         </div>
 
@@ -195,6 +190,17 @@
             </button>
           </div>
         </div>
+
+        <ng-container *ngFor="let error of error_messages.term_and_condition">
+          <span
+            *ngIf="
+              is_valid('term_and_condition') &&
+              errorType('term_and_condition', error.type)
+            "
+            class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+            >{{ error.message }}</span
+          >
+        </ng-container>
       </form>
     </div>
   </div>

@@ -6,8 +6,11 @@ import { NotFoundError } from './not-found-error';
 import { ValidationError } from './validation-error';
 
 export function handleError(error: HttpErrorResponse) {
-  if (error.status === 400) return throwError(() => new BadInput());
-  if (error.status === 404) return throwError(() => new NotFoundError());
-  if (error.status === 422) return throwError(() => new ValidationError(error));
-  return throwError(() => new AppError(error));
+  if (error.status === 400)
+    return throwError(() => new BadInput(error.error.errors));
+  if (error.status === 404)
+    return throwError(() => new NotFoundError(error.error.errors));
+  if (error.status === 422)
+    return throwError(() => new ValidationError(error.error.errors));
+  return throwError(() => new AppError(error.error.errors));
 }
