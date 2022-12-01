@@ -1,10 +1,7 @@
 import { AppError } from './../../common/app-error';
 import { ValidationError } from './../../common/validation-error';
 import { AuthService } from './../../services/auth.service';
-import {
-  confirmValidator,
-  destroySubscribe,
-} from './../../common/custom-validators';
+import { CustomValidator } from './../../common/custom-validator';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
@@ -47,7 +44,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ),
     password_confirmation: new FormControl(
       null,
-      Validators.compose([Validators.required, confirmValidator])
+      Validators.compose([
+        Validators.required,
+        this.customValidator.confirmValidator,
+      ])
     ),
     term_and_condition: new FormControl(null, Validators.requiredTrue),
   });
@@ -102,9 +102,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ],
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private customValidator: CustomValidator
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.customValidator.joinMatchField(
+      this.registerForm.controls['password'],
+      this.registerForm.controls['password_confirmation']
+    );
+  }
 
   is_valid(field_name: string): boolean | undefined {
     return (
@@ -126,32 +134,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
       next: (resp: any) => {
         console.log(resp);
         this.registerForm.reset();
-        //this.is_submitted = true;
       },
       error: (e: AppError) => {
         if (e instanceof ValidationError) {
-          console.log(e.errors);
-          for (let field_name of Object.keys(e.errors)) {
-            this.registerForm.controls[field_name].setErrors({
-              custom: true,
-            });
-
-            let field_obj =
-              this.error_messages[
-                field_name as keyof typeof this.error_messages
-              ];
-            let result = field_obj.filter((key) => key.type === 'custom');
-            if (result.length) {
-              result[0].message = e.errors[field_name][0];
-            } else {
-              field_obj.push({
-                type: 'custom',
-                message: e.errors[field_name][0],
-              });
-            }
-          }
-
-          // this.registerForm.setErrors(e.errors);
+          this.customValidator.extractErrors(
+            this.registerForm,
+            e.errors,
+            this.error_messages
+          );
         } else throw e;
       },
     });
@@ -159,6 +149,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    destroySubscribe();
+    this.customValidator.destroySubscribe();
   }
 }

@@ -4,30 +4,55 @@
   <div class="w-full max-w-xs">
     <div class="border rounded-t-3xl shadow-2xl px-6 py-6">
       <h2 class="text-center text-3xl font-bold tracking-tight">Sign in</h2>
-      <form class="mt-4 space-y-6">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit($event)"
+        class="mt-4 space-y-6"
+      >
         <div class="-space-y-px">
           <div class="mb-4">
+            <p
+              class="mb-2 text-sm italic text-red-700 py-2 px-2 bg-red-100"
+              *ngIf="error_unauthenticated"
+            >
+              Either your Phone or password is incorrect
+            </p>
             <label
-              for="mobile_no"
+              for="mobile"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('mobile') }"
               >Mobile No.</label
             >
             <input
-              id="mobile_no"
-              name="mobile_no"
+              formControlName="mobile"
+              [inputMask]="mobileInputMask"
+              [ngClass]="{ 'border-red-500': is_valid('mobile') }"
+              id="mobile"
+              name="mobile"
               type="text"
               required
               class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="03XX XXXXXXX"
             />
+
+            <ng-container *ngFor="let error of error_messages.mobile">
+              <span
+                *ngIf="is_valid('mobile') && errorType('mobile', error.type)"
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
           <div class="mb-4">
             <label
               for="password"
               class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+              [ngClass]="{ 'text-red-500': is_valid('password') }"
               >Password</label
             >
             <input
+              formControlName="password"
+              [ngClass]="{ 'border-red-500': is_valid('password') }"
               id="password"
               name="password"
               type="password"
@@ -36,19 +61,30 @@
               class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               placeholder="Enter Password"
             />
+
+            <ng-container *ngFor="let error of error_messages.password">
+              <span
+                *ngIf="
+                  is_valid('password') && errorType('password', error.type)
+                "
+                class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                >{{ error.message }}</span
+              >
+            </ng-container>
           </div>
         </div>
 
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input
-              id="remember-me"
-              name="remember-me"
+              formControlName="remember_me"
+              id="remember_me"
+              name="remember_me"
               type="checkbox"
               class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
             />
             <label
-              for="remember-me"
+              for="remember_me"
               class="ml-2 block text-sm text-gray-900 cursor-pointer"
               >Remember me</label
             >
@@ -56,8 +92,9 @@
 
           <div>
             <button
+              [disabled]="loginForm.invalid"
               type="submit"
-              class="px-3 py-2 bg-primary hover:bg-primary-light shadow-md shadow-primary rounded-lg"
+              class="px-3 py-2 bg-primary hover:bg-primary-light shadow-md shadow-primary rounded-lg disabled:bg-orange-300"
             >
               <fa-icon
                 class="text-xl text-white"

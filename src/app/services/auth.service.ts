@@ -18,4 +18,11 @@ export class AuthService {
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  login(login_form: any) {
+    return this.http
+      .post(`${this.base_url}/login`, login_form)
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
 }
