@@ -25,4 +25,21 @@ export class AuthService {
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  setToken(token: string) {
+    return localStorage.setItem('access_token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  isAuthenticated() {
+    return this.getToken() !== null;
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    // this.router.navigate(['client/login']);
+  }
 }

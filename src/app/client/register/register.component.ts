@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AppError } from './../../common/app-error';
 import { ValidationError } from './../../common/validation-error';
 import { AuthService } from './../../services/auth.service';
@@ -104,10 +105,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private customValidator: CustomValidator
+    private customValidator: CustomValidator,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['client/dashboard']);
+    }
+
     this.customValidator.joinMatchField(
       this.registerForm.controls['password'],
       this.registerForm.controls['password_confirmation']
@@ -134,6 +140,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       next: (resp: any) => {
         console.log(resp);
         this.registerForm.reset();
+        this.authService.setToken(resp.token);
+        this.router.navigate(['client/dashboard']);
       },
       error: (e: AppError) => {
         if (e instanceof ValidationError) {

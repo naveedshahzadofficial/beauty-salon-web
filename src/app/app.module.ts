@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { FooterComponent } from './layouts/client-layout/footer/footer.component
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CategoryService } from './services/category.service';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -40,6 +41,11 @@ import { CategoryService } from './services/category.service';
   providers: [
     CategoryService,
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

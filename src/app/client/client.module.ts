@@ -17,6 +17,6 @@ import { RegisterComponent } from './register/register.component';
     FontAwesomeModule,
     ReactiveFormsModule,
     InputMaskModule,
-  ],
+  ]
 })
 export class ClientModule {}

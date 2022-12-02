@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['client/dashboard']);
+    }
+  }
 
   is_valid(field_name: string): boolean | undefined {
     return this.customValidator.is_valid(this.loginForm, field_name);
@@ -55,7 +59,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe({
       next: (resp: any) => {
         console.log(resp);
-        //this.loginForm.reset();
+        this.loginForm.reset();
+        this.authService.setToken(resp.token);
+        this.router.navigate(['client/dashboard']);
       },
       error: (e: AppError) => {
         if (e instanceof ValidationError) {
