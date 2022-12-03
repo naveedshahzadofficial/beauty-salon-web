@@ -12,9 +12,9 @@
                 page_meta.url && !page_meta.active && pageChange(page_meta.url);
                 scroll(target)
               "
-              class="px-2 py-1 mr-1 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-300 hover:text-gray-700"
+              class="px-2 py-1 mr-1 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-300 hover:text-gray-700"
               [ngClass]="{
-                'cursor-pointer': page_meta.url && !page_meta.active,
+                'cursor-pointer bg-white': page_meta.url && !page_meta.active,
                 'cursor-default text-white bg-primary border-primary hover:bg-primary hover:border-primary hover:text-white z-10':
                   page_meta.active
               }"

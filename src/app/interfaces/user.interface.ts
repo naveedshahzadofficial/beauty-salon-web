@@ -8,5 +8,5 @@ export interface IUser {
   email?: string;
   updated_at: string;
   created_at: string;
-  roles: IRole[];
+  roles?: IRole[];
 }

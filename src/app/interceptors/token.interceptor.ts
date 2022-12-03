@@ -15,10 +15,10 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isLoggedIn$) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.authService.getToken()}`,
+          Authorization: `Bearer ${this.authService.token}`,
         },
       });
     }

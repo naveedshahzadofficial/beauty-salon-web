@@ -2,11 +2,17 @@
 <nav class="navbar-menu">
   <div class="navbar-wrapper">
     <div class="logo">
-      <a routerLink="/"><img src="assets/logo.svg" class="inline-block" alt=""></a>
+      <a routerLink="/"
+        ><img src="assets/logo.svg" class="inline-block" alt=""
+      /></a>
     </div>
     <div class="block lg:hidden">
       <button class="toggle-btn">
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="fill-current h-3 w-3"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <title>Menu</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
@@ -14,39 +20,157 @@
     </div>
     <div class="navigation">
       <div class="nav-left-side">
-        <a routerLink="/services">
-          Services
-        </a>
-        <a routerLink="/stories">
-          Stories
-        </a>
-        <a routerLink="/faqs">
-          FAQ
-        </a>
-        <a routerLink="/contact-us">
-          Contact Us
-        </a>
+        <ng-container *ngIf="authService.isLoggedIn$ | async; else elseMenu">
+          <a routerLink="/client/services"> Services </a>
+        </ng-container>
+        <ng-template #elseMenu>
+          <a routerLink="/services"> Services </a>
+          <a routerLink="/stories"> Stories </a>
+        </ng-template>
+        <a routerLink="/faqs"> FAQ </a>
+        <a routerLink="/contact-us"> Contact Us </a>
       </div>
-      <div>
-        <a routerLink="/client/register" class="btn-primary inline-block leading-5 mt-4 lg:mt-0">
-          <svg class="inline-block fa-user-plus w-5" aria-hidden="true" focusable="false" data-prefix="fas"
-            data-icon="user-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg="">
-            <path fill="currentColor"
-              d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
-            </path>
-          </svg>
-          Register</a>
-        &nbsp;
-        <a routerLink="/client/login" class="btn-primary inline-block leading-5 mt-4 lg:mt-0">
-          <svg class="inline-block fa-sign-in-alt w-5" aria-hidden="true" focusable="false" data-prefix="fas"
-            data-icon="sign-in-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-            data-fa-i2svg="">
-            <path fill="currentColor"
-              d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z">
-            </path>
-          </svg>
-          Login</a>
+      <div *ngIf="authService.isLoggedIn$ | async; else loggedOut">
+        <div class="relative inline-block">
+          <button
+            (click)="isOpen = true"
+            class="inline-flex items-center pl-5 pr-2 py-2 mt-1 font-semibold text-white bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:shadow-outline active:bg-gray-900"
+          >
+            Hi, {{ (authService.user$ | async)?.first_name }}
+            <svg
+              class="h-6 w-6 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"
+              />
+            </svg>
+          </button>
+          <div
+            *ngIf="isOpen"
+            (click)="isOpen = false"
+            class="fixed inset-0"
+            tabindex="-1"
+          ></div>
+          <transition
+            enter-class="opacity-0 scale-90"
+            enter-active-class="ease-out transition-fastest"
+            enter-to-class="opacity-100 scale-100"
+            leave-class="opacity-100 scale-100"
+            leave-active-class="ease-in transition-fastest"
+            leave-to-class="opacity-0 scale-90"
+          >
+            <div
+              *ngIf="isOpen"
+              class="mt-2 absolute right-0 origin-top-right text-left z-999"
+            >
+              <div class="w-64 bg-white rounded-lg shadow-lg">
+                <div class="flex items-center px-6 py-4">
+                  <img
+                    class="h-10 w-10 rounded-full flex-no-shrink"
+                    src="/assets/images/female.png"
+                    alt=""
+                  />
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900 leading-none">
+                      {{ (authService.user$ | async)?.first_name }}&nbsp;
+                      {{ (authService.user$ | async)?.last_name }}
+                    </p>
+                    <p>
+                      <a
+                        href="#"
+                        class="text-sm text-gray-600 leading-none hover:underline"
+                        >View Profile</a
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="border-t-2 border-gray-200 py-1">
+                  <a
+                    href="#"
+                    class="block px-6 py-3 leading-tight hover:bg-gray-200"
+                    >Settings and Privacy</a
+                  >
+                </div>
+
+                <div class="border-t-2 border-gray-200 py-1">
+                  <a
+                    (click)="logout($event)"
+                    class="cursor-pointer block w-full px-6 py-3 text-left leading-tight hover:bg-gray-200"
+                  >
+                    Sign out
+                  </a>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </div>
+
+        <span
+          class="w-12 h-12 float-right bg-secondary-dark text-center rounded-full ml-4 relative block pt-[10px]"
+        >
+          <span
+            class="bg-primary text-white w-5 h-5 text-xs rounded-full absolute right-9 top-0 align-middle inline-block pt-[2px]"
+            >10</span
+          >
+
+          <img
+            class="align-middle inline-block"
+            src="assets/images/cart.png"
+            alt="cart"
+          />
+        </span>
       </div>
+      <ng-template #loggedOut>
+        <div>
+          <a
+            routerLink="/client/register"
+            class="btn-primary inline-block leading-5 mt-4 lg:mt-0"
+          >
+            <svg
+              class="inline-block fa-user-plus w-5"
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="user-plus"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+              data-fa-i2svg=""
+            >
+              <path
+                fill="currentColor"
+                d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+              ></path>
+            </svg>
+            Register</a
+          >
+          &nbsp;
+          <a
+            routerLink="/client/login"
+            class="btn-primary inline-block leading-5 mt-4 lg:mt-0"
+          >
+            <svg
+              class="inline-block fa-sign-in-alt w-5"
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="sign-in-alt"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              data-fa-i2svg=""
+            >
+              <path
+                fill="currentColor"
+                d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"
+              ></path>
+            </svg>
+            Login</a
+          >
+        </div>
+      </ng-template>
     </div>
   </div>
 </nav>

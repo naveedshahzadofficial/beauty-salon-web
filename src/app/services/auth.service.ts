@@ -1,8 +1,9 @@
+import { IUser } from './../interfaces/user.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { retry, catchError, map, tap } from 'rxjs/operators';
 import { handleError } from '../common/handle-errors';
 
 @Injectable({
@@ -10,7 +11,17 @@ import { handleError } from '../common/handle-errors';
 })
 export class AuthService {
   protected base_url = environment.base_url;
-  constructor(private http: HttpClient) {}
+  private readonly TOKEN_NAME = 'access_token';
+  private readonly USER_NAME = 'user';
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private _user$ = new BehaviorSubject<IUser | null>(null);
+  isLoggedIn$ = this._isLoggedIn$.asObservable();
+  user$ = this._user$.asObservable();
+
+  constructor(private http: HttpClient) {
+    this._isLoggedIn$.next(!!this.token);
+    this._user$.next(this.user);
+  }
 
   register(register_form: any): Observable<any> {
     return this.http
@@ -26,20 +37,35 @@ export class AuthService {
       .pipe(retry(1), catchError(handleError));
   }
 
-  setToken(token: string) {
-    return localStorage.setItem('access_token', token);
+  set token(token: string) {
+    localStorage.setItem(this.TOKEN_NAME, token);
+    this._isLoggedIn$.next(true);
   }
 
-  getToken() {
-    return localStorage.getItem('access_token');
+  get token(): any {
+    return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  isAuthenticated() {
-    return this.getToken() !== null;
+  set user(user: IUser) {
+    localStorage.setItem(this.USER_NAME, JSON.stringify(user));
+    this._user$.next(user);
+  }
+
+  get user(): IUser {
+    let auth_user = localStorage.getItem(this.USER_NAME) as string;
+    return JSON.parse(auth_user) as IUser;
+  }
+
+  removeToken() {
+    localStorage.removeItem(this.TOKEN_NAME);
+    localStorage.removeItem(this.USER_NAME);
+    this._isLoggedIn$.next(false);
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    // this.router.navigate(['client/login']);
+    return this.http
+      .post(`${this.base_url}/logout`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
   }
 }

@@ -1,3 +1,4 @@
+import { IUser } from './../../interfaces/user.interface';
 import { UnauthorizedError } from './../../common/unauthorized-error';
 import { CustomValidator } from './../../common/custom-validator';
 import { ValidationError } from './../../common/validation-error';
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isLoggedIn$) {
       this.router.navigate(['client/dashboard']);
     }
   }
@@ -60,7 +61,8 @@ export class LoginComponent implements OnInit {
       next: (resp: any) => {
         console.log(resp);
         this.loginForm.reset();
-        this.authService.setToken(resp.token);
+        this.authService.token = resp.token;
+        this.authService.user = resp.user as IUser;
         this.router.navigate(['client/dashboard']);
       },
       error: (e: AppError) => {

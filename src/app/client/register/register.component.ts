@@ -1,3 +1,4 @@
+import { IUser } from './../../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { AppError } from './../../common/app-error';
 import { ValidationError } from './../../common/validation-error';
@@ -110,7 +111,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isLoggedIn$) {
       this.router.navigate(['client/dashboard']);
     }
 
@@ -140,7 +141,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       next: (resp: any) => {
         console.log(resp);
         this.registerForm.reset();
-        this.authService.setToken(resp.token);
+        this.authService.token = resp.token;
+        this.authService.user = resp.user as IUser;
         this.router.navigate(['client/dashboard']);
       },
       error: (e: AppError) => {
