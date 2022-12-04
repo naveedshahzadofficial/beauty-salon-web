@@ -1,0 +1,71 @@
+<!-- begin: fixed-cart -->
+<div class="fixed-cart block font-poppins">
+  <!-- begin: my-cart -->
+  <div
+    class="my-cart bg-white rounded-[18px] shadow-cart text-secondary-dark sticky text-sm"
+  >
+    <!-- begin: cart-header -->
+    <div class="cart-header flex justify-between px-5 py-6">
+      <h6 class="text-other-blue inline-block pr-3 m-0 text-base font-medium">
+        My Cart
+        <span
+          class="w-[26px] h-[26px] rounded-full bg-primary inline-block text-center ml-[10px] pt-1 text-white text-sm"
+          >0</span
+        >
+      </h6>
+    </div>
+    <!-- end: cart-header -->
+    <!-- begin: items -->
+    <div class="items h-[325px] overflow-auto">
+      <!-- begin: empty-cart-body -->
+      <div
+        *ngIf="false"
+        class="empty-cart-body flex justify-center items-center flex-col text-center border-t border-gray-300 h-[inherit]"
+      >
+        <img
+          class="align-middle inline-block"
+          src="assets/images/empty_cart.svg"
+          alt="empty cart image"
+        /><label class="font-medium mt-[30px] mb-5 inline-block"
+          >Empty Cart!</label
+        ><small class="text-other-gray text-xs"
+          >You haven't added any service to <br />
+          your cart yet.</small
+        >
+      </div>
+      <!-- end: empty-cart-body -->
+
+      <!-- begin: add-items -->
+      <div class="add-items px-5 py-6 border-t border-t-other-light">
+        <app-cart-item></app-cart-item>
+        <!-- begin: cart-addon -->
+        <div
+          class="cart-addon w-11/12 bg-other-cart-light rounded-l-[48px] px-6 py-5 ml-[15%] mt-2.5"
+        >
+          <app-cart-item></app-cart-item>
+        </div>
+        <!-- end: cart-addon -->
+      </div>
+
+      <!-- end: add-items -->
+    </div>
+    <!-- end: items -->
+
+    <span
+      class="chk-btn cursor-pointer w-full bg-other-blue text-center font-medium leading-[56px] block text-white relative rounded-b-2xl"
+      >Checkout - Rs. 0
+      <img
+        class="absolute top-5 right-4"
+        src="assets/images/arrow-forward.svg"
+        alt="arrow"
+      />
+    </span>
+  </div>
+  <!-- end: my-cart -->
+  <div class="text-center pt-1">
+    <small class="text-other-gray text-xs"
+      >Place your minimum order of Rs. 1500</small
+    >
+  </div>
+</div>
+<!-- end: fixed-cart -->

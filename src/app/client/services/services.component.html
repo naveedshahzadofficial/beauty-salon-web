@@ -1,1 +1,110 @@
-<p>services works!</p>
+<div class="banner bg-secondary-dark">
+  <div class="container max-auto">
+    <p
+      class="text-xl text-white bg-client-banner bg-no-repeat text-center leading-[150px]"
+    >
+      Flawless makeup to make you look and feel your best. We bring everything
+      you need.
+    </p>
+  </div>
+</div>
+
+<section class="categories bg-secondary-gray sticky top-0 z-50">
+  <div class="categories-tab">
+    <div class="container">
+      <ul
+        class="overflow-x-auto flex flex-nowrap whitespace-nowrap no-scrollbar"
+      >
+        <ng-container *ngFor="let category of categories; let first = first">
+          <li>
+            <a
+              (click)="getCategoryServices(category)"
+              [ngClass]="
+                (first && !tab_activated) ||
+                (tab_activated && tab_activated === category.id)
+                  ? 'bg-other-blue text-white'
+                  : 'text-secondary-dark'
+              "
+              class="text-xs leading-10 py-3 px-6 cursor-pointer uppercase font-medium block hover:bg-orange-300 hover:text-white"
+              >{{ category.category_name }}</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="category-services py-8 font-medium">
+  <div class="container">
+    <div class="flex flex-wrap">
+      <div class="services-tab basis-4/6 relative px-4">
+        <form>
+          <div
+            class="checkbtn font-poppins text-sm leading-5 text-secondary-dark"
+          >
+            <input
+              class="hidden absolute w-full appearance-none kit"
+              type="checkbox"
+              id="114"
+              name="check-box"
+            />
+            <label
+              for="114"
+              class="w-full resize-none cursor-pointer overflow-hidden relative service-item check-lab inline-block"
+              ><div class="flex flex-wrap">
+                <div class="basis-4/6">
+                  <label class="cursor-pointer inline-block"
+                    >Underarm+Full Arms (polisher)</label
+                  ><span class="text-other-blue pl-5 text-xs">Add-ons</span>
+                </div>
+                <div class="basis-2/6 flex justify-between text-primary">
+                  <label class="cursor-pointer">Rs. 1250</label
+                  ><span
+                    ><img
+                      class="align-middle inline-block"
+                      src="assets/images/plus.svg"
+                      alt="plus"
+                  /></span>
+                </div></div
+            ></label>
+          </div>
+        </form>
+        <form>
+          <div
+            class="checkbtn font-poppins text-sm leading-5 text-secondary-dark"
+          >
+            <input
+              class="hidden absolute w-full appearance-none kit"
+              type="checkbox"
+              id="115"
+              name="check-box"
+            />
+            <label
+              for="115"
+              class="w-full resize-none cursor-pointer overflow-hidden relative service-item check-lab inline-block"
+              ><div class="flex flex-wrap">
+                <div class="basis-4/6">
+                  <label class="cursor-pointer inline-block"
+                    >Underarm+Full Arms (polisher)</label
+                  ><span class="text-other-blue pl-5 text-xs">Add-ons</span>
+                </div>
+                <div class="basis-2/6 flex justify-between text-primary">
+                  <label class="cursor-pointer">Rs. 1250</label
+                  ><span
+                    ><img
+                      class="align-middle inline-block"
+                      src="assets/images/plus.svg"
+                      alt="plus"
+                  /></span>
+                </div></div
+            ></label>
+          </div>
+        </form>
+      </div>
+      <div class="basis-2/6 relative px-4">
+        <app-cart></app-cart>
+      </div>
+    </div>
+  </div>
+</section>
