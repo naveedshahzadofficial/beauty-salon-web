@@ -12,7 +12,11 @@
         </figcaption>
         <p class="mb-4">{{ category.short_description }}</p>
         <div class="text-center">
-          <a class="btn-secondary mx-auto more-info" href="#">More Info</a>
+          <a
+            class="btn-secondary mx-auto more-info"
+            [routerLink]="['/services', category.category_slug]"
+            >More Info</a
+          >
         </div>
       </div>
     </figure>

@@ -1,5 +1,5 @@
-import { ICategory } from '@interfaces/category.interface';
 import { Component, Input, OnInit } from '@angular/core';
+import { ICategory } from '@interfaces/category.interface';
 
 @Component({
   selector: 'app-service-cards',

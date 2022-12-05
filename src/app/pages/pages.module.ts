@@ -19,6 +19,8 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PageService } from '@services/page.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { StoryDetailComponent } from './story-detail/story-detail.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -31,6 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StoriesComponent,
     FaqsComponent,
     ContactUsComponent,
+    ServiceDetailComponent,
+    StoryDetailComponent,
   ],
   imports: [
     CommonModule,

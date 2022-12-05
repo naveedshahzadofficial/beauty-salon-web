@@ -1,94 +1,129 @@
 <app-slider *ngIf="sliders.length" [sliders]="sliders"></app-slider>
 <section class="intro container">
   <div class="py-12 text-center font-light mx-[8.3%]">
-      <h1 class="heading">Professional Beauty Services at Home</h1>
-      <p class="lead">The ultimate in comfortable, convenient, and professional beauty salon services at home. SavvySalon is a mobile app and web based solution providing women with high quality, hygienic, and timely at-home beauty services.
-      </p>
+    <h1 class="heading">Professional Beauty Services at Home</h1>
+    <p class="lead">
+      The ultimate in comfortable, convenient, and professional beauty salon
+      services at home. JITSS is a mobile app and web based solution
+      providing women with high quality, hygienic, and timely at-home beauty
+      services.
+    </p>
   </div>
 </section>
 
 <section *ngIf="categories.length" class="services-section py-12 bg-gray-100">
-<h1 class="heading text-center pb-6">Our Services</h1>
-<div class="container">
- <app-service-cards [categories]="categories"></app-service-cards>
-</div>
+  <h1 class="heading text-center pb-6">Our Services</h1>
+  <div class="container">
+    <app-service-cards [categories]="categories"></app-service-cards>
+  </div>
 </section>
 
 <section class="get-apps">
   <div class="container">
     <div class="flex flex-row text-center">
-        <div class="relative basis-1/2 hidden md:block">
-          <div class="absolute bottom-0 right-0">
-          <img  src="assets/images/get-apps.png" alt="android and iphone apps">
-          </div>
+      <div class="relative basis-1/2 hidden md:block">
+        <div class="absolute bottom-0 right-0">
+          <img src="assets/images/get-apps.png" alt="android and iphone apps" />
         </div>
-        <div class="basis-full md:basis-1/2 py-12 my-4">
-          <h3 class="clear-both">Get the<span class="italic-big-text block sm:inline">SavvySalon</span>app<svg class="heart" viewBox="0 0 32 29.6">
+      </div>
+      <div class="basis-full md:basis-1/2 py-12 my-4">
+        <h3 class="clear-both">
+          Get the<span class="italic-big-text block sm:inline">JITSS</span
+          >app<svg class="heart" viewBox="0 0 32 29.6">
             <path
-              d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z">
-            </path>
-          </svg></h3>
-          <p class="clear-both my-12">Visit App Store and Google Play to download SavvySalon offical app</p>
+              d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+            ></path>
+          </svg>
+        </h3>
+        <p class="clear-both my-12">
+          Visit App Store and Google Play to download JITSS offical app
+        </p>
 
-          <div class="get-apps-icons text-center">
-              <a href="#" class="inline-block pr-0 sm:pr-2 align-middle">
-                <img class="h-[59px] w-[200px]" src="assets/images/app-apple-store.svg" alt="Get SavvySalon App from iStore">
-              </a>
-              <a href="#" class="inline-block pt-2 sm:pt-0 align-middle">
-                <img class="h-[59px] w-[200px]" src="assets/images/app-google-play.svg"
-                  alt="Get SavvySalon App from iStore">
-              </a>
-          </div>
+        <div class="get-apps-icons text-center">
+          <a href="javascript:;" class="inline-block pr-0 sm:pr-2 align-middle">
+            <img
+              class="h-[59px] w-[200px]"
+              src="assets/images/app-apple-store.svg"
+              alt="Get JITSS App from iStore"
+            />
+          </a>
+          <a href="javascript:;" class="inline-block pt-2 sm:pt-0 align-middle">
+            <img
+              class="h-[59px] w-[200px]"
+              src="assets/images/app-google-play.svg"
+              alt="Get JITSS App from iStore"
+            />
+          </a>
         </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="how-to-work py-12">
   <div class="container">
-    <h2 class="text-center pb-6">How #SavvySalon works?</h2>
+    <h2 class="text-center pb-6">How #JITSS works?</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="border border-color-[rgba(0,0,0,.125)] rounded-t-md" *ngFor="let card of help_cards; let number = index">
-            <div class="flex justify-center">
-              <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                <div class="relative">
-                <img class="rounded-t-md" [src]="card.image_file" [alt]="card.title" />
-                <div class="absolute bottom-0 text-center font-playfairDisplay text-5xl px-4 pb-4 bg-[rgba(253,196,155,.9)]">{{ number>9?number+1:'0'+(number+1) }}</div>
-                </div>
-                <div class="p-2 text-center">
-                  <div class="mb-0 text-lg font-playfairDisplay">{{ card.title }}</div>
-                </div>
+      <div
+        class="border border-color-[rgba(0,0,0,.125)] rounded-t-md"
+        *ngFor="let card of help_cards; let number = index"
+      >
+        <div class="flex justify-center">
+          <div class="rounded-lg shadow-lg bg-white max-w-sm">
+            <div class="relative">
+              <img
+                class="rounded-t-md"
+                [src]="card.image_file"
+                [alt]="card.title"
+              />
+              <div
+                class="absolute bottom-0 text-center font-playfairDisplay text-5xl px-4 pb-4 bg-[rgba(253,196,155,.9)]"
+              >
+                {{ number > 9 ? number + 1 : "0" + (number + 1) }}
               </div>
             </div>
+            <div class="p-2 text-center">
+              <div class="mb-0 text-lg font-playfairDisplay">
+                {{ card.title }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="reviews bg-gray-100 py-12">
-  <h2 class="text-center pb-6">What people say about SavvySalon</h2>
+  <h2 class="text-center pb-6">What people say about JITSS</h2>
   <div class="container text-center">
-  <app-slider [isDefault]="false" [review_sliders]="review_sliders"></app-slider>
+    <app-slider
+      [isDefault]="false"
+      [review_sliders]="review_sliders"
+    ></app-slider>
   </div>
 </section>
 
-
 <section class="latest-blog container py-12">
-<h2 class="py-6 text-center">Latest Stories</h2>
+  <h2 class="py-6 text-center">Latest Stories</h2>
 
-<app-story-cards [stories]="stories"></app-story-cards>
+  <app-story-cards [stories]="stories"></app-story-cards>
 
-<div class="text-center pt-12">
-  <a href="#" class="btn-primary shadow-sm text-xl">More Stories</a>
-</div>
-
+  <div class="text-center pt-12">
+    <a routerLink="stories" class="btn-primary shadow-sm text-xl">More Stories</a>
+  </div>
 </section>
 
 <section class="py-12 bg-gray-100 text-center">
-<h2 class="pb-6">Proudly Featured In</h2>
-<ng-container *ngFor="let feature of features">
-<span class="p-4 inline-table sm:inline-block">
-  <a [href]="feature.link??'#'" [target]="feature.link?'_blank':''"><img [src]="feature.image_file" [alt]="feature.title" class="h-16 w-auto"></a>
-</span>
-</ng-container>
+  <h2 class="pb-6">Proudly Featured In</h2>
+  <ng-container *ngFor="let feature of features">
+    <span class="p-4 inline-table sm:inline-block">
+      <a [href]="feature.link ?? '#'" [target]="feature.link ? '_blank' : ''"
+        ><img
+          [src]="feature.image_file"
+          [alt]="feature.title"
+          class="h-16 w-auto"
+      /></a>
+    </span>
+  </ng-container>
 </section>

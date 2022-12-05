@@ -1,41 +1,65 @@
-<div class="slider-outter overflow-hidden" [ngClass]="isDefault?'home-slider':'quote-slider'">
+<div
+  class="slider-outter overflow-hidden"
+  [ngClass]="isDefault ? 'home-slider' : 'quote-slider'"
+>
   <owl-carousel-o [options]="customOptions">
     <ng-container *ngIf="isDefault">
-    <ng-template carouselSlide *ngFor="let slider of sliders">
-      <div class="slider-inner">
-        <img [src]="slider.slider_file" class="object-cover" alt="slider image" />
-        <div class="slider-content">
-          <div class="slider-title">
-            <h2>{{ slider.title }}</h2>
-          </div>
-          <div class="slider-sub-title">
-            <h2>{{ slider.sub_title }}</h2>
-          </div>
-          <div class="slider-buttons mt-8">
-            <a href="#" class="slider-botton-black">Register Now</a>
-            <a href="#" class="slider-botton-orange">Book Appointment</a>
+      <ng-template carouselSlide *ngFor="let slider of sliders">
+        <div class="slider-inner">
+          <img
+            [src]="slider.slider_file"
+            class="object-cover"
+            alt="slider image"
+          />
+          <div class="slider-content">
+            <div class="slider-title">
+              <h2>{{ slider.title }}</h2>
+            </div>
+            <div class="slider-sub-title">
+              <h2>{{ slider.sub_title }}</h2>
+            </div>
+            <div class="slider-buttons mt-8">
+              <a routerLink="client/register" class="slider-botton-black"
+                >Register Now</a
+              >
+              <a routerLink="client/login" class="slider-botton-orange"
+                >Book Appointment</a
+              >
+            </div>
           </div>
         </div>
-      </div>
-    </ng-template>
+      </ng-template>
     </ng-container>
     <ng-container *ngIf="!isDefault">
-    <ng-template carouselSlide *ngFor="let slider of review_sliders">
+      <ng-template carouselSlide *ngFor="let slider of review_sliders">
         <div class="flex flex-col md:flex-row">
-          <div class="basis-full m-auto md:basis-1/4 relative md:pl-4 md:ml-[8.83%]">
-            <img class="w-16 absolute top-0" src="assets/images/blockquote.svg" alt="">
-            <img class="aspect-h-1 w-40 h-40 rounded-full mt-1 ml-8" [src]="slider.photo_file" alt="">
+          <div
+            class="basis-full m-auto md:basis-1/4 relative md:pl-4 md:ml-[8.83%]"
+          >
+            <img
+              class="w-16 absolute top-0"
+              src="assets/images/blockquote.svg"
+              alt=""
+            />
+            <img
+              class="aspect-h-1 w-40 h-40 rounded-full mt-1 ml-8"
+              [src]="slider.photo_file"
+              alt=""
+            />
           </div>
           <div class="basis-full md:basis-3/4">
             <p class="text-justify">{{ slider.review }}</p>
-            <br>
+            <br />
             <blockquote class="mb-4 text-xl text-left">
-              <p class="font-playfairDisplay italic text-gray-500 text-[.875em] -mt-4 before:content-['-']">{{ slider.name }}</p>
+              <p
+                class="font-playfairDisplay italic text-gray-500 text-[.875em] -mt-4 before:content-['-']"
+              >
+                {{ slider.name }}
+              </p>
             </blockquote>
-    
           </div>
         </div>
-    </ng-template>
+      </ng-template>
     </ng-container>
   </owl-carousel-o>
 </div>

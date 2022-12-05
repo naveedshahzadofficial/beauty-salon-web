@@ -5,10 +5,10 @@
 .slider-content {
   @apply text-center absolute;
 
-  >.slider-title {
+  > .slider-title {
     @apply w-fit m-auto;
 
-    >h2 {
+    > h2 {
       @apply font-montserrat px-5 py-[10px] text-black uppercase text-sm text-center;
       background: #f8f2ec;
       line-height: 1.2;
@@ -16,10 +16,10 @@
     }
   }
 
-  >.slider-sub-title {
+  > .slider-sub-title {
     @apply w-fit m-auto;
 
-    >h2 {
+    > h2 {
       @apply font-playfairDisplay px-5 py-[10px] text-black text-center;
       background: RGBA(248, 242, 236, 0.78);
       font-size: 237.5%;
@@ -31,7 +31,7 @@
     @apply py-3 px-6 text-white bg-gray-800 border-gray-800;
 
     &:hover {
-      @apply bg-black border-black;
+      @apply bg-black border-black cursor-pointer;
     }
   }
 
@@ -43,6 +43,3 @@
     }
   }
 }
-
-
-

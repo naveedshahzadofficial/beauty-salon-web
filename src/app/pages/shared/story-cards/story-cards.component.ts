@@ -1,5 +1,5 @@
-import { IStory } from '@interfaces/story.interface';
 import { Component, Input, OnInit } from '@angular/core';
+import { IStory } from '@interfaces/story.interface';
 
 @Component({
   selector: 'app-story-cards',

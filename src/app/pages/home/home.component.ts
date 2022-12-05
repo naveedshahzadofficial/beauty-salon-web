@@ -1,9 +1,9 @@
+import { Component, OnInit } from '@angular/core';
+import { PageService } from '@services/page.service';
 import { IStory } from '@interfaces/story.interface';
 import { IReviewSlider } from '@interfaces/review-slider.interface';
 import { ISlider } from '@interfaces/slider.interface';
 import { ICategory } from '@interfaces/category.interface';
-import { PageService } from '@services/page.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
