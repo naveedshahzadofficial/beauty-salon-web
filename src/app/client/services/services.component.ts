@@ -1,5 +1,5 @@
-import { ICategory } from './../../interfaces/category.interface';
-import { ClientService } from './../../services/client.service';
+import { ICategory } from '@interfaces/category.interface';
+import { ClientService } from '@services/client.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

@@ -1,7 +1,7 @@
-import { ILinks } from './../../interfaces/links.interface';
-import { IMeta } from './../../interfaces/meta.interface';
-import { PageService } from './../../services/page.service';
-import { IStory } from './../../interfaces/story.interface';
+import { ILinks } from '@interfaces/links.interface';
+import { IMeta } from '@interfaces/meta.interface';
+import { PageService } from '@services/page.service';
+import { IStory } from '@interfaces/story.interface';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

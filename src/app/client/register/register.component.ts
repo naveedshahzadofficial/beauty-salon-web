@@ -1,9 +1,9 @@
-import { IUser } from './../../interfaces/user.interface';
+import { IUser } from '@interfaces/user.interface';
 import { Router } from '@angular/router';
-import { AppError } from './../../common/app-error';
-import { ValidationError } from './../../common/validation-error';
-import { AuthService } from './../../services/auth.service';
-import { CustomValidator } from './../../common/custom-validator';
+import { AppError } from '@common/app-error';
+import { ValidationError } from '@common/validation-error';
+import { AuthService } from '@services/auth.service';
+import { CustomValidator } from '@common/custom-validator';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';

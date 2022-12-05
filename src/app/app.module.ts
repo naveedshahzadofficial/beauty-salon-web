@@ -18,7 +18,7 @@ import { TopBarComponent } from './layouts/client-layout/header/top-bar/top-bar.
 import { FooterComponent } from './layouts/client-layout/footer/footer.component';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { CategoryService } from './services/category.service';
+import { CategoryService } from '@services/category.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({

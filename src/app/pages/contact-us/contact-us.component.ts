@@ -1,4 +1,4 @@
-import { PageService } from './../../services/page.service';
+import { PageService } from '@services/page.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';

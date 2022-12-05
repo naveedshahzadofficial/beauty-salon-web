@@ -60,6 +60,7 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.USER_NAME);
     this._isLoggedIn$.next(false);
+    this._user$.next(null);
   }
 
   logout() {

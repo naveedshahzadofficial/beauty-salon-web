@@ -1,16 +1,14 @@
-import { IStory } from './../../interfaces/story.interface';
+import { IStory } from '@interfaces/story.interface';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-story-cards',
   templateUrl: './story-cards.component.html',
-  styleUrls: ['./story-cards.component.scss']
+  styleUrls: ['./story-cards.component.scss'],
 })
 export class StoryCardsComponent implements OnInit {
   @Input() stories: IStory[] = [];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
