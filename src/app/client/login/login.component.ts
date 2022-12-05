@@ -1,10 +1,10 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@services/auth.service';
 import { IUser } from '@interfaces/user.interface';
 import { UnauthorizedError } from '@common/unauthorized-error';
 import { CustomValidator } from '@common/custom-validator';
 import { ValidationError } from '@common/validation-error';
 import { AppError } from '@common/app-error';
-import { AuthService } from '@services/auth.service';
-import { Component, OnInit } from '@angular/core';
 
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { createMask } from '@ngneat/input-mask';

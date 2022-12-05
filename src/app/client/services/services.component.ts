@@ -1,6 +1,6 @@
-import { ICategory } from '@interfaces/category.interface';
-import { ClientService } from '@services/client.service';
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from '@services/client.service';
+import { ICategory } from '@interfaces/category.interface';
 
 @Component({
   selector: 'app-services',

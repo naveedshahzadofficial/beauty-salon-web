@@ -1,6 +1,6 @@
-import { UnauthorizedError } from './unauthorized-error';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { UnauthorizedError } from './unauthorized-error';
 import { AppError } from './app-error';
 import { BadInput } from './bad-input';
 import { NotFoundError } from './not-found-error';

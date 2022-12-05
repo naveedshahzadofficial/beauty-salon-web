@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { IResponses } from '../interfaces/responses.interface';
-import { IResponse } from '../interfaces/response.interface';
-import { handleError } from '../common/handle-errors';
+import { IResponses } from '@interfaces/responses.interface';
+import { IResponse } from '@interfaces/response.interface';
+import { handleError } from '@common/handle-errors';
 
 @Injectable({
   providedIn: 'root',

@@ -20,4 +20,7 @@ export class ServiceDetailComponent implements OnInit {
       console.log(params.get('slug'));
     });
   }
+
+  description =
+    '<p> It is not just a massage service but the perfect therapy you need to rejuvenate and recoup for going about your daily routine. GharPar full body massage is your power house! Let us help you achieve your life goals hassle-free.</p>';
 }

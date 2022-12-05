@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '@services/auth.service';
 import { AppError } from './app-error';
 import { UnauthorizedError } from './unauthorized-error';
 import { ErrorHandler, Injectable } from '@angular/core';
