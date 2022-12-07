@@ -39,12 +39,14 @@
   <div class="container">
     <div class="flex flex-wrap">
       <div class="services-tab basis-4/6 relative px-4">
-        <ng-container *ngFor="let service of services">
-          <form>
+        <form>
+          <ng-container *ngFor="let service of services">
             <div
               class="checkbtn font-poppins text-sm leading-5 text-secondary-dark"
             >
               <input
+                (change)="onCheckboxChange($event)"
+                [value]="service.id"
                 class="hidden absolute w-full appearance-none kit"
                 type="checkbox"
                 [id]="service.id"
@@ -55,14 +57,14 @@
                 class="w-full resize-none cursor-pointer overflow-hidden relative service-item check-lab inline-block"
                 ><div class="flex flex-wrap">
                   <div class="basis-4/6">
-                    <label class="cursor-pointer inline-block">{{
+                    <span class="cursor-pointer inline-block">{{
                       service.service_title
-                    }}</label
-                    ><span class="text-other-blue pl-5 text-xs">Add-ons</span>
+                    }}</span>
+                    <span class="text-other-blue pl-5 text-xs">Add-ons</span>
                   </div>
                   <div class="basis-2/6 flex justify-between text-primary">
-                    <label class="cursor-pointer"
-                      >Rs. {{ service.service_price }}</label
+                    <span class="cursor-pointer"
+                      >Rs. {{ service.service_price }}</span
                     ><span
                       ><img
                         class="align-middle inline-block"
@@ -72,8 +74,8 @@
                   </div></div
               ></label>
             </div>
-          </form>
-        </ng-container>
+          </ng-container>
+        </form>
       </div>
       <div class="basis-2/6 relative px-4">
         <app-cart></app-cart>
