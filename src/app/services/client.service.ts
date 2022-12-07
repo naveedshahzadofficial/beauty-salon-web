@@ -18,4 +18,11 @@ export class ClientService {
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  getCategoryServices(category_id: number) {
+    return this.http
+      .post(`${this.base_url}/client/categories/${category_id}/services`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '@services/client.service';
+import { IService } from '@interfaces/service.interface';
 import { ICategory } from '@interfaces/category.interface';
 
 @Component({
@@ -9,6 +10,7 @@ import { ICategory } from '@interfaces/category.interface';
 })
 export class ServicesComponent implements OnInit {
   categories: ICategory[] = [];
+  services: IService[] = [];
   tab_activated!: number;
   constructor(private clientService: ClientService) {}
 
@@ -20,6 +22,9 @@ export class ServicesComponent implements OnInit {
 
   getCategoryServices(category: ICategory) {
     this.tab_activated = category.id;
+    this.clientService
+      .getCategoryServices(category.id)
+      .subscribe((resp) => (this.services = resp));
     console.log(category);
   }
 }
