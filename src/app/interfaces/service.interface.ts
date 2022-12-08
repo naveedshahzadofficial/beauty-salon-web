@@ -1,3 +1,4 @@
+import { IAddon } from './addon.interface';
 export interface IService {
   id: number;
   category_id: number;
@@ -12,4 +13,5 @@ export interface IService {
   is_active: number;
   created_at: string;
   updated_at: string;
+  addons?: IAddon[];
 }
