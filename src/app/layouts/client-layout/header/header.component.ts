@@ -1,3 +1,4 @@
+import { CartService } from './../../../services/cart.service';
 import { Router } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isOpen: boolean = false;
-  constructor(public authService: AuthService, private router: Router) {}
+  totalCartItems: number = 0;
+  constructor(
+    public authService: AuthService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cartService
+      .getCartServices()
+      .subscribe((services) => (this.totalCartItems = services.length));
+  }
 
   logout(e: Event): void {
     e.preventDefault();

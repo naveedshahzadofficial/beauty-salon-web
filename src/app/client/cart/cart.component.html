@@ -11,7 +11,7 @@
         My Cart
         <span
           class="w-[26px] h-[26px] rounded-full bg-primary inline-block text-center ml-[10px] pt-1 text-white text-sm"
-          >0</span
+          >{{ totalCartItems }}</span
         >
       </h6>
     </div>
@@ -20,7 +20,7 @@
     <!-- begin: items -->
     <div class="items h-[325px] overflow-auto">
       <!-- begin: empty-cart-body -->
-      <ng-container *ngIf="false">
+      <ng-container *ngIf="services.length === 0">
         <div
           class="empty-cart-body flex justify-center items-center flex-col text-center border-t border-gray-300 h-[inherit]"
         >
@@ -39,9 +39,12 @@
       <!-- end: empty-cart-body -->
 
       <!-- begin: add-items -->
-      <ng-container *ngIf="true">
+      <ng-container *ngFor="let service of services">
         <div class="add-items px-5 py-6 border-t border-t-other-light">
-          <app-cart-item></app-cart-item>
+          <app-cart-item
+            (removeItemEvent)="removeFromCart(service)"
+            [service]="service"
+          ></app-cart-item>
 
           <!-- begin: cart-addon -->
           <ng-container *ngIf="false">
@@ -60,7 +63,7 @@
 
     <span
       class="chk-btn cursor-pointer w-full bg-other-blue text-center font-medium leading-[56px] block text-white relative rounded-b-2xl"
-      >Checkout - Rs. 0
+      >Checkout - {{ grandTotal | currency : "Rs. " }}
       <img
         class="absolute top-5 right-4"
         src="assets/images/arrow-forward.svg"

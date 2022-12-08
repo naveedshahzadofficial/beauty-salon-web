@@ -5,7 +5,7 @@ export interface IService {
   service_title: string;
   service_slug: string;
   service_duration: number;
-  service_price: string;
+  service_price: number;
   is_deal: number;
   is_featured: number;
   is_addon: number;

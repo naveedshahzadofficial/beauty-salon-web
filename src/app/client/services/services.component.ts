@@ -12,7 +12,6 @@ export class ServicesComponent implements OnInit {
   categories: ICategory[] = [];
   services: IService[] = [];
   tab_activated!: number;
-  checkedItems: any = [];
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
@@ -32,19 +31,19 @@ export class ServicesComponent implements OnInit {
       .subscribe((resp) => (this.services = resp));
   }
 
-  onCheckboxChange(e: any) {
-    if (e.target.checked) {
-      this.checkedItems.push(e.target.value);
-    } else {
-      this.checkedItems = this.checkedItems.filter(
-        (item: any) => item !== e.target.value
-      );
-    }
 
-    console.log(this.checkedItems);
-  }
 
-  toggleCheckBox(elementId: any) {
-    //return this.tempData.indexOf(elementId) != -1 ? true : false;
-  }
+  // onCheckboxChange(e: any) {
+  //   if (e.target.checked) {
+  //     this.checkedItems.push(e.target.value);
+  //   } else {
+  //     this.checkedItems = this.checkedItems.filter(
+  //       (item: any) => item !== e.target.value
+  //     );
+  //   }
+
+  //   console.log(this.checkedItems);
+  // }
+
+ 
 }

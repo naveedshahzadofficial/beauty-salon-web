@@ -106,13 +106,13 @@
             </div>
           </transition>
         </div>
-
+        <!-- began: cart-top -->
         <span
           class="w-12 h-12 float-right bg-secondary-dark text-center rounded-full ml-4 relative block pt-[10px]"
         >
           <span
             class="bg-primary text-white w-5 h-5 text-xs rounded-full absolute right-9 top-0 align-middle inline-block pt-[2px]"
-            >10</span
+            >{{ totalCartItems }}</span
           >
 
           <img
@@ -121,6 +121,7 @@
             alt="cart"
           />
         </span>
+        <!-- end: cart-top -->
       </div>
       <ng-template #loggedOut>
         <div>
