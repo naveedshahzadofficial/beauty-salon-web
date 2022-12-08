@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { IAddon } from '@interfaces/addon.interface';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-addons',
@@ -6,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./addons.component.scss'],
 })
 export class AddonsComponent implements OnInit {
+  @Input() addons: IAddon[] | undefined = [];
   @Output() isClosedEvent = new EventEmitter<boolean>();
   constructor() {}
 
