@@ -1,0 +1,47 @@
+<div class="banner bg-secondary-dark">
+  <div class="container max-auto">
+    <p
+      class="text-xl text-white bg-client-banner bg-no-repeat text-center leading-[150px]"
+    >
+      Flawless makeup to make you look and feel your best. We bring everything
+      you need.
+    </p>
+  </div>
+</div>
+
+<section class="categories bg-secondary-gray sticky top-0 z-50">
+  <div class="categories-tab">
+    <div class="container">
+      <ul
+        class="overflow-x-auto flex flex-nowrap whitespace-nowrap no-scrollbar"
+      >
+        <ng-container *ngFor="let category of categories; let first = first">
+          <li>
+            <a
+              [routerLink]="[
+                '/client/categories/services',
+                category.category_slug
+              ]"
+              routerLinkActive="bg-other-blue text-white"
+              class="text-secondary-dark text-xs leading-10 py-3 px-6 cursor-pointer uppercase font-medium block hover:bg-orange-300 hover:text-white"
+              >{{ category.category_name }}</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="category-services py-8 font-medium">
+  <div class="container">
+    <div class="flex flex-wrap">
+      <div class="services-tab basis-4/6 relative px-4">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="basis-2/6 relative px-4">
+        <app-cart></app-cart>
+      </div>
+    </div>
+  </div>
+</section>

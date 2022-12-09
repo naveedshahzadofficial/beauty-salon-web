@@ -10,6 +10,7 @@
   class="select-qty relative inline-block flex-1 py-0 px-[0.5em] cursor-pointer text-white text-sm"
 >
   <select
+    (change)="changedItemQtyEvent.emit(cartItem)"
     [(ngModel)]="cartItem.quantity"
     class="qty-opt text-black p-0 focus:ring-0"
     name="item"
@@ -29,7 +30,7 @@
 <!-- end: qty -->
 <!-- begin: remove-btn -->
 <span
-  (click)="removeItem(cartItem)"
+  (click)="removeItemEvent.emit(cartItem)"
   class="remove-btn cursor-pointer text-other-red hover:text-red-700 text-sm ml-5 mr-10"
   ><img
     class="w-3 h-2.5 pr-1 inline-block"

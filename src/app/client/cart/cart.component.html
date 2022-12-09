@@ -14,6 +14,7 @@
           >{{ totalCartItems }}</span
         >
       </h6>
+      <button (click)="clearAllCart()" *ngIf="cartItems.length !== 0" class="text-other-blue font-medium contents">Clear All</button>
     </div>
     <!-- end: cart-header -->
 
@@ -43,6 +44,7 @@
         <div class="add-items px-5 py-6 border-t border-t-other-light">
           <app-cart-item
             (removeItemEvent)="removeFromCart($event)"
+            (changedItemQtyEvent)="changedItemQtyEvent($event)"
             [cartItem]="cartItem"
           ></app-cart-item>
 
@@ -66,6 +68,7 @@
     <!-- end: items -->
 
     <span
+      (click)="checkout($event)"
       class="chk-btn cursor-pointer w-full bg-other-blue text-center font-medium leading-[56px] block text-white relative rounded-b-2xl"
       >Checkout - {{ grandTotal | currency : "Rs. " }}
       <img

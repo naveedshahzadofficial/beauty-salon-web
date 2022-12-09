@@ -9,12 +9,9 @@ import { ICartItem } from '@interfaces/cart-item.interface';
 export class CartItemComponent implements OnInit {
   @Input() cartItem!: ICartItem;
   @Output() removeItemEvent = new EventEmitter<ICartItem>();
+  @Output() changedItemQtyEvent = new EventEmitter<ICartItem>();
   quantity = 1;
   constructor() {}
 
   ngOnInit(): void {}
-
-  removeItem(item: ICartItem): void {
-    this.removeItemEvent.emit(item);
-  }
 }

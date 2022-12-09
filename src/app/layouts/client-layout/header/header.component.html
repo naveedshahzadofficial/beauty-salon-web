@@ -21,14 +21,20 @@
     <div class="navigation">
       <div class="nav-left-side">
         <ng-container *ngIf="authService.isLoggedIn$ | async; else elseMenu">
-          <a routerLink="/client/services"> Services </a>
+          <a routerLink="/client/categories" routerLinkActive="text-primary">
+            Services
+          </a>
         </ng-container>
         <ng-template #elseMenu>
-          <a routerLink="/services"> Services </a>
-          <a routerLink="/stories"> Stories </a>
+          <a routerLink="/services" routerLinkActive="text-primary">
+            Services
+          </a>
+          <a routerLink="/stories" routerLinkActive="text-primary"> Stories </a>
         </ng-template>
-        <a routerLink="/faqs"> FAQ </a>
-        <a routerLink="/contact-us"> Contact Us </a>
+        <a routerLink="/faqs" routerLinkActive="text-primary"> FAQ </a>
+        <a routerLink="/contact-us" routerLinkActive="text-primary">
+          Contact Us
+        </a>
       </div>
       <div *ngIf="authService.isLoggedIn$ | async; else loggedOut">
         <div class="relative inline-block">

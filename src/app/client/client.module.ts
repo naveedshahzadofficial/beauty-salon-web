@@ -15,6 +15,8 @@ import { AddonsComponent } from './services/addons/addons.component';
 import { ServiceItemComponent } from './services/service-item/service-item.component';
 import { AddonItemComponent } from './services/addons/addon-item/addon-item.component';
 import { CartAddonItemComponent } from './cart/cart-addon-item/cart-addon-item.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CartAddonItemComponent } from './cart/cart-addon-item/cart-addon-item.c
     ServiceItemComponent,
     AddonItemComponent,
     CartAddonItemComponent,
+    CategoriesComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

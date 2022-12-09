@@ -90,4 +90,8 @@ export class CartService {
     );
     return addonItem !== undefined;
   }
+
+  changedItemQtyEvent(cartItem: ICartItem) {
+    this._cartItems$.next(this.cartItems);
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '@services/client.service';
 import { IService } from '@interfaces/service.interface';
 import { ICategory } from '@interfaces/category.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -9,25 +10,22 @@ import { ICategory } from '@interfaces/category.interface';
   styleUrls: ['./services.component.scss'],
 })
 export class ServicesComponent implements OnInit {
-  categories: ICategory[] = [];
   services: IService[] = [];
-  tab_activated!: number;
-  constructor(private clientService: ClientService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
-    this.clientService.getCategories().subscribe((resp: any) => {
-      this.categories = resp;
-      if (this.categories.length) {
-        let category = this.categories[0];
-        this.getCategoryServices(category);
-      }
+    this.route.paramMap.subscribe((params) => {
+      let slug = params.get('slug') || '';
+      this.getCategoryServices(slug);
     });
   }
 
-  getCategoryServices(category: ICategory) {
-    this.tab_activated = category.id;
+  getCategoryServices(slug: string) {
     this.clientService
-      .getCategoryServices(category.id)
+      .getCategoryServices(slug)
       .subscribe((resp) => (this.services = resp));
   }
 }
