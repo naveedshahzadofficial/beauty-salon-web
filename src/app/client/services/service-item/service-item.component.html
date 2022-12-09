@@ -32,6 +32,10 @@
     ></label>
   </div>
   <ng-container *ngIf="isAddOn">
-    <app-addons [service]="service"></app-addons>
+    <app-addons
+      (isClosedEvent)="isClosedEvent($event)"
+      *ngIf="isOpenAddOn"
+      [service]="service"
+    ></app-addons>
   </ng-container>
 </ng-container>

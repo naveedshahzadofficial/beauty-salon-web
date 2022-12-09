@@ -1,6 +1,7 @@
 import { ICartAddon } from '@interfaces/cart-addon.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IAddon } from '@interfaces/addon.interface';
+import { CartService } from '@services/cart.service';
 
 @Component({
   selector: 'app-addon-item',
@@ -9,8 +10,10 @@ import { IAddon } from '@interfaces/addon.interface';
 })
 export class AddonItemComponent implements OnInit {
   @Input() addon!: IAddon;
+  @Input() cartItemId!: number;
+  @Output() addonItemEvent = new EventEmitter<ICartAddon>();
   cartAddonItem!: ICartAddon;
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartAddonItem = {
@@ -19,5 +22,13 @@ export class AddonItemComponent implements OnInit {
       price: this.addon.addon_price,
       quantity: 1,
     };
+  }
+
+  addToCart(cartAddonItem: ICartAddon) {
+    this.addonItemEvent.emit(cartAddonItem);
+  }
+
+  isCartAddonItem(cartAddonItem: ICartAddon) {
+    return this.cartService.isExistAddon(this.cartItemId, cartAddonItem);
   }
 }

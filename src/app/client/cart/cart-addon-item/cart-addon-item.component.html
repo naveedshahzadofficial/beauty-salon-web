@@ -1,7 +1,7 @@
 <div class="flex justify-between align-middle pb-0 sm:pb-2">
-  <label>{{ cartItem.name }} </label>
+  <label>{{ cartAddonItem.name }} </label>
   <span class="price-tag text-primary text-sm">{{
-    cartItem.price | currency : "Rs. "
+    cartAddonItem.price | currency : "Rs. "
   }}</span>
 </div>
 <!-- begin: qty -->
@@ -10,7 +10,7 @@
   class="select-qty relative inline-block flex-1 py-0 px-[0.5em] cursor-pointer text-white text-sm"
 >
   <select
-    [(ngModel)]="cartItem.quantity"
+    [(ngModel)]="cartAddonItem.quantity"
     class="qty-opt text-black p-0 focus:ring-0"
     name="item"
   >
@@ -29,7 +29,7 @@
 <!-- end: qty -->
 <!-- begin: remove-btn -->
 <span
-  (click)="removeItem(cartItem)"
+  (click)="removeItem(cartAddonItem)"
   class="remove-btn cursor-pointer text-other-red hover:text-red-700 text-sm ml-5 mr-10"
   ><img
     class="w-3 h-2.5 pr-1 inline-block"

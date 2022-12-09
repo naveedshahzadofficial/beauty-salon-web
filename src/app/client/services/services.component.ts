@@ -30,20 +30,4 @@ export class ServicesComponent implements OnInit {
       .getCategoryServices(category.id)
       .subscribe((resp) => (this.services = resp));
   }
-
-
-
-  // onCheckboxChange(e: any) {
-  //   if (e.target.checked) {
-  //     this.checkedItems.push(e.target.value);
-  //   } else {
-  //     this.checkedItems = this.checkedItems.filter(
-  //       (item: any) => item !== e.target.value
-  //     );
-  //   }
-
-  //   console.log(this.checkedItems);
-  // }
-
- 
 }

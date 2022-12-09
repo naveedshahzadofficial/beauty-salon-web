@@ -1,6 +1,7 @@
 import { ICartItem } from '@interfaces/cart-item.interface';
 import { CartService } from '@services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { ICartAddon } from '@interfaces/cart-addon.interface';
 
 @Component({
   selector: 'app-cart',
@@ -24,5 +25,9 @@ export class CartComponent implements OnInit {
 
   removeFromCart(cartItem: ICartItem) {
     this.cartService.removeFromCart(cartItem);
+  }
+
+  removeAddonFromCart(CartAddonItem: ICartAddon, cartItem: ICartItem) {
+    this.cartService.removeAddonFromCart(cartItem, CartAddonItem);
   }
 }

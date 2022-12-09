@@ -1,5 +1,5 @@
 import { InputMaskModule } from '@ngneat/input-mask';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,15 +14,28 @@ import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { AddonsComponent } from './services/addons/addons.component';
 import { ServiceItemComponent } from './services/service-item/service-item.component';
 import { AddonItemComponent } from './services/addons/addon-item/addon-item.component';
+import { CartAddonItemComponent } from './cart/cart-addon-item/cart-addon-item.component';
 
 @NgModule({
-  declarations: [LoginComponent, DashboardComponent, RegisterComponent, ServicesComponent, CartComponent, CartItemComponent, AddonsComponent, ServiceItemComponent, AddonItemComponent],
+  declarations: [
+    LoginComponent,
+    DashboardComponent,
+    RegisterComponent,
+    ServicesComponent,
+    CartComponent,
+    CartItemComponent,
+    AddonsComponent,
+    ServiceItemComponent,
+    AddonItemComponent,
+    CartAddonItemComponent,
+  ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     InputMaskModule,
-  ]
+    FormsModule,
+  ],
 })
 export class ClientModule {}

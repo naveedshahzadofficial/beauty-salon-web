@@ -1,0 +1,37 @@
+.qty-opt {
+  text-align: center;
+  padding-left: 5px;
+  width: 35px;
+  border: none;
+  -webkit-appearance: none;
+  background: 0 0;
+}
+.select-qty:after {
+  content: "";
+  display: block;
+  background: url(/assets/images/down-arrow.svg) no-repeat;
+  background-position: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 8px;
+  left: 24px;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  padding-left: 30px;
+}
+select {
+  word-wrap: normal;
+}
+select {
+  text-transform: none;
+}
+option {
+  font-weight: normal;
+  display: block;
+  white-space: nowrap;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}

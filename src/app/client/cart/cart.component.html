@@ -42,16 +42,20 @@
       <ng-container *ngFor="let cartItem of cartItems">
         <div class="add-items px-5 py-6 border-t border-t-other-light">
           <app-cart-item
-            (removeItemEvent)="removeFromCart(cartItem)"
+            (removeItemEvent)="removeFromCart($event)"
             [cartItem]="cartItem"
           ></app-cart-item>
 
           <!-- begin: cart-addon -->
-          <ng-container *ngIf="false">
+          <ng-container *ngIf="cartItem.addons?.length">
             <div
+              *ngFor="let cartAddonItem of cartItem.addons"
               class="cart-addon w-11/12 bg-other-cart-light rounded-l-[48px] px-6 py-5 ml-[15%] mt-2.5"
             >
-              <app-cart-item></app-cart-item>
+              <app-cart-addon-item
+                [cartAddonItem]="cartAddonItem"
+                (removeAddonItemEvent)="removeAddonFromCart($event, cartItem)"
+              ></app-cart-addon-item>
             </div>
           </ng-container>
           <!-- end: cart-addon -->

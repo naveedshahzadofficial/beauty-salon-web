@@ -19,8 +19,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService
-      .getCartServices()
-      .subscribe((services) => (this.totalCartItems = services.length));
+      .getCartItems()
+      .subscribe((cartItems) => (this.totalCartItems = cartItems.length));
   }
 
   logout(e: Event): void {
