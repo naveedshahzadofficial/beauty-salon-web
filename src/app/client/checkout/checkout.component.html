@@ -1,4 +1,50 @@
 <div
-    class="my-cart bg-white rounded-[18px] shadow-cart text-secondary-dark sticky text-sm"
-  >
-  </div>
+  class="my-cart bg-white rounded-[18px] shadow-cart text-secondary-dark sticky text-sm h-full px-2"
+>
+  <form [formGroup]="orderForm" class="px-6 py-12">
+    <div class="form-group mb-6">
+      <label
+        class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+      >
+        DATE
+      </label>
+      <input
+        type="text"
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+        [dpDayPicker]="dpConfig"
+        formControlName="order_date"
+        [placeholder]="currentDate"
+        readonly="true"
+      />
+    </div>
+
+    <div class="form-group mb-6">
+      <label
+        class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+      >
+        Time
+      </label>
+      <dp-time-select
+        (onChange)="selectedTime($event)"
+        formControlName="order_time"
+        [config]="dptConfig"
+      ></dp-time-select>
+    </div>
+
+    <div class="form-group mb-6">
+      <label
+        class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+        for="special_instructions"
+      >
+        SPECIAL INSTRUCTIONS
+      </label>
+
+      <textarea
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none resize-none"
+        name="instructions"
+        rows="3"
+        formControlName="instructions"
+      ></textarea>
+    </div>
+  </form>
+</div>

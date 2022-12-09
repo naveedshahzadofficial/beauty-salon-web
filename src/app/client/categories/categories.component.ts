@@ -14,16 +14,18 @@ export class CategoriesComponent implements OnInit {
     private clientService: ClientService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.clientService.getCategories().subscribe((resp) => {
       this.categories = resp;
-      if (this.categories.length) {
+
+      if (this.categories.length && this.router.url === '/client/categories') {
         this.router.navigate(['services', this.categories[0].category_slug], {
           relativeTo: this.route,
         });
       }
+
     });
   }
 }

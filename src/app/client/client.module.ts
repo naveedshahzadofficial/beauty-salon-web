@@ -17,6 +17,7 @@ import { AddonItemComponent } from './services/addons/addon-item/addon-item.comp
 import { CartAddonItemComponent } from './cart/cart-addon-item/cart-addon-item.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ReactiveFormsModule,
     InputMaskModule,
     FormsModule,
+    DpDatePickerModule,
   ],
 })
 export class ClientModule {}
