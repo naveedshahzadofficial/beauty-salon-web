@@ -1,3 +1,4 @@
+import { IService } from '@interfaces/service.interface';
 import { IAddon } from '@interfaces/addon.interface';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -7,8 +8,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./addons.component.scss'],
 })
 export class AddonsComponent implements OnInit {
-  @Input() addons: IAddon[] | undefined = [];
+  @Input() service!: IService;
   @Output() isClosedEvent = new EventEmitter<boolean>();
+
   constructor() {}
 
   ngOnInit(): void {}

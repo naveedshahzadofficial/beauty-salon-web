@@ -1,9 +1,7 @@
-import { ICartAddon } from './../../../interfaces/cart-addon.interface';
 import { IService } from '@interfaces/service.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '@services/cart.service';
-import { IAddon } from '@interfaces/addon.interface';
-import { ICartService } from '@interfaces/cart-service.interface';
+import { ICartItem } from '@app/interfaces/cart-item.interface';
 
 @Component({
   selector: 'app-service-item',
@@ -11,46 +9,32 @@ import { ICartService } from '@interfaces/cart-service.interface';
   styleUrls: ['./service-item.component.scss'],
 })
 export class ServiceItemComponent implements OnInit {
-  @Input() isAddOn: boolean = true;
   @Input() service!: IService;
-  @Input() addon!: IAddon;
-
-  cartItem!: ICartService | ICartAddon;
-
+  cartItem!: ICartItem;
+  isAddOn: boolean = false;
   isOpenAddOn: boolean = false;
-  addons: IAddon[] = [];
 
   constructor(private cartService: CartService) {}
   ngOnInit(): void {
-    if (this.service) {
-      this.cartItem = {
-        id: this.service.id,
-        name: this.service.service_title,
-        price: this.service.service_price,
-        quantity: 1,
-        addons: [],
-      };
-    }
-    if (this.addon) {
-      this.cartItem = {
-        id: this.addon.id,
-        name: this.addon.addon_title,
-        price: this.addon.addon_price,
-        quantity: 1,
-      };
-    }
-    if (this.service && this.service.addons) {
-      this.addons = this.service.addons;
+    this.cartItem = {
+      id: this.service.id,
+      name: this.service.service_title,
+      price: this.service.service_price,
+      quantity: 1,
+      addons: [],
+    };
+    if (this.service.addons?.length) {
+      this.isAddOn = true;
     }
   }
 
-  addToCart(service: IService) {
+  addToCart(cartItem: ICartItem) {
     this.isOpenAddOn = true;
-    this.cartService.addToCart(service);
+    this.cartService.addToCart(cartItem);
   }
 
-  isCartItem(service: IService) {
-    return this.cartService.isExist(service);
+  isCartItem(cartItem: ICartItem) {
+    return this.cartService.isExist(cartItem);
   }
   isClosedEvent(isOpenAddOn: boolean) {
     this.isOpenAddOn = isOpenAddOn;

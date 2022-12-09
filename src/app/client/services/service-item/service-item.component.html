@@ -4,17 +4,17 @@
       [id]="cartItem.id"
       class="hidden absolute w-full appearance-none kit"
       type="checkbox"
-      [disabled]="isCartItem(service)"
-      [checked]="isCartItem(service)"
+      [disabled]="isCartItem(cartItem)"
+      [checked]="isCartItem(cartItem)"
     />
     <label
-      (click)="addToCart(service)"
+      (click)="addToCart(cartItem)"
       [htmlFor]="cartItem.id"
       class="w-full resize-none cursor-pointer overflow-hidden relative service-item check-lab inline-block"
       ><div class="flex flex-wrap">
         <div class="basis-4/6">
           <span class="cursor-pointer inline-block">{{ cartItem.name }}</span>
-          <span *ngIf="addons.length" class="text-other-blue w-3 pl-5 text-xs">
+          <span *ngIf="isAddOn" class="text-other-blue w-3 pl-5 text-xs">
             Add-ons
           </span>
         </div>
@@ -31,9 +31,7 @@
         </div></div
     ></label>
   </div>
-  <app-addons
-    [addons]="addons"
-    (isClosedEvent)="isClosedEvent($event)"
-    *ngIf="isOpenAddOn && addons.length"
-  ></app-addons>
+  <ng-container *ngIf="isAddOn">
+    <app-addons [service]="service"></app-addons>
+  </ng-container>
 </ng-container>

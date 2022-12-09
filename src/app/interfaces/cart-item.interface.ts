@@ -1,5 +1,5 @@
 import { ICartAddon } from './cart-addon.interface';
-export interface ICartService {
+export interface ICartItem {
   id: number;
   name: string;
   price: number;

@@ -1,4 +1,4 @@
-import { IService } from '@interfaces/service.interface';
+import { ICartItem } from '@interfaces/cart-item.interface';
 import { CartService } from '@services/cart.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,21 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  public services: IService[] = [];
+  public cartItems: ICartItem[] = [];
   public grandTotal: number = 0;
   public totalCartItems: number = 0;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.getCartServices().subscribe((services) => {
-      this.totalCartItems = services.length;
+    this.cartService.getCartItems().subscribe((cartItems) => {
+      this.totalCartItems = cartItems.length;
       this.grandTotal = this.cartService.getTotalPrice();
-      this.services = services;
+      this.cartItems = cartItems;
     });
   }
 
-  removeFromCart(service: IService) {
-    this.cartService.removeFromCart(service);
+  removeFromCart(cartItem: ICartItem) {
+    this.cartService.removeFromCart(cartItem);
   }
 }

@@ -1,7 +1,7 @@
 <div class="flex justify-between align-middle pb-0 sm:pb-2">
-  <label>{{ service.service_title }} </label>
+  <label>{{ cartItem.name }} </label>
   <span class="price-tag text-primary text-sm">{{
-    service.service_price | currency : "Rs. "
+    cartItem.price | currency : "Rs. "
   }}</span>
 </div>
 <!-- begin: qty -->
@@ -25,7 +25,7 @@
 <!-- end: qty -->
 <!-- begin: remove-btn -->
 <span
-  (click)="removeItem(service)"
+  (click)="removeItem(cartItem)"
   class="remove-btn cursor-pointer text-other-red hover:text-red-700 text-sm ml-5 mr-10"
   ><img
     class="w-3 h-2.5 pr-1 inline-block"

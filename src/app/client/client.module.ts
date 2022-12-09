@@ -13,9 +13,10 @@ import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { AddonsComponent } from './services/addons/addons.component';
 import { ServiceItemComponent } from './services/service-item/service-item.component';
+import { AddonItemComponent } from './services/addons/addon-item/addon-item.component';
 
 @NgModule({
-  declarations: [LoginComponent, DashboardComponent, RegisterComponent, ServicesComponent, CartComponent, CartItemComponent, AddonsComponent, ServiceItemComponent],
+  declarations: [LoginComponent, DashboardComponent, RegisterComponent, ServicesComponent, CartComponent, CartItemComponent, AddonsComponent, ServiceItemComponent, AddonItemComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,

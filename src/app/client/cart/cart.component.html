@@ -20,7 +20,7 @@
     <!-- begin: items -->
     <div class="items h-[325px] overflow-auto">
       <!-- begin: empty-cart-body -->
-      <ng-container *ngIf="services.length === 0">
+      <ng-container *ngIf="cartItems.length === 0">
         <div
           class="empty-cart-body flex justify-center items-center flex-col text-center border-t border-gray-300 h-[inherit]"
         >
@@ -39,11 +39,11 @@
       <!-- end: empty-cart-body -->
 
       <!-- begin: add-items -->
-      <ng-container *ngFor="let service of services">
+      <ng-container *ngFor="let cartItem of cartItems">
         <div class="add-items px-5 py-6 border-t border-t-other-light">
           <app-cart-item
-            (removeItemEvent)="removeFromCart(service)"
-            [service]="service"
+            (removeItemEvent)="removeFromCart(cartItem)"
+            [cartItem]="cartItem"
           ></app-cart-item>
 
           <!-- begin: cart-addon -->

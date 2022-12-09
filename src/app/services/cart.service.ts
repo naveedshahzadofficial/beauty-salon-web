@@ -1,4 +1,4 @@
-import { IService } from '@interfaces/service.interface';
+import { ICartItem } from './../interfaces/cart-item.interface';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -6,51 +6,51 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private _cartServices$ = new BehaviorSubject<IService[]>([]);
-  private cartServices: IService[] = [];
+  private _cartItems$ = new BehaviorSubject<ICartItem[]>([]);
+  private cartItems: ICartItem[] = [];
 
   constructor() {}
 
-  getCartServices(): Observable<IService[]> {
-    return this._cartServices$.asObservable();
+  getCartItems(): Observable<ICartItem[]> {
+    return this._cartItems$.asObservable();
   }
 
-  setCartServices(services: IService[]) {
-    this.cartServices.push(...services);
-    this._cartServices$.next(services);
+  setCartItems(cartItems: ICartItem[]) {
+    this.cartItems.push(...cartItems);
+    this._cartItems$.next(cartItems);
   }
 
-  addToCart(service: IService) {
-    if (!this.isExist(service)) {
-      this.cartServices.push(service);
-      this._cartServices$.next(this.cartServices);
+  addToCart(cartItem: ICartItem) {
+    if (!this.isExist(cartItem)) {
+      this.cartItems.push(cartItem);
+      this._cartItems$.next(this.cartItems);
       this.getTotalPrice();
     }
   }
 
   getTotalPrice(): number {
-    return this.cartServices.reduce(
-      (total, service: IService) =>
-        total + parseFloat(service.service_price.toString()),
+    return this.cartItems.reduce(
+      (total, cartItem: ICartItem) =>
+        total + parseFloat(cartItem.price.toString()),
       0
     );
   }
 
-  removeFromCart(service: IService) {
-    this.cartServices.map((_service: IService, index: number) => {
-      if (service.id === _service.id) this.cartServices.splice(index, 1);
+  removeFromCart(cartItem: ICartItem) {
+    this.cartItems.map((_cartItem: ICartItem, index: number) => {
+      if (cartItem.id === _cartItem.id) this.cartItems.splice(index, 1);
     });
-    this._cartServices$.next(this.cartServices);
+    this._cartItems$.next(this.cartItems);
   }
 
   clearCart() {
-    this.cartServices = [];
-    this._cartServices$.next(this.cartServices);
+    this.cartItems = [];
+    this._cartItems$.next(this.cartItems);
   }
 
-  isExist(service: IService): boolean {
+  isExist(cartItem: ICartItem): boolean {
     return (
-      this.cartServices.filter((_service) => _service.id === service.id)
+      this.cartItems.filter((_cartItem) => _cartItem.id === cartItem.id)
         .length > 0
     );
   }

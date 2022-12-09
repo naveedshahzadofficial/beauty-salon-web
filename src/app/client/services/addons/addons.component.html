@@ -42,8 +42,8 @@
                 Add Ons
               </h3>
               <div class="mt-2">
-                <ng-container *ngFor="let addon of addons">
-                  <app-service-item [addon]="addon"></app-service-item>
+                <ng-container *ngFor="let addon of service.addons">
+                  <app-addon-item [addon]="addon"></app-addon-item>
                 </ng-container>
               </div>
             </div>

@@ -1,5 +1,5 @@
-import { IService } from '@interfaces/service.interface';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICartItem } from '@interfaces/cart-item.interface';
 
 @Component({
   selector: 'app-cart-item',
@@ -7,14 +7,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./cart-item.component.scss'],
 })
 export class CartItemComponent implements OnInit {
-  @Input() service!: IService;
-  @Output() removeItemEvent = new EventEmitter<IService>();
+  @Input() cartItem!: ICartItem;
+  @Output() removeItemEvent = new EventEmitter<ICartItem>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  removeItem(item: IService): void {
+  removeItem(item: ICartItem): void {
     this.removeItemEvent.emit(item);
   }
 }
