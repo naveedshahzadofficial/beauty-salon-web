@@ -35,12 +35,16 @@
 
 <section class="category-services py-8 font-medium">
   <div class="container">
-    <div class="flex flex-wrap">
-      <div class="services-tab basis-4/6 relative px-4">
-        <router-outlet></router-outlet>
+    <div class="grid grid-cols-3 gap-3">
+      <div class="services-tab col-span-2 relative grow-0">
+        <div class="px-4">
+          <router-outlet></router-outlet>
+        </div>
       </div>
-      <div class="basis-2/6 relative px-4">
-        <app-cart></app-cart>
+      <div class="relative grow-0">
+        <div class="px-4">
+          <app-cart></app-cart>
+        </div>
       </div>
     </div>
   </div>

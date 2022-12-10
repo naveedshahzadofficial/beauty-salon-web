@@ -18,6 +18,7 @@ import { CartAddonItemComponent } from './cart/cart-addon-item/cart-addon-item.c
 import { CategoriesComponent } from './categories/categories.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
+import { AddressesComponent } from './shared/addresses/addresses.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     CartAddonItemComponent,
     CategoriesComponent,
     CheckoutComponent,
+    AddressesComponent,
   ],
   imports: [
     CommonModule,

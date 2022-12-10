@@ -1,0 +1,155 @@
+<div
+  class="relative z-999"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div class="fixed inset-0 z-99 overflow-y-auto">
+    <div
+      class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+    >
+      <div
+        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+      >
+        <form [formGroup]="addressForm" (ngSubmit)="onSubmit($event)">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3
+                  class="text-base font-normal leading-6 text-gray-900 text-center"
+                >
+                  Add Address
+                </h3>
+                <div class="mt-2">
+                  <div class="space-y-4">
+                    <div>
+                      <label
+                        for="city_id"
+                        class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+                        [ngClass]="{ 'text-red-500': is_valid('city_id') }"
+                        >City Name</label
+                      >
+
+                      <select
+                        id="city_id"
+                        (change)="getAreas($event)"
+                        formControlName="city_id"
+                        required
+                        [ngClass]="{
+                          'border-red-500': is_valid('city_id')
+                        }"
+                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                      >
+                        <ng-container *ngFor="let city of cities">
+                          <option [value]="city.id">
+                            {{ city.city_name }}
+                          </option>
+                        </ng-container>
+                      </select>
+                      <ng-container
+                        *ngFor="let error of error_messages.city_id"
+                      >
+                        <span
+                          *ngIf="
+                            is_valid('city_id') &&
+                            errorType('city_id', error.type)
+                          "
+                          class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                          >{{ error.message }}</span
+                        >
+                      </ng-container>
+                    </div>
+
+                    <div>
+                      <label
+                        for="area_id"
+                        class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+                        [ngClass]="{ 'text-red-500': is_valid('area_id') }"
+                        >Area Name</label
+                      >
+
+                      <select
+                        id="area_id"
+                        formControlName="area_id"
+                        required
+                        [ngClass]="{
+                          'border-red-500': is_valid('area_id')
+                        }"
+                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                      >
+                        <ng-container *ngFor="let area of filter_areas">
+                          <option [value]="area.id">{{ area.area }}</option>
+                        </ng-container>
+                      </select>
+                      <ng-container
+                        *ngFor="let error of error_messages.area_id"
+                      >
+                        <span
+                          *ngIf="
+                            is_valid('area_id') &&
+                            errorType('area_id', error.type)
+                          "
+                          class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                          >{{ error.message }}</span
+                        >
+                      </ng-container>
+                    </div>
+
+                    <div>
+                      <label
+                        for="address_1"
+                        class="block uppercase text-gray-500 tracking-wide text-xs font-bold mb-2"
+                        [ngClass]="{ 'text-red-500': is_valid('address_1') }"
+                        >Address</label
+                      >
+
+                      <input
+                        formControlName="address_1"
+                        [ngClass]="{ 'border-red-500': is_valid('address_1') }"
+                        id="address_1"
+                        name="address_1"
+                        type="text"
+                        required
+                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                        placeholder="Your Address"
+                      />
+                      <ng-container
+                        *ngFor="let error of error_messages.address_1"
+                      >
+                        <span
+                          *ngIf="
+                            is_valid('address_1') &&
+                            errorType('address_1', error.type)
+                          "
+                          class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+                          >{{ error.message }}</span
+                        >
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button
+              type="submit"
+              class="inline-flex w-full justify-center rounded-md border border-transparent bg-primary px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Done
+            </button>
+            <button
+              (click)="closedDialog()"
+              type="button"
+              class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-5 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ import { handleError } from '@common/handle-errors';
 })
 export class ClientService {
   protected base_url = environment.base_url;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCategories() {
     return this.http
@@ -25,4 +25,26 @@ export class ClientService {
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  getCheckoutPage() {
+    return this.http
+      .post(`${this.base_url}/client/checkout-page`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  getAddresses() {
+    return this.http
+      .post(`${this.base_url}/client/addresses`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  addAddress(addressFrom: any) {
+    return this.http
+      .post(`${this.base_url}/client/address`, addressFrom)
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
 }

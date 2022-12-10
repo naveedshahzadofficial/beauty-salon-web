@@ -1,34 +1,126 @@
 <div
-  class="my-cart bg-white rounded-[18px] shadow-cart text-secondary-dark sticky text-sm h-full px-2"
+  class="bg-white rounded-[18px] shadow-cart text-secondary-dark text-sm h-full px-2"
 >
   <form [formGroup]="orderForm" class="px-6 py-12">
-    <div class="form-group mb-6">
-      <label
-        class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
-      >
-        DATE
-      </label>
-      <input
-        type="text"
-        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
-        [dpDayPicker]="dpConfig"
-        formControlName="order_date"
-        [placeholder]="currentDate"
-        readonly="true"
-      />
+    <div class="flex justify-start">
+      <div class="form-group mb-6 mr-5">
+        <label
+          class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+        >
+          DATE & Time
+        </label>
+        <input
+          type="text"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary focus:ring-0 focus:outline-none"
+          [ngClass]="{
+            'border-red-500': is_valid('order_date')
+          }"
+          [dpDayPicker]="dpConfig"
+          formControlName="order_date"
+          [placeholder]="currentDate"
+          readonly="true"
+        />
+
+        <ng-container *ngFor="let error of error_messages.order_date">
+          <span
+            *ngIf="is_valid('address_1') && errorType('address_1', error.type)"
+            class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+            >{{ error.message }}</span
+          >
+        </ng-container>
+      </div>
+
+      <div class="form-group mb-6">
+        <dp-time-select
+          [ngClass]="{
+            'border-red-500': is_valid('order_time')
+          }"
+          (onChange)="selectedTime($event)"
+          formControlName="order_time"
+          [config]="dptConfig"
+        ></dp-time-select>
+
+        <ng-container *ngFor="let error of error_messages.order_time">
+          <span
+            *ngIf="is_valid('address_1') && errorType('address_1', error.type)"
+            class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+            >{{ error.message }}</span
+          >
+        </ng-container>
+      </div>
     </div>
 
-    <div class="form-group mb-6">
-      <label
-        class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
-      >
-        Time
-      </label>
-      <dp-time-select
-        (onChange)="selectedTime($event)"
-        formControlName="order_time"
-        [config]="dptConfig"
-      ></dp-time-select>
+    <div class="mt-6 inline-flex w-full">
+      <app-addresses
+        [cities]="cities"
+        [areas]="areas"
+        *ngIf="isOpenAddressDialog"
+        (closedDialogEvent)="closedDialogEvent($event)"
+      ></app-addresses>
+      <div class="form-width address w-[70%]">
+        <label
+          class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
+          for="address_id"
+          [ngClass]="{
+            'border-red-500': is_valid('address_id')
+          }"
+        >
+          Address
+        </label>
+        <input formControlName="address_id" name="address_id" class="hidden" />
+
+        <div
+          class="flex flex-nowrap overflow-x-auto min-h-[120px] snap-mandatory whitespace-nowrap font-medium text-sm gap-5 relative"
+        >
+          <ng-container *ngFor="let address of addresses; let i = index">
+            <div
+              (click)="selectAddress($event, address)"
+              class="h-[100px] w-[350px] flex-none inline-block cursor-pointer snap-always snap-center relative"
+            >
+              <div
+                class="p-3 border border-other-blue"
+                [ngClass]="{
+                  'border-other-blue': is_address(address.id)
+                }"
+              >
+                <div class="flex justify-between">
+                  <div class="font-medium text-sm">Address {{ i + 1 }}</div>
+                  <div><img src="/assets/images/edit_grey.svg" /></div>
+                </div>
+                <div
+                  class="block whitespace-normal break-words overflow-auto max-h-12 font-medium text-sm"
+                >
+                  {{ address.address_1 }}, {{ address.area.area }},
+                  {{ address.city.city_name }}
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="w-[30%]">
+        <span class="add-picker h-24"
+          ><div class="text-center block">
+            <div class="address-elipse rounded-full">
+              <img
+                (click)="openAddressDialog($event)"
+                class="rounded-full cursor-pointer"
+                src="/assets/images/plus.svg"
+                alt="Plus"
+              />
+            </div>
+            <span class="block">add new address</span>
+          </div></span
+        >
+      </div>
+
+      <ng-container *ngFor="let error of error_messages.address_id">
+        <span
+          *ngIf="is_valid('address_1') && errorType('address_1', error.type)"
+          class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+          >{{ error.message }}</span
+        >
+      </ng-container>
     </div>
 
     <div class="form-group mb-6">

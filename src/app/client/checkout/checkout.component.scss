@@ -1,0 +1,30 @@
+.myaddress-wrap {
+  min-height: 120px;
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.add-picker {
+  background: #f6f5f4;
+  border: 1px dashed #e2dcd9;
+  border-radius: 6px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  color: #8d9296;
+  margin: 10px 20px 0;
+  font-weight: 300;
+}
+.address-elipse {
+  margin: 0 auto;
+}
+.add-picker a,
+.address-elipse {
+  width: 36px;
+  height: 36px;
+}
