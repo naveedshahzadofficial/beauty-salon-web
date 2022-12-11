@@ -1,3 +1,4 @@
+import { SharedService } from '@services/shared.service';
 import { ICartItem } from '@interfaces/cart-item.interface';
 import { CartService } from '@services/cart.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,9 +17,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
     this.cartService.getCartItems().subscribe((cartItems) => {
@@ -48,9 +48,7 @@ export class CartComponent implements OnInit {
     if (this.grandTotal < 1500) {
       alert('Place your minimum order of Rs. 1500');
     } else {
-      this.router.navigate(['checkout'], {
-        relativeTo: this.route,
-      });
+      this.sharedService.checkoutClicked.next(true);
     }
   }
 }

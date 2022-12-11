@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://beauty-salon.test",
+    "target": "http://api.jitss.net",
     "secure": false
   }
 }

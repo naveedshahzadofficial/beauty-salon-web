@@ -1,7 +1,6 @@
 import { PageService } from '@services/page.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import {
   faPhoneAlt,
@@ -19,8 +18,6 @@ export class ContactUsComponent implements OnInit {
   faEnvelope = faEnvelope;
   faBuilding = faBuilding;
 
-  map_url: string =
-    'https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed';
 
   is_submitted: boolean = false;
 
@@ -38,11 +35,10 @@ export class ContactUsComponent implements OnInit {
     is_copy: new FormControl(null, Validators.nullValidator),
   });
   constructor(
-    public sanitizer: DomSanitizer,
     private pageService: PageService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit(e: Event) {
     e.preventDefault();

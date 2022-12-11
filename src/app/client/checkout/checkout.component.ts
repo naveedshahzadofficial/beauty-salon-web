@@ -1,18 +1,22 @@
+import { CartService } from './../../services/cart.service';
 import { IArea } from '@interfaces/area.interface';
 import { ICity } from '@interfaces/city.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IDate, IDayCalendarConfig } from 'ng2-date-picker';
 import { formatDate } from '@angular/common';
 import { ClientService } from '@services/client.service';
 import { IAddress } from '@interfaces/address.interface';
+import { SharedService } from '@services/shared.service';
+import { Route, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   currentDate = formatDate(new Date(), 'dd-MM-YYYY', 'en');
   currentTime = formatDate(new Date(), 'hh:mm aaa', 'en');
   public dpConfig = <IDayCalendarConfig>{
@@ -52,7 +56,9 @@ export class CheckoutComponent implements OnInit {
     ],
   };
 
-  constructor(private fb: FormBuilder, private clientService: ClientService) {
+  checkoutClicked!: Subscription;
+
+  constructor(private fb: FormBuilder, private clientService: ClientService, private sharedService: SharedService, private router: Router, private cartService: CartService) {
     this.createForm();
   }
 
@@ -61,6 +67,12 @@ export class CheckoutComponent implements OnInit {
       this.cities = resp.cities;
       this.areas = resp.areas;
       this.addresses = resp.addresses;
+    });
+
+    this.checkoutClicked = this.sharedService.getCheckoutClicked().subscribe((resp: boolean) => {
+      if (resp) {
+        this.onSubmit();
+      }
     });
   }
 
@@ -109,5 +121,30 @@ export class CheckoutComponent implements OnInit {
 
   getAddresses() {
     this.clientService.getAddresses().subscribe(resp => this.addresses = resp);
+  }
+
+  onSubmit() {
+    console.log(this.orderForm.value);
+    if (this.orderForm.invalid) {
+      Object.keys(this.orderForm.controls).forEach(field => {
+        const control = this.orderForm.get(field);
+        if (control)
+          control.markAsTouched({ onlySelf: true });
+      });
+      return false
+    };
+
+
+    this.cartService.getCartItems().subscribe(resp => {
+      console.log(resp);
+    });
+
+    //this.router.navigate(['client/categories/recipient']);
+    return true;
+  }
+
+  ngOnDestroy(): void {
+    this.sharedService.checkoutClicked.next(false);
+    this.checkoutClicked.unsubscribe();
   }
 }

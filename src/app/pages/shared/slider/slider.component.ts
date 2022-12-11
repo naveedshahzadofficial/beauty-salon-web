@@ -13,12 +13,12 @@ export class SliderComponent implements OnInit {
   @Input() sliders: ISlider[] = [];
   @Input() review_sliders: IReviewSlider[] = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   customOptions: OwlOptions = {
-    autoplay: false,
+    autoplay: true,
     loop: true,
     mouseDrag: true,
     touchDrag: false,

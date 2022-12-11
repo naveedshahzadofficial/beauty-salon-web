@@ -295,25 +295,32 @@
         <div class="h-[51rem] map-container shadow-lg rounded-lg">
           <div class="border p-6">
             <p class="mt-6">
-              <fa-icon class="text-lg" [icon]="faPhoneAlt"></fa-icon> +92 304
-              111 44 27
+              <a href="tel:+924235823369">
+                <fa-icon class="text-lg" [icon]="faPhoneAlt"></fa-icon>+92 42
+                358 233 69
+              </a>
             </p>
             <p class="mt-6">
-              <fa-icon class="text-lg" [icon]="faEnvelope"></fa-icon>
-              customercare@jitss.com
+              <a href="https://api.whatsapp.com/send?phone=+923035649214">
+                <img
+                  class="w-6 inline-block"
+                  src="/assets/images/whatsapp.png"
+                  alt=""
+                />+92 303 564 92 14
+              </a>
             </p>
             <p class="mt-6">
-              <fa-icon class="text-lg" [icon]="faBuilding"></fa-icon> Q Block,
-              Phase 2, DHA, Lahore.
+              <a href="mailto:customercare@jitss.net">
+                <fa-icon class="text-lg" [icon]="faEnvelope"></fa-icon>
+                customercare@jitss.net
+              </a>
+            </p>
+            <p class="mt-6">
+              <fa-icon class="text-lg" [icon]="faBuilding"></fa-icon> Kanchi
+              Amar Siddo mahala Maka chonk Gali nambar 23 Makan nambar E 858
+              Lahore
             </p>
           </div>
-
-          <iframe
-            [src]="sanitizer.bypassSecurityTrustResourceUrl(map_url)"
-            class="h-full w-full rounded-lg"
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
         </div>
       </div>
     </section>

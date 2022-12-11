@@ -4,17 +4,26 @@
     <h1 class="heading">Professional Beauty Services at Home</h1>
     <p class="lead">
       The ultimate in comfortable, convenient, and professional beauty salon
-      services at home. JITSS is a mobile app and web based solution
-      providing women with high quality, hygienic, and timely at-home beauty
-      services.
+      services at home. JITSS is a mobile app and web based solution providing
+      women with high quality, hygienic, and timely at-home beauty services.
     </p>
   </div>
 </section>
 
-<section *ngIf="categories.length" class="services-section py-12 bg-gray-100">
+<section *ngIf="categories.length" class="services-section pt-12 bg-gray-100">
   <h1 class="heading text-center pb-6">Our Services</h1>
   <div class="container">
     <app-service-cards [categories]="categories"></app-service-cards>
+  </div>
+</section>
+
+<section class="mb-16 bg-gray-100">
+  <h1 class="heading text-center pb-6">JUST IN TIME SEVICE AND SUPPLIES</h1>
+  <div class="container">
+    <img src="/assets/images/services/additional-service-1.jpeg" alt="" />
+    <img src="/assets/images/services/additional-service-2.jpeg" alt="" />
+    <img src="/assets/images/services/additional-service-3.jpeg" alt="" />
+    <img src="/assets/images/services/additional-service-4.jpeg" alt="" />
   </div>
 </section>
 
@@ -104,13 +113,15 @@
   </div>
 </section>
 
-<section class="latest-blog container py-12">
+<section *ngIf="stories.length" class="latest-blog container py-12">
   <h2 class="py-6 text-center">Latest Stories</h2>
 
   <app-story-cards [stories]="stories"></app-story-cards>
 
   <div class="text-center pt-12">
-    <a routerLink="stories" class="btn-primary shadow-sm text-xl">More Stories</a>
+    <a routerLink="stories" class="btn-primary shadow-sm text-xl"
+      >More Stories</a
+    >
   </div>
 </section>
 

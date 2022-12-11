@@ -113,17 +113,17 @@
           </div></span
         >
       </div>
-
-      <ng-container *ngFor="let error of error_messages.address_id">
-        <span
-          *ngIf="is_valid('address_1') && errorType('address_1', error.type)"
-          class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
-          >{{ error.message }}</span
-        >
-      </ng-container>
     </div>
+    <ng-container *ngFor="let error of error_messages.address_id">
+      <div
+        *ngIf="is_valid('address_id') && errorType('address_id', error.type)"
+        class="flex items-center tracking-wide text-red-500 text-xs italic mt-1 ml-1"
+      >
+        {{ error.message }}
+      </div>
+    </ng-container>
 
-    <div class="form-group mb-6">
+    <div class="form-group mt-4 mb-6">
       <label
         class="block uppercase text-gray-700 tracking-wide text-xs font-bold mb-2"
         for="special_instructions"

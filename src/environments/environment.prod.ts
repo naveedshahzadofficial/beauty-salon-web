@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  base_url: 'http://beauty-salon.test/api/v1',
+  base_url: 'http://api.jitss.net/api/v1',
 };
