@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://api.jitss.net",
+    "target": "https://api.jitss.net",
     "secure": false
   }
 }
