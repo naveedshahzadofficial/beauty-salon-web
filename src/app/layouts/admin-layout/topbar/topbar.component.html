@@ -10,7 +10,7 @@
   <!-- END: Breadcrumb -->
 
   <!-- BEGIN: Account Menu -->
-  <div class="intro-x dropdown w-8 h-8">
+  <div class="intro-x dropdown w-8 h-8" #dropdown>
     <div
       class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"
       role="button"
@@ -18,7 +18,13 @@
     >
       <img alt="JITSS" src="assets/images/200x200.jpg" />
     </div>
-    <div class="dropdown-menu w-56">
+    <div
+      class="dropdown-menu w-56"
+      [ngClass]="{
+        'show inset-[0px 0px auto auto] m-0  translate-x-[-190px] translate-y-[32px]':
+          isActiveDropdown
+      }"
+    >
       <div
         class="dropdown-menu__content box bg-theme-26 dark:bg-dark-6 text-white"
       >
