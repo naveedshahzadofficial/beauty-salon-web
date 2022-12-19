@@ -1,0 +1,26 @@
+.tableFilter {
+    margin-bottom: 10px;
+    input {
+        width: 175px;
+    }
+    .control {
+        float: right;
+    }
+}
+.table {
+    .sorting {
+        background-image: url(/assets/images/sort_both.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+    .sorting_asc {
+        background-image: url(/assets/images/sort_asc.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+    .sorting_desc {
+        background-image: url(/assets/images/sort_desc.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+}

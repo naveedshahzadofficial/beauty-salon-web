@@ -50,6 +50,15 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.3",
-    "typescript": "~4.7.2"
+    "typescript": "~4.7.2",
+
+    "@left4code/tw-starter": "^1.1.0",
+    "highlight.js": "^10.6.0",
+    "tippy.js": "^6.2.7",
+    "toastify-js": "^1.9.0",
+    "dropzone": "^5.7.2",
+    "zoom-vanilla.js": "^2.0.6",
+    "tabulator-tables": "^4.9.1",
+    "tom-select": "^1.7.5"
   }
 }

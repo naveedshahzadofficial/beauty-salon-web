@@ -20,6 +20,8 @@ import { ClientLayoutComponent } from './layouts/client-layout/client-layout.com
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CategoryService } from '@services/category.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { SidebarComponent } from './layouts/admin-layout/sidebar/sidebar.component';
+import { TopbarComponent } from './layouts/admin-layout/topbar/topbar.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -30,6 +32,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     FooterComponent,
     ClientLayoutComponent,
     AdminLayoutComponent,
+    SidebarComponent,
+    TopbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,8 @@
       "@env/*": ["src/environments/*"],
       "@common/*": ["src/app/common/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
-      "@services/*": ["src/app/services/*"]
+      "@services/*": ["src/app/services/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

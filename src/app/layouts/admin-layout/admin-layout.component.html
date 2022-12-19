@@ -1,2 +1,9 @@
-<router-outlet></router-outlet>
-
+<div id="app">
+  <div [ngClass]="{ flex: isLogin }">
+    <app-sidebar *ngIf="isLogin"></app-sidebar>
+    <div [ngClass]="{ content: isLogin }">
+      <app-topbar *ngIf="isLogin"></app-topbar>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
