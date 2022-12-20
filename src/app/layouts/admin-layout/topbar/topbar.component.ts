@@ -1,6 +1,7 @@
 import { DomEvents } from '@common/dom.events';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -11,7 +12,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   isActiveDropdown: boolean = false;
   @ViewChild('dropdown') dropdown!: ElementRef;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }

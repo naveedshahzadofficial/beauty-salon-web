@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,10 +8,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class AdminLayoutComponent implements OnInit {
-  isLogin = true;
-  constructor() { }
+  isLogin!: boolean;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.isStaffLoggedIn$.subscribe(resp => this.isLogin = resp);
   }
 
 }

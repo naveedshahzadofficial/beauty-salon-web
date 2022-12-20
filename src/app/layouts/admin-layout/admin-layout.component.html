@@ -1,7 +1,7 @@
 <div id="app">
-  <div [ngClass]="{ flex: isLogin }">
+  <div [class.flex]="isLogin">
     <app-sidebar *ngIf="isLogin"></app-sidebar>
-    <div [ngClass]="{ content: isLogin }">
+    <div [class.content]="isLogin">
       <app-topbar *ngIf="isLogin"></app-topbar>
       <router-outlet></router-outlet>
     </div>

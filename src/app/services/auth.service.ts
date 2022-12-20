@@ -11,16 +11,27 @@ import { handleError } from '@common/handle-errors';
 })
 export class AuthService {
   protected base_url = environment.base_url;
-  private readonly TOKEN_NAME = 'access_token';
+  private readonly CLIENT_TOKEN_NAME = 'access_token';
+  private readonly STAFF_TOKEN_NAME = 'staff_access_token';
   private readonly USER_NAME = 'user';
+  private readonly STAFF_USER_NAME = 'staff_user';
+
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private _isStaffLoggedIn$ = new BehaviorSubject<boolean>(false);
   private _user$ = new BehaviorSubject<IUser | null>(null);
+  private _staffUser$ = new BehaviorSubject<IUser | null>(null);
+
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   user$ = this._user$.asObservable();
+
+  isStaffLoggedIn$ = this._isStaffLoggedIn$.asObservable();
+  staffUser$ = this._staffUser$.asObservable();
 
   constructor(private http: HttpClient) {
     this._isLoggedIn$.next(!!this.token);
     this._user$.next(this.user);
+    this._isStaffLoggedIn$.next(!!this.staffToken);
+    this._staffUser$.next(this.staffUser);
   }
 
   register(register_form: any): Observable<any> {
@@ -38,12 +49,21 @@ export class AuthService {
   }
 
   set token(token: string) {
-    localStorage.setItem(this.TOKEN_NAME, token);
+    localStorage.setItem(this.CLIENT_TOKEN_NAME, token);
     this._isLoggedIn$.next(true);
   }
 
   get token(): any {
-    return localStorage.getItem(this.TOKEN_NAME);
+    return localStorage.getItem(this.CLIENT_TOKEN_NAME);
+  }
+
+  set staffToken(token: string) {
+    localStorage.setItem(this.STAFF_TOKEN_NAME, token);
+    this._isStaffLoggedIn$.next(true);
+  }
+
+  get staffToken(): any {
+    return localStorage.getItem(this.STAFF_TOKEN_NAME);
   }
 
   set user(user: IUser) {
@@ -56,11 +76,28 @@ export class AuthService {
     return JSON.parse(auth_user) as IUser;
   }
 
+  set staffUser(user: IUser) {
+    localStorage.setItem(this.STAFF_USER_NAME, JSON.stringify(user));
+    this._staffUser$.next(user);
+  }
+
+  get staffUser(): IUser {
+    let auth_user = localStorage.getItem(this.STAFF_USER_NAME) as string;
+    return JSON.parse(auth_user) as IUser;
+  }
+
   removeToken() {
-    localStorage.removeItem(this.TOKEN_NAME);
+    localStorage.removeItem(this.CLIENT_TOKEN_NAME);
     localStorage.removeItem(this.USER_NAME);
     this._isLoggedIn$.next(false);
     this._user$.next(null);
+  }
+
+  removeStaffToken() {
+    localStorage.removeItem(this.STAFF_TOKEN_NAME);
+    localStorage.removeItem(this.STAFF_USER_NAME);
+    this._isStaffLoggedIn$.next(false);
+    this._staffUser$.next(null);
   }
 
   logout() {
