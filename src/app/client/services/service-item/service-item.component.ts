@@ -19,7 +19,7 @@ export class ServiceItemComponent implements OnInit {
   addToCart() {
     if (this.service.addons?.length)
       this.isOpenAddOn = true;
-    let cartService = Object.assign({}, this.service, { service_id: this.service.id, name: this.service.service_title, price: this.service.service_price, quantity: 1, is_same_time: true, addons: [] });
+    let cartService = Object.assign({}, { service_id: this.service.id, name: this.service.service_title, price: this.service.service_price, quantity: 1, is_same_time: true, addons: [] });
     console.log(cartService);
     this.cartService.addToCart(cartService);
   }

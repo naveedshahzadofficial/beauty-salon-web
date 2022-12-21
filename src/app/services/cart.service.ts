@@ -1,10 +1,11 @@
+import { IResponses } from '@interfaces/responses.interface';
+import { CartItemService } from '@services/cart-item.service';
 import { environment } from '@env/environment';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, retry } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ICartItem } from '@interfaces/cart-item.interface';
 import { ICartAddon } from '@interfaces/cart-addon.interface';
-import { handleError } from '@common/handle-errors';
+import { IResponse } from '@interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,11 @@ export class CartService {
   private _cartItems$ = new BehaviorSubject<ICartItem[]>([]);
   private cartItems: ICartItem[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private cartItemService: CartItemService) {
+    cartItemService.getAll().subscribe((resp: IResponses<ICartItem>) => {
+      this.setCartItems(resp.data);
+    });
+  }
 
   getCartItems(): Observable<ICartItem[]> {
     return this._cartItems$.asObservable();
@@ -25,25 +30,13 @@ export class CartService {
     this._cartItems$.next(cartItems);
   }
 
-  addItem(serviceItem: any) {
-    return this.http
-      .post(`${this.base_url}/client/cart/add`, serviceItem)
-      .pipe(map((response: any) => response.data))
-      .pipe(retry(1), catchError(handleError));
-  }
 
-  removeItem(CartItemId: number) {
-    return this.http
-      .post(`${this.base_url}/client/cart/${CartItemId}/remove`, {})
-      .pipe(map((response: any) => response.data))
-      .pipe(retry(1), catchError(handleError));
-  }
 
   addToCart(serviceItem: any) {
     if (this.isExist(serviceItem.service_id))
       return;
-    this.addItem(serviceItem).subscribe((cartItem: ICartItem) => {
-      this.cartItems.push(cartItem);
+    this.cartItemService.store(serviceItem).subscribe((resp: IResponse<ICartItem>) => {
+      this.cartItems.push(resp.data);
       this._cartItems$.next(this.cartItems);
       this.getTotalPrice();
     });
@@ -76,13 +69,14 @@ export class CartService {
   }
 
   removeFromCart(cartItem: ICartItem) {
-
-    cartItem.addons = [];
-    cartItem.quantity = 1;
-    this.cartItems = this.cartItems.filter(
-      (_cartItem) => cartItem.id !== _cartItem.id
-    );
-    this._cartItems$.next(this.cartItems);
+    //cartItem.addons = [];
+    //cartItem.quantity = 1;
+    this.cartItemService.destroy(cartItem.id).subscribe((resp) => {
+      this.cartItems = this.cartItems.filter(
+        (_cartItem) => cartItem.id !== _cartItem.id
+      );
+      this._cartItems$.next(this.cartItems);
+    });
   }
 
   removeAddonFromCart(cartItem: ICartItem, cartItemAddon: ICartAddon) {
@@ -94,8 +88,10 @@ export class CartService {
   }
 
   clearCart() {
-    this.cartItems = [];
-    this._cartItems$.next(this.cartItems);
+    this.cartItemService.destoryAll().subscribe((resp) => {
+      this.cartItems = [];
+      this._cartItems$.next(this.cartItems);
+    });
   }
 
   isExist(serviceId: Number): boolean {
@@ -114,6 +110,8 @@ export class CartService {
   }
 
   changedItemQtyEvent(cartItem: ICartItem) {
-    this._cartItems$.next(this.cartItems);
+    this.cartItemService.update(cartItem).subscribe(resp => {
+      this._cartItems$.next(this.cartItems);
+    });
   }
 }

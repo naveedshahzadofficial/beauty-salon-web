@@ -12,7 +12,7 @@ import { handleError } from '@common/handle-errors';
 })
 export class DataService<T> {
   protected base_url = environment.base_url;
-  constructor(protected resource: String, protected http: HttpClient) {}
+  constructor(protected resource: String, protected http: HttpClient) { }
 
   getAll(): Observable<IResponses<T>> {
     return this.http
@@ -20,27 +20,23 @@ export class DataService<T> {
       .pipe(retry(1), catchError(handleError));
   }
 
-  store(model: any): Observable<IResponse<T>> {
+  store(formData: any): Observable<IResponse<T>> {
     return this.http
       .post<IResponse<T>>(
-        `${this.base_url}/${this.resource}`,
-        JSON.stringify(model)
-      )
+        `${this.base_url}/${this.resource}`, formData)
       .pipe(retry(1), catchError(handleError));
   }
 
-  show(id: T): Observable<IResponse<T>> {
+  show(id: any): Observable<IResponse<T>> {
     return this.http
       .get<IResponse<T>>(`${this.base_url}/${this.resource}/${id}`)
       .pipe(retry(1), catchError(handleError));
   }
 
-  update(model: any): Observable<IResponse<T>> {
+  update(formData: any): Observable<IResponse<T>> {
     return this.http
       .patch<IResponse<T>>(
-        `${this.base_url}/${this.resource}/${model.id}`,
-        JSON.stringify(model)
-      )
+        `${this.base_url}/${this.resource}/${formData.id}`, formData)
       .pipe(retry(1), catchError(handleError));
   }
 
