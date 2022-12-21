@@ -10,31 +10,22 @@ import { ICartItem } from '@app/interfaces/cart-item.interface';
 })
 export class ServiceItemComponent implements OnInit {
   @Input() service!: IService;
-  cartItem!: ICartItem;
-  isAddOn: boolean = false;
   isOpenAddOn: boolean = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) { }
   ngOnInit(): void {
-    this.cartItem = {
-      id: this.service.id,
-      name: this.service.service_title,
-      price: this.service.service_price,
-      quantity: 1,
-      addons: [],
-    };
-    if (this.service.addons?.length) {
-      this.isAddOn = true;
-    }
   }
 
-  addToCart(cartItem: ICartItem) {
-    this.isOpenAddOn = true;
-    this.cartService.addToCart(cartItem);
+  addToCart() {
+    if (this.service.addons?.length)
+      this.isOpenAddOn = true;
+    let cartService = Object.assign({}, this.service, { service_id: this.service.id, name: this.service.service_title, price: this.service.service_price, quantity: 1, is_same_time: true, addons: [] });
+    console.log(cartService);
+    this.cartService.addToCart(cartService);
   }
 
-  isCartItem(cartItem: ICartItem) {
-    return this.cartService.isExist(cartItem);
+  isCartItem() {
+    return this.cartService.isExist(this.service.id);
   }
   isClosedEvent(isOpenAddOn: boolean) {
     this.isOpenAddOn = isOpenAddOn;

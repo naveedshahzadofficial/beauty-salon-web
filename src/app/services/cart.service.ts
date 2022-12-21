@@ -1,16 +1,20 @@
+import { environment } from '@env/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, retry } from 'rxjs';
 import { ICartItem } from '@interfaces/cart-item.interface';
-import { ICartAddon } from '@app/interfaces/cart-addon.interface';
+import { ICartAddon } from '@interfaces/cart-addon.interface';
+import { handleError } from '@common/handle-errors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  protected base_url = environment.base_url;
   private _cartItems$ = new BehaviorSubject<ICartItem[]>([]);
   private cartItems: ICartItem[] = [];
 
-  constructor() {}
+  constructor(private http: HttpClient) { }
 
   getCartItems(): Observable<ICartItem[]> {
     return this._cartItems$.asObservable();
@@ -21,12 +25,29 @@ export class CartService {
     this._cartItems$.next(cartItems);
   }
 
-  addToCart(cartItem: ICartItem) {
-    if (!this.isExist(cartItem)) {
+  addItem(serviceItem: any) {
+    return this.http
+      .post(`${this.base_url}/client/cart/add`, serviceItem)
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  removeItem(CartItemId: number) {
+    return this.http
+      .post(`${this.base_url}/client/cart/${CartItemId}/remove`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  addToCart(serviceItem: any) {
+    if (this.isExist(serviceItem.service_id))
+      return;
+    this.addItem(serviceItem).subscribe((cartItem: ICartItem) => {
       this.cartItems.push(cartItem);
       this._cartItems$.next(this.cartItems);
       this.getTotalPrice();
-    }
+    });
+
   }
 
   addToCartAddons(cartItemId: number, cartItemAddons: ICartAddon[]) {
@@ -55,6 +76,7 @@ export class CartService {
   }
 
   removeFromCart(cartItem: ICartItem) {
+
     cartItem.addons = [];
     cartItem.quantity = 1;
     this.cartItems = this.cartItems.filter(
@@ -76,8 +98,8 @@ export class CartService {
     this._cartItems$.next(this.cartItems);
   }
 
-  isExist(cartItem: ICartItem): boolean {
-    let item = this.cartItems.find((_cartItem) => _cartItem.id === cartItem.id);
+  isExist(serviceId: Number): boolean {
+    let item = this.cartItems.find((_cartItem) => _cartItem.service_id === serviceId);
     return item !== undefined;
   }
 

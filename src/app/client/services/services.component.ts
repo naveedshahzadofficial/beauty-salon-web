@@ -1,3 +1,4 @@
+import { mergeMap, take } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClientService } from '@services/client.service';
 import { IService } from '@interfaces/service.interface';
@@ -22,21 +23,16 @@ export class ServicesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      let slug = params.get('slug') || '';
-      this.getCategoryServices(slug);
-    });
+    this.route.params.pipe(
+      mergeMap((resp: any) => this.clientService
+        .getCategoryServices(resp.slug)),
+    ).subscribe((resp) => (this.services = resp));
+
     this.checkoutClicked = this.sharedService.getCheckoutClicked().subscribe((resp: boolean) => {
       if (resp) {
         this.router.navigate(['client/categories/checkout']);
       }
     })
-  }
-
-  getCategoryServices(slug: string) {
-    this.clientService
-      .getCategoryServices(slug)
-      .subscribe((resp) => (this.services = resp));
   }
 
   ngOnDestroy(): void {

@@ -1,26 +1,31 @@
 <ng-container>
   <div class="checkbtn font-poppins text-sm leading-5 text-secondary-dark">
     <input
-      [id]="cartItem.id"
+      [id]="service.id"
       class="hidden absolute w-full appearance-none kit"
       type="checkbox"
-      [disabled]="isCartItem(cartItem)"
-      [checked]="isCartItem(cartItem)"
+      [disabled]="isCartItem()"
+      [checked]="isCartItem()"
     />
     <label
-      (click)="addToCart(cartItem)"
-      [htmlFor]="cartItem.id"
+      (click)="addToCart()"
+      [htmlFor]="service.id"
       class="w-full resize-none cursor-pointer overflow-hidden relative service-item check-lab inline-block"
       ><div class="flex flex-wrap">
         <div class="basis-4/6">
-          <span class="cursor-pointer inline-block">{{ cartItem.name }}</span>
-          <span *ngIf="isAddOn" class="text-other-blue w-3 pl-5 text-xs">
+          <span class="cursor-pointer inline-block">{{
+            service.service_title
+          }}</span>
+          <span
+            *ngIf="service.addons?.length"
+            class="text-other-blue w-3 pl-5 text-xs"
+          >
             Add-ons
           </span>
         </div>
         <div class="basis-2/6 flex justify-between text-primary">
           <span class="cursor-pointer">{{
-            cartItem.price | currency : "Rs. "
+            service.service_price | currency : "Rs. "
           }}</span
           ><span
             ><img
@@ -31,7 +36,7 @@
         </div></div
     ></label>
   </div>
-  <ng-container *ngIf="isAddOn">
+  <ng-container *ngIf="service.addons?.length">
     <app-addons
       (isClosedEvent)="isClosedEvent($event)"
       *ngIf="isOpenAddOn"
