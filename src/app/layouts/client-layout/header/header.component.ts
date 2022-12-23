@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     public authService: AuthService,
     private cartService: CartService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cartService

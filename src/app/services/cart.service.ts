@@ -1,25 +1,34 @@
+import { mergeMap } from 'rxjs/operators';
 import { IResponses } from '@interfaces/responses.interface';
 import { CartItemService } from '@services/cart-item.service';
 import { environment } from '@env/environment';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ICartItem } from '@interfaces/cart-item.interface';
 import { ICartAddon } from '@interfaces/cart-addon.interface';
 import { IResponse } from '@interfaces/response.interface';
+import { AuthService } from '@services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnDestroy {
   protected base_url = environment.base_url;
   private _cartItems$ = new BehaviorSubject<ICartItem[]>([]);
   private cartItems: ICartItem[] = [];
+  subscription!: Subscription;
 
-  constructor(private cartItemService: CartItemService) {
-    cartItemService.getAll().subscribe((resp: IResponses<ICartItem>) => {
+  constructor(public authService: AuthService,
+    private cartItemService: CartItemService) {
+
+    this.subscription = this.authService.isLoggedIn$.pipe(
+      mergeMap((resp: boolean) => resp ? this.cartItemService.getAll() : []),
+    ).subscribe((resp: IResponses<ICartItem>) => {
       this.setCartItems(resp.data);
     });
   }
+
+
 
   getCartItems(): Observable<ICartItem[]> {
     return this._cartItems$.asObservable();
@@ -99,12 +108,12 @@ export class CartService {
     return item !== undefined;
   }
 
-  isExistAddon(cartItemId: number, cartItemAddon: ICartAddon): boolean {
+  isExistAddon(serviceId: number, addonId: number): boolean {
     let cartItem = this.cartItems.find(
-      (_cartItem) => _cartItem.id === cartItemId
+      (_cartItem) => _cartItem.service_id === serviceId
     );
     const addonItem = cartItem?.addons?.find(
-      (_cartItemAddon) => _cartItemAddon.id === cartItemAddon.id
+      (_cartItemAddon) => _cartItemAddon.id === addonId
     );
     return addonItem !== undefined;
   }
@@ -113,5 +122,9 @@ export class CartService {
     this.cartItemService.update(cartItem).subscribe(resp => {
       this._cartItems$.next(this.cartItems);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

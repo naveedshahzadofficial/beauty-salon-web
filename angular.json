@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["lodash", "dayjs"],
+            "allowedCommonJsDependencies": ["lodash", "dayjs", "feather-icons"],
             "outputPath": "dist/beauty-salon-web",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -25,11 +25,9 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [ 
-            "node_modules/@angular/cdk/overlay-prebuilt.css",
-            "src/assets/scss/styles.scss"
-            ],
-            "scripts": [
+            "styles": [
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/assets/scss/styles.scss"
             ]
           },
           "configurations": {
@@ -97,8 +95,7 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": [
-            ]
+            "scripts": []
           }
         }
       }

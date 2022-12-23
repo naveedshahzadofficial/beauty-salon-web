@@ -12,9 +12,9 @@ export class AddonsComponent implements OnInit {
   @Input() service!: IService;
   @Output() isClosedEvent = new EventEmitter<boolean>();
   addonItems: ICartAddon[] = [];
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addonItemEvent(addonItem: ICartAddon) {
     let item = this.addonItems.find(
@@ -22,7 +22,7 @@ export class AddonsComponent implements OnInit {
     );
     let cartAddonItem = this.cartService.isExistAddon(
       this.service.id,
-      addonItem
+      addonItem.id
     );
     if (item === undefined && !cartAddonItem) this.addonItems.push(addonItem);
   }

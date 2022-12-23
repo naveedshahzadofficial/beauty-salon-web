@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { IUser } from '@interfaces/user.interface';
 import { UnauthorizedError } from '@common/unauthorized-error';
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   faLongArrowAltRight = faLongArrowAltRight;
 
   mobileInputMask = createMask('03999999999');
@@ -32,17 +33,19 @@ export class LoginComponent implements OnInit {
     mobile: [{ type: 'required', message: 'Please enter your mobile no.' }],
     password: [{ type: 'required', message: 'Please enter your password.' }],
   };
+  subscription!: Subscription;
 
   constructor(
     private authService: AuthService,
     private customValidator: CustomValidator,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn$) {
-      this.router.navigate(['client/dashboard']);
-    }
+    this.subscription = this.authService.isLoggedIn$.subscribe((resp: boolean) => {
+      if (resp)
+        this.router.navigate(['client/dashboard']);
+    });
   }
 
   is_valid(field_name: string): boolean | undefined {
@@ -79,5 +82,9 @@ export class LoginComponent implements OnInit {
     });
 
     return true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

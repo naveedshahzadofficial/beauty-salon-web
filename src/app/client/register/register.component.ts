@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +18,7 @@ import { CustomValidator } from '@common/custom-validator';
 export class RegisterComponent implements OnInit, OnDestroy {
   faLongArrowAltRight = faLongArrowAltRight;
   mobileInputMask = createMask('03999999999');
-
+  subscription!: Subscription;
   registerForm: FormGroup = new FormGroup({
     first_name: new FormControl(
       null,
@@ -108,12 +109,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private customValidator: CustomValidator,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn$) {
-      this.router.navigate(['client/dashboard']);
-    }
+    this.subscription = this.authService.isLoggedIn$.subscribe
+      ((resp: boolean) => {
+        if (resp)
+          this.router.navigate(['client/dashboard']);
+      });
 
     this.customValidator.joinMatchField(
       this.registerForm.controls['password'],
@@ -160,5 +163,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.customValidator.destroySubscribe();
+    this.subscription.unsubscribe();
   }
 }

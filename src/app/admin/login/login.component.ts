@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { createMask } from '@ngneat/input-mask';
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   mobileInputMask = createMask('03999999999');
   error_unauthenticated = false;
   loginForm!: FormGroup;
+  subscription!: Subscription;
 
 
   error_messages = {
@@ -34,9 +36,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.authService.isStaffLoggedIn$) {
-      this.router.navigate(['admin/dashboard']);
-    }
+    this.subscription = this.authService.isStaffLoggedIn$.subscribe((resp: boolean) => {
+      if (resp)
+        this.router.navigate(['admin/dashboard']);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -47,6 +50,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     document.body.classList.remove('login');
     document.body.classList.add('main');
+    this.subscription.unsubscribe();
   }
 
   private loginFormBuild(): void {

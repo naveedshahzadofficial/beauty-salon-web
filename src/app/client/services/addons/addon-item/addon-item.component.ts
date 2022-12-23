@@ -13,7 +13,7 @@ export class AddonItemComponent implements OnInit {
   @Input() cartItemId!: number;
   @Output() addonItemEvent = new EventEmitter<ICartAddon>();
   cartAddonItem!: ICartAddon;
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.cartAddonItem = {
@@ -28,7 +28,7 @@ export class AddonItemComponent implements OnInit {
     this.addonItemEvent.emit(cartAddonItem);
   }
 
-  isCartAddonItem(cartAddonItem: ICartAddon) {
-    return this.cartService.isExistAddon(this.cartItemId, cartAddonItem);
+  isCartAddonItem() {
+    return this.cartService.isExistAddon(this.cartItemId, this.cartAddonItem.id);
   }
 }

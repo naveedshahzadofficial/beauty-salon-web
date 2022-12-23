@@ -4,8 +4,8 @@
       [id]="'addon_' + cartAddonItem.id"
       class="hidden absolute w-full appearance-none kit"
       type="checkbox"
-      [disabled]="isCartAddonItem(cartAddonItem)"
-      [checked]="isCartAddonItem(cartAddonItem)"
+      [disabled]="isCartAddonItem()"
+      [checked]="isCartAddonItem()"
     />
     <label
       (click)="addToCart(cartAddonItem)"
