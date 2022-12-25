@@ -8,6 +8,7 @@ import { ICartItem } from '@interfaces/cart-item.interface';
 import { ICartAddon } from '@interfaces/cart-addon.interface';
 import { IResponse } from '@interfaces/response.interface';
 import { AuthService } from '@services/auth.service';
+import { CartAddonService } from '@services/cart-addon.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,11 @@ export class CartService implements OnDestroy {
   private cartItems: ICartItem[] = [];
   subscription!: Subscription;
 
-  constructor(public authService: AuthService,
-    private cartItemService: CartItemService) {
+  constructor(
+    private authService: AuthService,
+    private cartItemService: CartItemService,
+    private cartAddonService: CartAddonService,
+  ) {
 
     this.subscription = this.authService.isLoggedIn$.pipe(
       mergeMap((resp: boolean) => resp ? this.cartItemService.getAll() : []),
@@ -52,21 +56,25 @@ export class CartService implements OnDestroy {
 
   }
 
-  addToCartAddons(cartItemId: number, cartItemAddons: ICartAddon[]) {
+  addToCartAddons(cartItemId: number, cartItemAddons: any[]) {
     let cartItem = this.cartItems.find(
-      (_cartItem) => _cartItem.id === cartItemId
+      (_cartItem) => _cartItem.service_id === cartItemId
     );
-    if (cartItem !== undefined) cartItem.addons?.push(...cartItemAddons);
-
-    this._cartItems$.next(this.cartItems);
+    if (cartItem !== undefined)
+      this.cartItemService.cartAddons(cartItem.id, cartItemAddons).subscribe((resp: any) => {
+        if (cartItem !== undefined) {
+          cartItem.cartAddons?.push(...resp.data.cartAddons);
+          this._cartItems$.next(this.cartItems);
+        }
+      });
   }
 
   getTotalPrice(): number {
     let grandTotal = 0;
     this.cartItems.map((_cartItem) => {
       grandTotal += parseInt(_cartItem.price.toString()) * _cartItem.quantity;
-      if (_cartItem.addons?.length) {
-        grandTotal += _cartItem.addons.reduce(
+      if (_cartItem.cartAddons?.length) {
+        grandTotal += _cartItem.cartAddons.reduce(
           (total, _cartAddonItem: ICartAddon) =>
             total +
             parseInt(_cartAddonItem.price.toString()) * _cartAddonItem.quantity,
@@ -89,11 +97,13 @@ export class CartService implements OnDestroy {
   }
 
   removeAddonFromCart(cartItem: ICartItem, cartItemAddon: ICartAddon) {
-    let addons = cartItem.addons?.filter(
-      (_cartItemAddon) => _cartItemAddon.id !== cartItemAddon.id
-    );
-    cartItem.addons = addons;
-    this._cartItems$.next(this.cartItems);
+    this.cartAddonService.destroy(cartItemAddon.id).subscribe((resp) => {
+      let addons = cartItem.cartAddons?.filter(
+        (_cartItemAddon) => _cartItemAddon.id !== cartItemAddon.id
+      );
+      cartItem.cartAddons = addons;
+      this._cartItems$.next(this.cartItems);
+    });
   }
 
   clearCart() {
@@ -112,14 +122,22 @@ export class CartService implements OnDestroy {
     let cartItem = this.cartItems.find(
       (_cartItem) => _cartItem.service_id === serviceId
     );
-    const addonItem = cartItem?.addons?.find(
-      (_cartItemAddon) => _cartItemAddon.id === addonId
+    console.log(cartItem);
+
+    const addonItem = cartItem?.cartAddons?.find(
+      (_cartItemAddon) => _cartItemAddon.addon_id === addonId
     );
     return addonItem !== undefined;
   }
 
   changedItemQtyEvent(cartItem: ICartItem) {
     this.cartItemService.update(cartItem).subscribe(resp => {
+      this._cartItems$.next(this.cartItems);
+    });
+  }
+
+  changedAddonQtyEvent(cartAddon: ICartAddon) {
+    this.cartAddonService.update(cartAddon).subscribe(resp => {
       this._cartItems$.next(this.cartItems);
     });
   }

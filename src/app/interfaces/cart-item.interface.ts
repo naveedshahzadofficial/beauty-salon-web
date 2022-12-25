@@ -6,5 +6,5 @@ export interface ICartItem {
   price: number;
   quantity: number;
   is_same_time: boolean;
-  addons?: ICartAddon[];
+  cartAddons?: ICartAddon[];
 }

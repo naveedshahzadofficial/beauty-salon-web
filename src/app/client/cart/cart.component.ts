@@ -3,7 +3,6 @@ import { ICartItem } from '@interfaces/cart-item.interface';
 import { CartService } from '@services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ICartAddon } from '@interfaces/cart-addon.interface';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -38,6 +37,9 @@ export class CartComponent implements OnInit {
 
   changedItemQtyEvent(cartItem: ICartItem) {
     this.cartService.changedItemQtyEvent(cartItem);
+  }
+  changedAddonQtyEvent(cartAddon: ICartAddon) {
+    this.cartService.changedAddonQtyEvent(cartAddon);
   }
   clearAllCart() {
     this.cartService.clearCart();

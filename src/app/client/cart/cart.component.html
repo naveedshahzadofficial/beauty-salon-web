@@ -14,7 +14,13 @@
           >{{ totalCartItems }}</span
         >
       </h6>
-      <button (click)="clearAllCart()" *ngIf="cartItems.length !== 0" class="text-other-blue font-medium contents">Clear All</button>
+      <button
+        (click)="clearAllCart()"
+        *ngIf="cartItems.length !== 0"
+        class="text-other-blue font-medium contents"
+      >
+        Clear All
+      </button>
     </div>
     <!-- end: cart-header -->
 
@@ -49,14 +55,15 @@
           ></app-cart-item>
 
           <!-- begin: cart-addon -->
-          <ng-container *ngIf="cartItem.addons?.length">
+          <ng-container *ngIf="cartItem.cartAddons?.length">
             <div
-              *ngFor="let cartAddonItem of cartItem.addons"
+              *ngFor="let cartAddonItem of cartItem.cartAddons"
               class="cart-addon w-11/12 bg-other-cart-light rounded-l-[48px] px-6 py-5 ml-[15%] mt-2.5"
             >
               <app-cart-addon-item
                 [cartAddonItem]="cartAddonItem"
                 (removeAddonItemEvent)="removeAddonFromCart($event, cartItem)"
+                (changedAddonQtyEvent)="changedAddonQtyEvent($event)"
               ></app-cart-addon-item>
             </div>
           </ng-container>

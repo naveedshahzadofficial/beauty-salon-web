@@ -1,3 +1,4 @@
+import { RecipientComponent } from './recipient/recipient.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@app/guards/auth.guard';
@@ -38,8 +39,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'services',
-    component: ServicesComponent,
+    path: 'recipient',
+    component: RecipientComponent,
     canActivate: [AuthGuard],
   },
 ];
@@ -48,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ClientRoutingModule {}
+export class ClientRoutingModule { }

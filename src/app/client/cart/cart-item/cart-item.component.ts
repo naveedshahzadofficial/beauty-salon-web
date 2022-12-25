@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SharedService } from '@services/shared.service';
 import { ICartItem } from '@interfaces/cart-item.interface';
 
 @Component({
@@ -10,8 +11,7 @@ export class CartItemComponent implements OnInit {
   @Input() cartItem!: ICartItem;
   @Output() removeItemEvent = new EventEmitter<ICartItem>();
   @Output() changedItemQtyEvent = new EventEmitter<ICartItem>();
-  quantity = 1;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

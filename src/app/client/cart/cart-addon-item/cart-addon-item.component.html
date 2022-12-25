@@ -10,11 +10,12 @@
   class="select-qty relative inline-block flex-1 py-0 px-[0.5em] cursor-pointer text-white text-sm"
 >
   <select
+    (change)="changedAddonQtyEvent.emit(cartAddonItem)"
     [(ngModel)]="cartAddonItem.quantity"
     class="qty-opt text-black p-0 focus:ring-0"
     name="item"
   >
-    <option value="1">1</option>
+    <option *ngFor="let x of range" [value]="x">{{ x }}</option>
   </select>
 </div>
 <!-- end: qty -->

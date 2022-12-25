@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedService {
   checkoutClicked = new BehaviorSubject(false);
-
   constructor() { }
 
   getCheckoutClicked() {
     return this.checkoutClicked.asObservable();
   }
+
 }

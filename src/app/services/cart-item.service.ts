@@ -18,4 +18,9 @@ export class CartItemService extends DataService<ICartItem>{
     return this.http.post(`${this.base_url}/client/cart-items/destroy-all`, {})
       .pipe(retry(1), catchError(handleError));
   }
+
+  cartAddons(cartItemId: number, cartItemAddons: any[]) {
+    return this.http.post(`${this.base_url}/client/cart-items/${cartItemId}/cart-addons`, { 'cart_addons': cartItemAddons })
+      .pipe(retry(1), catchError(handleError));
+  }
 }
