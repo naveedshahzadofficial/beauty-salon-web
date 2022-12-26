@@ -29,4 +29,204 @@
     </div>
   </div>
   <!-- end: Customer Detail -->
+
+  <!-- begin: Order Summery -->
+  <div class="bg-white px-[62px] pt-[30px] pb-10">
+    <table class="min-w-full">
+      <thead class="bg-[#f8f2ec] leading-9 rounded-[10px]">
+        <tr>
+          <th scope="col" class="p-3 text-left">Categories</th>
+          <th scope="col" class="p-3 text-left">Services</th>
+          <th scope="col" class="p-3 text-left">Unit Price</th>
+          <th scope="col" class="p-3 text-center">Qty</th>
+          <th scope="col" class="p-3 text-left">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b-other-cart-light border-b">
+          <td class="p-3 align-top">
+            <small
+              class="text-[12px] uppercase bg-other-cart-light w-[110px] block text-center leading-9 rounded font-normal"
+              >Makeup</small
+            >
+          </td>
+          <td class="p-3">
+            <ul class="flex flex-col">
+              <li>Party Makeup, Eyelashes, Nail Paint</li>
+              <li class="py-2.5">
+                <span class="text-[#8d9296] pl-2.5"
+                  >- Extra Massage (10 mins)</span
+                >
+              </li>
+              <li>
+                Bridal Makeup &amp; Hairstyle (Dupatta and Jewellery Setting)
+              </li>
+              <li>Soft Makeup without eyelashes + Blowdry</li>
+              <li>Party Makeup, Eyelashes, Nail Paint with Hairstyle</li>
+              <li>Party Makeup, Eyelashes, Nail Paint, with Blowdry</li>
+            </ul>
+          </td>
+          <td class="p-3 text-left">
+            <ul class="flex flex-col">
+              <li>Rs.4000</li>
+              <li class="py-2.5">Rs.3500</li>
+              <li>Rs.23530</li>
+              <li>Rs.2500</li>
+              <li>Rs.5000</li>
+              <li>Rs.4500</li>
+            </ul>
+          </td>
+          <td class="p-3 text-center">
+            <ul class="flex flex-col">
+              <li>1</li>
+              <li class="py-2.5">2</li>
+              <li>1</li>
+              <li>1</li>
+              <li>1</li>
+              <li>1</li>
+            </ul>
+          </td>
+          <td class="p-3 text-left">
+            <ul class="flex flex-col">
+              <li>Rs.4000</li>
+              <li class="py-2.5">Rs.7000</li>
+              <li>Rs.23530</li>
+              <li>Rs.2500</li>
+              <li>Rs.5000</li>
+              <li>Rs.4500</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- begin: Special Instructions -->
+    <div class="w-full mt-3">
+      <label class="text-base font-medium">Special Instructions</label>
+      <div class="form-group pb-4">
+        <textarea
+          class="w-full p-[15px] text-sm font-normal bg-[#f6f5f4] border-dashed border-[#dfdfdf] rounded-md resize-none mt-2.5 focus:ring-secondary-dark"
+          rows="2"
+          id="comment"
+          placeholder="special instructions"
+          style="color: transparent; text-shadow: black 0px 0px 0px"
+        ></textarea>
+      </div>
+    </div>
+    <!-- end: Special Instructions -->
+
+    <!-- begin: Invoice Footer -->
+    <div class="flex justify-between flex-row">
+      <!-- begin: Coupon Box -->
+      <div class="w-2/5">
+        <label class="text-base font-medium">Redeem Coupon/ Free Service</label>
+
+        <!-- begin: Coupon Fill Area -->
+        <div
+          *ngIf="false"
+          style="
+            background: transparent
+              linear-gradient(99deg, #f3790b, #faa458 39%, #ffbb7e) 0 0
+              no-repeat padding-box;
+          "
+          class="w-[90%] rounded-md text-white mt-4"
+        >
+          <!-- begin: Coupon Header -->
+          <div class="flex justify-between p-2.5">
+            <h5>15%</h5>
+            <span>Discount</span>
+          </div>
+          <!-- end: Coupon Header -->
+          <!-- begin: Coupon Body -->
+          <div class="flex justify-between">
+            <div class="body-left">
+              <p class="pl-2">Coupon Code: GP15%off</p>
+              <p class="pl-2">Redeemed: 0/ 1</p>
+            </div>
+            <div class="body-right pr-1.5 text-[35px]">15%</div>
+          </div>
+
+          <hr
+            class="border-t-2 border-t-white border-dashed my-2.5 mx-auto w-[90%]"
+          />
+          <div class="bottom-sec flex justify-between w-full p-2.5">
+            <p>Valid till: Valid till first order</p>
+            <button
+              class="btn coupon-remove-btn inline-block text-base px-3 py-2 bg-white rounded-md text-primary-heading"
+            >
+              Remove
+            </button>
+          </div>
+          <!-- end: Coupon Body -->
+        </div>
+        <!-- end: Coupon Fill Area -->
+
+        <!-- begin: Empty Coupon Area -->
+        <div class="w-[90%] bg-[#f6f5f4] rounded-md mt-4">
+          <div class="image-coupon text-center flex justify-center">
+            <img
+              class="m-5 align-middle"
+              src="assets/images/empty-coupon.png"
+              alt=""
+            />
+          </div>
+          <div class="lower-section flex justify-center p-5">
+            <button
+              class="btn coupon-btn mr-1 px-3 py-2 border border-[#dfdfdf] rounded-md text-[.9rem] font-normal"
+            >
+              Apply Coupon
+            </button>
+          </div>
+        </div>
+        <!-- end: Empty Coupon Area -->
+      </div>
+      <!-- end: Coupon Box -->
+
+      <!-- begin: Total Bill -->
+      <div class="total-bill">
+        <table class="mt-2.5">
+          <tr>
+            <td class="py-4 px-6 font-medium text-base"></td>
+            <td class="py-4 px-6 font-medium text-base">Services Charges</td>
+            <td class="py-4 px-6 font-medium text-base">Rs. 126180</td>
+          </tr>
+          <tr>
+            <td class="py-4 px-6 font-medium text-base"></td>
+            <td class="py-4 px-6 font-medium text-base">Travel Charges</td>
+            <td class="py-4 px-6 font-medium text-base">Rs. 0</td>
+          </tr>
+          <tr>
+            <td class="py-4 px-6 font-medium text-base"></td>
+            <td class="py-4 px-6 font-medium text-base text-red-600">
+              Discount
+            </td>
+            <td class="py-4 px-6 font-medium text-base text-red-600">Rs. 0</td>
+          </tr>
+          <tr>
+            <td class="py-4 px-6 font-medium text-base"></td>
+            <td class="py-4 px-6 font-medium text-base">Coupon Discount</td>
+            <td class="py-4 px-6 font-medium text-base">Rs.18927</td>
+          </tr>
+          <tr>
+            <td class="py-4 px-6 font-medium text-base"></td>
+            <td class="py-4 px-6 font-medium text-base">Grand Total</td>
+            <td class="py-4 px-6 font-medium text-base">Rs.126180</td>
+          </tr>
+        </table>
+      </div>
+      <!-- end: Total Bill -->
+    </div>
+    <!-- end: Invoice Footer -->
+  </div>
+  <!-- end: Order Summery -->
+
+  <div class="text-right mt-12">
+    <span class="cancel-btn pr-5 text-[#8d9296]" style="cursor: pointer"
+      >Cancel Order</span
+    ><span
+      class="done-btn px-7 py-2 text-white bg-primary-heading rounded-md"
+      style="cursor: pointer"
+      >Submit Order</span
+    >
+  </div>
 </div>
