@@ -1,5 +1,5 @@
-import { IArea } from './area.interface';
-import { ICity } from './city.interface';
+import { IArea } from '@interfaces/area.interface';
+import { ICity } from '@interfaces/city.interface';
 export interface IAddress {
   id: number
   user_id: number

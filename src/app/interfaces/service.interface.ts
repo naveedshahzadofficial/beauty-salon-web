@@ -1,4 +1,4 @@
-import { IAddon } from './addon.interface';
+import { IAddon } from '@interfaces/addon.interface';
 export interface IService {
   id: number;
   category_id: number;

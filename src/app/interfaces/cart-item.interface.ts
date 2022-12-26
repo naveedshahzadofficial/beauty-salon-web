@@ -1,4 +1,4 @@
-import { ICartAddon } from './cart-addon.interface';
+import { ICartAddon } from '@interfaces/cart-addon.interface';
 export interface ICartItem {
   id: number;
   service_id: number;

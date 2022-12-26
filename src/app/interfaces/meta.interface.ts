@@ -1,4 +1,4 @@
-import { ILink } from "./link.interface"
+import { ILink } from "@interfaces/link.interface"
 
 export interface IMeta {
   current_page: number

@@ -58,7 +58,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   checkoutClicked!: Subscription;
 
-  constructor(private fb: FormBuilder, private clientService: ClientService, private sharedService: SharedService, private router: Router, private cartService: CartService) {
+  constructor(
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    private sharedService: SharedService,
+    private router: Router,
+    private cartService: CartService) {
     this.createForm();
   }
 
