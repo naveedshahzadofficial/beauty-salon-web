@@ -1,3 +1,4 @@
+import { OrderService } from './../../services/order.service';
 import { CartService } from './../../services/cart.service';
 import { IArea } from '@interfaces/area.interface';
 import { ICity } from '@interfaces/city.interface';
@@ -60,10 +61,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private clientService: ClientService,
     private sharedService: SharedService,
-    private router: Router,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private orderService: OrderService,
+  ) {
     this.createForm();
   }
 
