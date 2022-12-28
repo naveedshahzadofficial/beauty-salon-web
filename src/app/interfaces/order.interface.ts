@@ -8,6 +8,7 @@ export interface IOrder {
   user_id: number;
   address_id: number;
   coupon_id?: number | null;
+  order_no: string;
   order_date: string;
   order_time: string;
   phone: string;

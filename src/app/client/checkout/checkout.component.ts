@@ -89,7 +89,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       order_date: new FormControl(this.currentDate, Validators.required),
       order_time: new FormControl(this.currentTime, Validators.required),
       address_id: new FormControl(null, Validators.required),
-      instructions: new FormControl(null, Validators.nullValidator),
+      special_notes: new FormControl(null, Validators.nullValidator),
     });
   }
 
@@ -143,7 +143,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     };
 
 
-    this.cartService.getCartItems().subscribe(resp => {
+    // this.cartService.getCartItems().subscribe(resp => {
+    //   console.log(resp);
+    // });
+
+    this.orderService.store(this.orderForm.value).subscribe(resp => {
       console.log(resp);
     });
 
