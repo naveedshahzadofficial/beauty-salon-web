@@ -5,9 +5,11 @@ import { IOrderService } from '@interfaces/order-service.interface';
 
 export interface IOrder {
   id: number;
+  user_id: number;
+  address_id: number;
+  coupon_id?: number | null;
   order_date: string;
   order_time: string;
-  address_id: number;
   phone: string;
   total_price: number;
   status: string;

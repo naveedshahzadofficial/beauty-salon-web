@@ -1,5 +1,6 @@
 export interface IOrderBilling {
   id: number;
+  order_id: number;
   actual_price: number;
   travel_charges: number;
   waiting_charges: number;
