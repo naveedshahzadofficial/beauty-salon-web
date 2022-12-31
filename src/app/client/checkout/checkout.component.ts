@@ -139,22 +139,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         if (control)
           control.markAsTouched({ onlySelf: true });
       });
-      return false
+      return;
     };
 
+    let orderFormData = this.orderForm.value;
+    orderFormData.total_price = this.cartService.getTotalPrice();
 
-    // this.cartService.getCartItems().subscribe(resp => {
-    //   console.log(resp);
-    // });
-
-    let orderFormDA
-
-    this.orderService.store(this.orderForm.value).subscribe(resp => {
-      console.log(resp);
+    this.orderService.store(orderFormData).subscribe(resp => {
+      this.sharedService.orderId = resp.data.id;
+      this.router.navigate(['client/recipient']);
     });
-
-    //this.router.navigate(['client/categories/recipient']);
-    return true;
   }
 
   ngOnDestroy(): void {
