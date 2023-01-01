@@ -5,6 +5,12 @@ export interface IOrderService {
   user_id: number;
   order_id: number;
   service_id: number;
+  service_title: string;
+  is_deal: boolean;
+  category_id: number;
+  category_name: string;
+  sub_category_id: number | null;
+  sub_category_name: string | null;
   unit_count: number;
   unit_price: number;
   total_price: number;
