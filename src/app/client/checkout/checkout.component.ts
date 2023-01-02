@@ -147,7 +147,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     //   console.log(resp);
     // });
 
-    let orderFormDA
+    let orderFormData = this.orderForm.value
 
     this.orderService.store(this.orderForm.value).subscribe(resp => {
       console.log(resp);
