@@ -132,7 +132,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.orderForm.value);
     if (this.orderForm.invalid) {
       Object.keys(this.orderForm.controls).forEach(field => {
         const control = this.orderForm.get(field);

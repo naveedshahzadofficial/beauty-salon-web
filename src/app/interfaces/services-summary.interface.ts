@@ -1,7 +1,7 @@
 import { IOrderService } from "@interfaces/order-service.interface"
 
-export interface IServiceSummary {
+export interface IServicesSummary {
   category_id: number;
-  category_title: string;
+  category_name: string;
   order_services: IOrderService[],
 }

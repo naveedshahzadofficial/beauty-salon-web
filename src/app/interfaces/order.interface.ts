@@ -1,8 +1,9 @@
+import { IUser } from '@interfaces/user.interface';
 import { ICoupon } from '@interfaces/coupon.interface';
 import { IAddress } from "@interfaces/address.interface";
 import { IOrderBilling } from '@interfaces/order-billing.interface';
 import { IOrderService } from '@interfaces/order-service.interface';
-import { IServiceSummary } from '@interfaces/service-summary.interface';
+import { IServicesSummary } from '@interfaces/services-summary.interface';
 
 export interface IOrder {
   id: number;
@@ -16,9 +17,10 @@ export interface IOrder {
   total_price: number;
   status: string;
   special_notes: string;
+  user: IUser;
   address: IAddress;
   order_services: IOrderService[],
-  service_summary: IServiceSummary[],
+  services_summary: IServicesSummary[],
   order_billing: IOrderBilling;
   coupon?: ICoupon;
   created_at: string;
