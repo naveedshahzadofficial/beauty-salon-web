@@ -31,4 +31,9 @@ export class SharedService {
     return parseInt(order_id);
   }
 
+  removeOrder() {
+    localStorage.removeItem(this.NEW_ORDER_ID);
+    this._orderId$.next(0);
+  }
+
 }

@@ -3,6 +3,7 @@ import { mergeMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '@services/order.service';
 import { SharedService } from '@services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipient',
@@ -14,6 +15,7 @@ export class RecipientComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private orderService: OrderService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +24,14 @@ export class RecipientComponent implements OnInit {
     ).subscribe((resp: IOrder) => {
       this.order = resp;
     });
+  }
+
+  onSubmit(): void {
+
+  }
+
+  onCancel(): void {
+    this.router.navigate(['client/categories']);
   }
 
 }

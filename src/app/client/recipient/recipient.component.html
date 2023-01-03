@@ -252,7 +252,10 @@
   <!-- end: Order Summery -->
 
   <div class="text-right mt-12">
-    <span class="cancel-btn pr-5 text-[#8d9296]" style="cursor: pointer"
+    <span
+      (click)="onCancel()"
+      class="cancel-btn pr-5 text-[#8d9296]"
+      style="cursor: pointer"
       >Cancel Order</span
     ><span
       class="done-btn px-7 py-2 text-white bg-primary-heading rounded-md"
