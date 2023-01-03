@@ -1,1 +1,52 @@
-<p>base-table works!</p>
+<table class="table is-bordered data-table">
+  <thead>
+    <ng-container *ngIf="columns.length">
+      <tr class="bg-gray-700 dark:bg-dark-1 text-white">
+        <ng-container *ngFor="let column of columns">
+          <th
+            class="whitespace-nowrap text-center cursor-pointer"
+            [ngClass]="
+              column.orderable
+                ? sortKey === column.name
+                  ? sortOrders[column.name] > 0
+                    ? 'sorting_asc'
+                    : 'sorting_desc'
+                  : 'sorting'
+                : ''
+            "
+            [colSpan]="column.colspan ? column.colspan : 1"
+            [ngStyle]="{ width: column.width ? column.width : 'auto' }"
+          >
+            {{ column.label }}
+          </th>
+        </ng-container>
+      </tr>
+    </ng-container>
+
+    <ng-container *ngIf="childColumns.length">
+      <tr class="bg-gray-700 dark:bg-dark-1 text-white">
+        <ng-container *ngFor="let column of childColumns">
+          <th
+            class="whitespace-nowrap text-center cursor-pointer"
+            [ngClass]="
+              column.orderable
+                ? sortKey === column.name
+                  ? sortOrders[column.name] > 0
+                    ? 'sorting_asc'
+                    : 'sorting_desc'
+                  : 'sorting'
+                : ''
+            "
+            [colSpan]="column.colspan ? column.colspan : 1"
+            [ngStyle]="{ width: column.width ? column.width : 'auto' }"
+          >
+            {{ column.label }}
+          </th>
+        </ng-container>
+      </tr>
+    </ng-container>
+  </thead>
+  <tbody>
+    <ng-content></ng-content>
+  </tbody>
+</table>

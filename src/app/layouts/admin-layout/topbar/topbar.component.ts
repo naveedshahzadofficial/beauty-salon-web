@@ -3,7 +3,6 @@ import { DomEvents } from '@common/dom.events';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { AuthService } from '@services/auth.service';
-
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',

@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { StaffsComponent } from './staffs/staffs.component';
 
@@ -33,6 +33,7 @@ import { DeleteModalComponent } from './shared/delete-modal/delete-modal.compone
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     InputMaskModule,
   ]
 })

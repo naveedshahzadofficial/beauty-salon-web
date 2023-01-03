@@ -33,12 +33,33 @@
               <div
                 class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center"
               >
+                <div class="hidden md:block text-gray-600">
+                  <select
+                    [(ngModel)]="tableData.length"
+                    (change)="loadCollection()"
+                    class="form-select box"
+                  >
+                    <ng-container *ngFor="let records of perPage">
+                      <option [value]="records === 'All' ? '9999999' : records">
+                        {{ records }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+
                 <div class="hidden md:block text-gray-600"></div>
 
                 <div class="hidden md:block mx-auto text-gray-600"></div>
 
                 <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                   <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <input
+                      [(ngModel)]="tableData.search"
+                      (change)="loadCollection()"
+                      type="text"
+                      class="form-control w-56 box pr-10 placeholder-theme-13 border-dark-2"
+                      placeholder="Search..."
+                    />
                     <i
                       class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
                       data-feather="search"
@@ -47,11 +68,19 @@
                 </div>
               </div>
 
-              <div class="intro-y col-span-12 overflow-auto"></div>
+              <div class="intro-y col-span-12 overflow-auto">
+                <app-base-table
+                  [columns]="columns"
+                  [sortKey]="sortKey"
+                  [sortOrders]="sortOrders"
+                >
+                  <p>this is sample of test...</p>
+                </app-base-table>
+              </div>
               <p
                 class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
               >
-                Currently no account is added.
+                Currently no staff is added.
               </p>
 
               <!-- BEGIN: Pagination -->
