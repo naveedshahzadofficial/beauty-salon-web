@@ -33,7 +33,6 @@ export class SharedService {
 
   removeOrder() {
     localStorage.removeItem(this.NEW_ORDER_ID);
-    this._orderId$.next(0);
   }
 
 }

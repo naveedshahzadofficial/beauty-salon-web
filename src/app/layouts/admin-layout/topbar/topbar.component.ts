@@ -3,7 +3,6 @@ import { DomEvents } from '@common/dom.events';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { AuthService } from '@services/auth.service';
-import * as feather from 'feather-icons';
 
 @Component({
   selector: 'app-topbar',
@@ -23,7 +22,6 @@ export class TopbarComponent implements OnInit, AfterViewInit {
     fromEvent<any>(this.dropdown.nativeElement, 'click').subscribe(resp => {
       this.isActiveDropdown = !this.isActiveDropdown;
     });
-    feather.replace();
   }
 
   logout() {

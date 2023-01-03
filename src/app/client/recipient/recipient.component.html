@@ -258,9 +258,15 @@
       style="cursor: pointer"
       >Cancel Order</span
     ><span
+      (click)="onSubmit()"
       class="done-btn px-7 py-2 text-white bg-primary-heading rounded-md"
       style="cursor: pointer"
       >Submit Order</span
     >
   </div>
+
+  <app-thankyou
+    *ngIf="isSubmitted"
+    [order_number]="order.order_no"
+  ></app-thankyou>
 </div>

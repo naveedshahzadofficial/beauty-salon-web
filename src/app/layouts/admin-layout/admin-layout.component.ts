@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { AuthService } from '@services/auth.service';
+import * as feather from 'feather-icons';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,12 +8,16 @@ import { AuthService } from '@services/auth.service';
   styleUrls: ['./admin-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, AfterViewInit {
   isLogin!: boolean;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.isStaffLoggedIn$.subscribe(resp => this.isLogin = resp);
+  }
+
+  ngAfterViewInit(): void {
+    feather.replace();
   }
 
 }

@@ -20,6 +20,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { AddressesComponent } from './shared/addresses/addresses.component';
 import { RecipientComponent } from './recipient/recipient.component';
+import { ThankyouComponent } from './recipient/thankyou/thankyou.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RecipientComponent } from './recipient/recipient.component';
     CheckoutComponent,
     AddressesComponent,
     RecipientComponent,
+    ThankyouComponent,
   ],
   imports: [
     CommonModule,

@@ -1,15 +1,58 @@
 <nav class="side-nav">
-  <a href="" class="intro-x flex items-center pt-4">
+  <a routerLink="admin/dashboard" class="intro-x flex items-center pt-4">
     <img alt="JITSS" src="assets/logo.svg" />
   </a>
   <div class="side-nav__devider my-6"></div>
   <ul>
     <li>
-      <a class="side-menu side-menu--active">
+      <a
+        routerLink="admin/dashboard"
+        routerLinkActive="side-menu--active"
+        class="side-menu"
+      >
         <div class="side-menu__icon">
           <i data-feather="home" class="w-6 h-6"></i>
         </div>
         <div class="side-menu__title">Dashboard</div>
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="admin/staffs/index"
+        routerLinkActive="side-menu--active"
+        class="side-menu"
+      >
+        <div class="side-menu__icon">
+          <i data-feather="user" class="w-6 h-6"></i>
+        </div>
+        <div class="side-menu__title">Staffs</div>
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="admin/clients/index"
+        routerLinkActive="side-menu--active"
+        class="side-menu"
+      >
+        <div class="side-menu__icon">
+          <i data-feather="users" class="w-6 h-6"></i>
+        </div>
+        <div class="side-menu__title">Clients</div>
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="admin/orders/index"
+        routerLinkActive="side-menu--active"
+        class="side-menu"
+      >
+        <div class="side-menu__icon">
+          <i data-feather="shopping-bag" class="w-6 h-6"></i>
+        </div>
+        <div class="side-menu__title">Orders</div>
       </a>
     </li>
   </ul>

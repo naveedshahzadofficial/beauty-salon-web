@@ -53,4 +53,4 @@ import { TopbarComponent } from './layouts/admin-layout/topbar/topbar.component'
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

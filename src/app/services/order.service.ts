@@ -20,4 +20,18 @@ export class OrderService extends DataService<IOrder>{
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  cancelled(order_id: number) {
+    return this.http
+      .post(`${this.base_url}/client/orders/${order_id}/cancelled`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+  submitted(order_id: number) {
+    return this.http
+      .post(`${this.base_url}/client/orders/${order_id}/submitted`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
 }

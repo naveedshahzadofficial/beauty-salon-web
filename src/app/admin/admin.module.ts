@@ -1,3 +1,4 @@
+import { StaffIndexComponent } from '@app/admin/staffs/index/index.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,12 +7,27 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
+import { StaffsComponent } from './staffs/staffs.component';
+
+import { ClientsComponent } from './clients/clients.component';
+import { OrdersComponent } from './orders/orders.component';
+import { BaseTableComponent } from './shared/base-table/base-table.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
+import { DeleteModalComponent } from './shared/delete-modal/delete-modal.component';
+
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    StaffsComponent,
+    StaffIndexComponent,
+    ClientsComponent,
+    OrdersComponent,
+    BaseTableComponent,
+    PaginationComponent,
+    DeleteModalComponent,
   ],
   imports: [
     CommonModule,
