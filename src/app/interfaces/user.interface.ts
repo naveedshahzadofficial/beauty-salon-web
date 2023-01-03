@@ -6,6 +6,8 @@ export interface IUser {
   last_name: string;
   mobile: string;
   email?: string;
+  is_active: boolean;
+  status?: string;
   updated_at: string;
   created_at: string;
   roles?: IRole[];

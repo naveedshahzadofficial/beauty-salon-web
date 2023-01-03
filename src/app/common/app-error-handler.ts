@@ -8,10 +8,11 @@ import { NotFoundError } from './not-found-error';
   providedIn: 'root',
 })
 export class AppErrorHandler implements ErrorHandler {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
   handleError(error: AppError) {
     if (error instanceof UnauthorizedError) {
       this.authService.removeToken();
+      this.authService.removeStaffToken();
       alert('Your are unauthorized.');
     } else if (error instanceof NotFoundError) {
       alert('Your Record is not found.');

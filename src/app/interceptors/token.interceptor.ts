@@ -19,12 +19,19 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const isAdmin = request.url.startsWith(environment.base_url + '/admin');
     console.log(isAdmin);
-
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.authService.token}`,
-      },
-    });
+    if (isAdmin) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.authService.staffToken}`,
+        },
+      });
+    } else {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.authService.token}`,
+        },
+      });
+    }
 
     return next.handle(request);
   }

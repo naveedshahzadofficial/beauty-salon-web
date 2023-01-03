@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { IUser } from '@interfaces/user.interface';
+import { StaffService } from '@services/staff.service';
+import { Component, OnInit } from '@angular/core';
 import * as feather from 'feather-icons';
 
 @Component({
@@ -6,10 +8,12 @@ import * as feather from 'feather-icons';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class StaffIndexComponent implements OnInit, AfterViewInit {
+export class StaffIndexComponent implements OnInit {
   message: string = '';
   sortOrders: any = {};
   sortKey = 'created_at';
+
+  staffs: IUser[] = [];
 
   perPage = ['30', '50', '100', '200', '500', '1000', 'All'];
   tableData = {
@@ -31,7 +35,7 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
 
 
 
-  constructor() {
+  constructor(private staffService: StaffService) {
     this.columns.forEach((column: any) => {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
@@ -39,13 +43,14 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    feather.replace();
+    this.loadCollection();
   }
 
   loadCollection() {
+    this.staffService.getAll().subscribe(resp => this.staffs = resp.data);
+  }
+
+  confirmDelete(user_id: number) {
 
   }
 
