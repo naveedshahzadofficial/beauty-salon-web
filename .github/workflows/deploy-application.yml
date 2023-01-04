@@ -49,7 +49,7 @@ jobs:
     needs: create-deployment-artifacts
     strategy:
       matrix:
-        server: ${{ fromJson(${{ env.deployment-matrix }}) }}
+        server: ${{ fromJson("${{ env.deployment-matrix }}") }}
 
     steps:
       - uses: actions/download-artifact@v3
