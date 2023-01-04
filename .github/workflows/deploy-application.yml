@@ -85,7 +85,7 @@ jobs:
             chmod -R 0775 ${{ matrix.server.path }}/releases/${GITHUB_SHA}
             chmod -R 0777 ${{ matrix.server.path }}/releases/${GITHUB_SHA}/assets
 
-            chcon -R -t httpd_sys_rw_content_t ${{ matrix.server.path }}/${GITHUB_SHA}/assets
+            chcon -R -t httpd_sys_rw_content_t ${{ matrix.server.path }}/releases/${GITHUB_SHA}/assets
 
   run-before-hooks:
     name: "${{ matrix.server.name }}: Before hook"
