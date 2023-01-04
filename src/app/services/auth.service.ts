@@ -106,4 +106,11 @@ export class AuthService {
       .pipe(map((response: any) => response.data))
       .pipe(retry(1), catchError(handleError));
   }
+
+  logoutStaff() {
+    return this.http
+      .post(`${this.base_url}/admin/logout`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
 }

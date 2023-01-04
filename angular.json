@@ -27,7 +27,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@angular/cdk/overlay-prebuilt.css",
-              "src/assets/scss/styles.scss"
+              "src/assets/scss/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ]
           },
           "configurations": {

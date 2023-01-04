@@ -1,4 +1,5 @@
 import { StaffIndexComponent } from '@app/admin/staffs/index/index.component';
+import { StaffCreateComponent } from '@app/admin/staffs/create/create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -23,6 +24,7 @@ import { DeleteModalComponent } from './shared/delete-modal/delete-modal.compone
     LoginComponent,
     StaffsComponent,
     StaffIndexComponent,
+    StaffCreateComponent,
     ClientsComponent,
     OrdersComponent,
     BaseTableComponent,
@@ -34,7 +36,7 @@ import { DeleteModalComponent } from './shared/delete-modal/delete-modal.compone
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    InputMaskModule,
+    InputMaskModule
   ]
 })
 export class AdminModule { }

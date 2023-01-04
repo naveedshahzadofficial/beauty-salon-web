@@ -22,6 +22,7 @@ import { CategoryService } from '@services/category.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { SidebarComponent } from './layouts/admin-layout/sidebar/sidebar.component';
 import { TopbarComponent } from './layouts/admin-layout/topbar/topbar.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -39,6 +40,7 @@ import { TopbarComponent } from './layouts/admin-layout/topbar/topbar.component'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({ closeButton: true }),
     HttpClientModule,
     NgxPaginationModule,
   ],

@@ -24,7 +24,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
+    this.authService.logoutStaff().subscribe(() => {
       this.authService.removeStaffToken();
       this.isActiveDropdown = false;
       this.router.navigate(['admin/login']);
