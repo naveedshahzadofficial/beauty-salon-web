@@ -1,0 +1,15 @@
+[
+  {
+    "name": "ns-prod",
+    "ip": "142.93.35.74",
+    "username": "root",
+    "password": "",
+    "key": "",
+    "key_path": "",
+    "port": "22",
+    "beforeHooks": "echo $GITHUB_SHA",
+    "afterHooks": "",
+    "env": "BEAUTY_SALON_ENV",
+    "path": "/var/www/vhosts/jitss"
+  }
+]
