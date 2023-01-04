@@ -24,7 +24,7 @@ jobs:
       - name: Create Deployment Artifact
         env:
           GITHUB_SHA: ${{ github.sha }}
-        run: tar -C /dist/beauty-salon-web -czf "${GITHUB_SHA}".tar.gz .
+        run: tar -C /dist/beauty-salon-web -czf "${GITHUB_SHA}".tar.gz *
 
       - name: Store Artifact for Distribution
         uses: actions/upload-artifact@v3
