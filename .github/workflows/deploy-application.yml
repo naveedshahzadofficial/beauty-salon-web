@@ -1,0 +1,33 @@
+name: Deploy Application
+
+on:
+  push:
+    branches: ["main"]
+jobs:
+  create-deployment-artifacts:
+    name: Create Deployment Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: ng build --configuration production --aot
+
+      - name: Create Deployment Artifact
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: tar -czf "${GITHUB_SHA}".tar.gz dist/beauty-salon-web/
+
+      - name: Store Artifact for Distribution
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: ${{ github.sha }}.tar.gz
