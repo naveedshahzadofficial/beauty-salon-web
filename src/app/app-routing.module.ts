@@ -1,6 +1,6 @@
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
 const routes: Routes = [
@@ -9,8 +9,8 @@ const routes: Routes = [
     path: '',
     component: ClientLayoutComponent,
     children: [{
-    path:'',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+      path: '',
+      loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
     }]
   },
   // Client Routes
@@ -18,15 +18,15 @@ const routes: Routes = [
     path: '',
     component: ClientLayoutComponent,
     children: [
-    {
-      path: '',
-      redirectTo: '/client',
-      pathMatch: 'full'
-    },
-  {
-    path: 'client',
-    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
-  }]
+      {
+        path: '',
+        redirectTo: '/client',
+        pathMatch: 'full'
+      },
+      {
+        path: 'client',
+        loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+      }]
   },
   // Admin Routes
   {
@@ -42,14 +42,16 @@ const routes: Routes = [
       path: 'admin',
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
     }
-  ]
+    ]
   },
-  
+
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
