@@ -42,13 +42,14 @@ jobs:
           JSON="${JSON//$'\n'/'%0A'}"
           JSON="${JSON//$'\r'/'%0D'}"
           echo "::set-output name=deployment-matrix::$JSON"
+          echo "deployment-matrix::$JSON" >> $GITHUB_ENV
 
   prepare-release-on-server:
     runs-on: ubuntu-latest
     needs: create-deployment-artifacts
     strategy:
       matrix:
-        server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
+        server: ${{ fromJson(env.deployment-matrix) }}
 
     steps:
       - uses: actions/download-artifact@v3
