@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build --prod
+        run: npm run build --omit=dev
 
       - name: Create Deployment Artifact
         env:
@@ -42,7 +42,6 @@ jobs:
           JSON="${JSON//$'\n'/'%0A'}"
           JSON="${JSON//$'\r'/'%0D'}"
           echo "::set-output name=deployment-matrix::$JSON"
-          echo "deployment-matrix::$JSON" >> $GITHUB_ENV
 
   prepare-release-on-server:
     runs-on: ubuntu-latest
