@@ -9,7 +9,7 @@
   <div class="hidden md:block mx-auto text-gray-600"></div>
   <div class="w-full sm:w-auto mt-3 sm:mt-0">
     <nav
-      *ngIf="meta.total && meta.per_page"
+      *ngIf="meta.total && meta.per_page && meta.links.length > 3"
       class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
       aria-label="Pagination"
     >
