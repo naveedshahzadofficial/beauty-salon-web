@@ -138,7 +138,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   onSubmit(e: Event) {
     e.preventDefault();
     console.log(this.registerForm.value);
-    if (this.registerForm.invalid) return false;
+    if (this.registerForm.invalid) return;
 
     this.authService.register(this.registerForm.value).subscribe({
       next: (resp: any) => {
@@ -158,7 +158,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         } else throw e;
       },
     });
-    return true;
+
   }
 
   ngOnDestroy() {

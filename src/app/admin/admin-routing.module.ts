@@ -7,6 +7,7 @@ import { DashboardComponent } from '@app/admin/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '@app/admin/login/login.component';
+import { StaffEditComponent } from '@app/admin/staffs/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: StaffCreateComponent
+      },
+      {
+        path: ':id/edit',
+        component: StaffEditComponent
       },
     ]
   },

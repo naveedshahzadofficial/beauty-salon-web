@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { IResponses } from '@interfaces/responses.interface';
 import { IResponse } from '@interfaces/response.interface';
 import { handleError } from '@common/handle-errors';
+import { IPagination } from '@interfaces/pagination.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,14 @@ export class DataService<T> {
   getAll(): Observable<IResponses<T>> {
     return this.http
       .get<IResponses<T>>(`${this.base_url}/${this.resource}`)
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  indexPaging(paging_url: string | null, table_data: object): Observable<IPagination<T>> {
+    if (paging_url === null)
+      paging_url = `${this.base_url}/${this.resource}/index-paging`;
+    return this.http
+      .post<IPagination<T>>(paging_url, table_data)
       .pipe(retry(1), catchError(handleError));
   }
 
@@ -33,10 +42,10 @@ export class DataService<T> {
       .pipe(retry(1), catchError(handleError));
   }
 
-  update(formData: any): Observable<IResponse<T>> {
+  update(formData: any, id: any): Observable<IResponse<T>> {
     return this.http
       .patch<IResponse<T>>(
-        `${this.base_url}/${this.resource}/${formData.id}`, formData)
+        `${this.base_url}/${this.resource}/${id}`, formData)
       .pipe(retry(1), catchError(handleError));
   }
 

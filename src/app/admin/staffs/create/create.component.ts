@@ -1,9 +1,17 @@
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { createMask } from '@ngneat/input-mask';
 import { ToastrService } from 'ngx-toastr';
+import { StaffService } from '@services/staff.service';
+import { RoleService } from '@services/role.service';
+import { IUser } from '@interfaces/user.interface';
+import { IResponses } from '@interfaces/responses.interface';
+import { IRole } from '@interfaces/role.interface';
+import { IResponse } from '@interfaces/response.interface';
 import { CustomValidator } from '@common/custom-validator';
+import { AppError } from '@app/common/app-error';
+import { ValidationError } from '@app/common/validation-error';
 
 @Component({
   selector: 'app-staff-create',
@@ -13,7 +21,8 @@ import { CustomValidator } from '@common/custom-validator';
 export class StaffCreateComponent implements OnInit {
 
   mobileInputMask = createMask('03999999999');
-  public staffForm!: FormGroup;
+  staffForm!: FormGroup;
+  roles: IRole[] = [];
 
   error_messages = {
     first_name: [
@@ -46,7 +55,7 @@ export class StaffCreateComponent implements OnInit {
       { type: 'required', message: 'Please enter your password.' },
       {
         type: 'minlength',
-        message: 'The last name must be at least 3 characters.',
+        message: 'The last name must be at least 6 characters.',
       },
       {
         type: 'maxlength',
@@ -54,20 +63,27 @@ export class StaffCreateComponent implements OnInit {
       },
     ],
     role_id: [{ type: 'required', message: 'Please select the role.' }],
+    is_active: [{ type: 'required', message: 'Please select the status.' }],
 
   };
 
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomValidator,
+    private roleService: RoleService,
+    private staffService: StaffService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
   ) {
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.getRoles();
+  }
 
+  private getRoles() {
+    this.roleService.getAll().subscribe((resp: IResponses<IRole>) => this.roles = resp.data);
   }
 
   private createForm(): void {
@@ -99,6 +115,7 @@ export class StaffCreateComponent implements OnInit {
         ])
       ),
       role_id: new FormControl(null, Validators.required),
+      is_active: new FormControl(null, Validators.required),
     });
   }
 
@@ -120,10 +137,22 @@ export class StaffCreateComponent implements OnInit {
       return;
     };
 
-    console.log(this.staffForm.value);
-
-    this.toastr.success('Your Staff has been added successfully!', 'Success!');
-
+    this.staffService.store(this.staffForm.value).subscribe({
+      next: (resp: IResponse<IUser>) => {
+        this.staffForm.reset();
+        this.toastr.success(resp.message, 'Success!');
+        this.router.navigate(['admin/staffs/index']);
+      },
+      error: (e: AppError) => {
+        if (e instanceof ValidationError) {
+          this.customValidator.extractErrors(
+            this.staffForm,
+            e.errors,
+            this.error_messages
+          );
+        } else throw e;
+      },
+    });
 
   }
 

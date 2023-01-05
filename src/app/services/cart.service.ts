@@ -131,13 +131,13 @@ export class CartService implements OnDestroy {
   }
 
   changedItemQtyEvent(cartItem: ICartItem) {
-    this.cartItemService.update(cartItem).subscribe(resp => {
+    this.cartItemService.update(cartItem, cartItem.id).subscribe(resp => {
       this._cartItems$.next(this.cartItems);
     });
   }
 
   changedAddonQtyEvent(cartAddon: ICartAddon) {
-    this.cartAddonService.update(cartAddon).subscribe(resp => {
+    this.cartAddonService.update(cartAddon, cartAddon.id).subscribe(resp => {
       this._cartItems$.next(this.cartItems);
     });
   }

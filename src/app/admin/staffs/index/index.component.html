@@ -35,32 +35,6 @@
         </div>
         <div class="p-5">
           <div class="preview">
-            <div
-              *ngIf="message"
-              class="alert alert-danger-soft show flex items-center mb-2"
-              role="alert"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-alert-octagon w-6 h-6 mr-2"
-              >
-                <polygon
-                  points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                ></polygon>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              {{ message }}
-            </div>
-
             <div class="grid grid-cols-12 gap-6">
               <div
                 class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center"
@@ -130,14 +104,51 @@
                         {{ staff.mobile }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
-                        {{ staff.is_active }}
+                        {{
+                          staff.roles && staff.roles.length
+                            ? staff.roles[0].name
+                            : ""
+                        }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
                         {{ staff.created_at }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
+                        <div
+                          [ngClass]="
+                            staff.is_active ? 'text-success' : 'text-danger'
+                          "
+                          class="flex items-center justify-cente"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            icon-name="check-square"
+                            data-lucide="check-square"
+                            class="lucide lucide-check-square w-4 h-4 mr-2"
+                          >
+                            <polyline points="9 11 12 14 22 4"></polyline>
+                            <path
+                              d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+                            ></path>
+                          </svg>
+                          {{ staff.status }}
+                        </div>
+                      </td>
+
+                      <td class="border-b dark:border-dark-5 text-center">
                         <div class="flex justify-center items-center">
-                          <a href="" class="text-theme-7">
+                          <a
+                            [routerLink]="['/admin/staffs/', staff.id, 'edit']"
+                            class="text-theme-7"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -194,15 +205,24 @@
               >
                 Currently no staff is added.
               </p>
-
-              <!-- BEGIN: Pagination -->
-
-              <!-- END: Pagination -->
             </div>
+
+            <!-- BEGIN: Pagination -->
+            <app-pagination
+              [meta]="meta"
+              [links]="links"
+              (pageChangeEvent)="loadCollection($event)"
+            ></app-pagination>
+            <!-- END: Pagination -->
           </div>
         </div>
       </div>
       <!-- END: Form Validation -->
     </div>
   </div>
+
+  <app-delete-modal
+    *ngIf="isShowModel"
+    (ConfirmEvent)="confirmEvent($event)"
+  ></app-delete-modal>
 </div>
