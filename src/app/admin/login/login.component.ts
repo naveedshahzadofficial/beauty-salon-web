@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.authService.isStaffLoggedIn$.subscribe((resp: boolean) => {
+    this.subscription = this.authService.isLoggedIn$.subscribe((resp: boolean) => {
       if (resp)
         this.router.navigate(['admin/dashboard']);
     });
@@ -77,8 +77,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (resp: any) => {
         console.log(resp);
         this.loginForm.reset();
-        this.authService.staffToken = resp.token;
-        this.authService.staffUser = resp.user as IUser;
+        this.authService.token = resp.token;
+        this.authService.user = resp.user as IUser;
         this.router.navigate(['admin/dashboard']);
       },
       error: (e: AppError) => {

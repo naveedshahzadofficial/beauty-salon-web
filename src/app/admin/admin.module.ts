@@ -16,6 +16,7 @@ import { BaseTableComponent } from './shared/base-table/base-table.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { DeleteModalComponent } from './shared/delete-modal/delete-modal.component';
 import { StaffEditComponent } from './staffs/edit/edit.component';
+import { ClientIndexComponent } from '@app/admin/clients/index/index.component';
 
 
 
@@ -28,6 +29,7 @@ import { StaffEditComponent } from './staffs/edit/edit.component';
     StaffCreateComponent,
     StaffEditComponent,
     ClientsComponent,
+    ClientIndexComponent,
     OrdersComponent,
     BaseTableComponent,
     PaginationComponent,

@@ -12,7 +12,6 @@ export class AppErrorHandler implements ErrorHandler {
   handleError(error: AppError) {
     if (error instanceof UnauthorizedError) {
       this.authService.removeToken();
-      this.authService.removeStaffToken();
       alert('Your are unauthorized.');
     } else if (error instanceof NotFoundError) {
       alert('Your Record is not found.');

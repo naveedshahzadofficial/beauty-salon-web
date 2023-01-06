@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { DomEvents } from '@common/dom.events';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { AuthService } from '@services/auth.service';
@@ -24,8 +23,8 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    this.authService.logoutStaff().subscribe(() => {
-      this.authService.removeStaffToken();
+    this.authService.logout().subscribe(() => {
+      this.authService.removeToken();
       this.isActiveDropdown = false;
       this.router.navigate(['admin/login']);
     })

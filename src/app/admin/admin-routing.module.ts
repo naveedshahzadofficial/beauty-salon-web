@@ -8,6 +8,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '@app/admin/login/login.component';
 import { StaffEditComponent } from '@app/admin/staffs/edit/edit.component';
+import { AuthAdminGuard } from '@app/guards/auth-admin.guard';
+import { HasRoleAdminGuard } from '@app/guards/has-role-admin.guard';
+import { ClientIndexComponent } from '@app/admin/clients/index/index.component';
 
 const routes: Routes = [
   {
@@ -17,6 +20,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [AuthAdminGuard, HasRoleAdminGuard],
+    data: {
+      roles: ['Super Admin', 'Admin', 'Staff'],
+    },
     children: [{
       path: 'dashboard',
       component: DashboardComponent,
@@ -25,6 +32,10 @@ const routes: Routes = [
   {
     path: 'staffs',
     component: StaffsComponent,
+    canActivate: [AuthAdminGuard, HasRoleAdminGuard],
+    data: {
+      roles: ['Super Admin', 'Admin'],
+    },
     children: [
       {
         path: 'index',
@@ -41,12 +52,34 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'clients/index',
+    path: 'clients',
     component: ClientsComponent,
+    canActivate: [AuthAdminGuard, HasRoleAdminGuard],
+    data: {
+      roles: ['Super Admin', 'Admin'],
+    },
+    children: [
+      {
+        path: 'index',
+        component: ClientIndexComponent
+      },
+      {
+        path: 'create',
+        component: StaffCreateComponent
+      },
+      {
+        path: ':id/edit',
+        component: StaffEditComponent
+      },
+    ]
   },
   {
     path: 'orders/index',
     component: OrdersComponent,
+    canActivate: [AuthAdminGuard, HasRoleAdminGuard],
+    data: {
+      roles: ['Super Admin', 'Admin'],
+    },
   },
 
 

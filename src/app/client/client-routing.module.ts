@@ -1,3 +1,4 @@
+import { HasRoleGuard } from '@app/guards/has-role.guard';
 import { RecipientComponent } from './recipient/recipient.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,12 +22,18 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, HasRoleGuard],
+    data: {
+      roles: ['Client'],
+    },
   },
   {
     path: 'categories',
     component: CategoriesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, HasRoleGuard],
+    data: {
+      roles: ['Client'],
+    },
     children: [
       {
         path: 'services/:slug',
@@ -41,7 +48,10 @@ const routes: Routes = [
   {
     path: 'recipient',
     component: RecipientComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, HasRoleGuard],
+    data: {
+      roles: ['Client'],
+    },
   },
 ];
 

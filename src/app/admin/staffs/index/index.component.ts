@@ -1,26 +1,27 @@
+import { debounceTime, distinctUntilChanged, map, switchMap, filter } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
 import { StaffService } from '@services/staff.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-staff-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class StaffIndexComponent implements OnInit {
+export class StaffIndexComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchForm') searchForm!: NgForm;
   isShowModel: boolean = false;
   deletingId: number = 0;
   sortOrders: any = {};
   sortKey = 'created_at';
   meta = {} as IMeta;
   links = {} as ILinks;
-
   staffs: IUser[] = [];
-
   perPage = ['30', '50', '100', '200', '500', '1000', 'All'];
   tableData = {
     draw: 0,
@@ -29,7 +30,6 @@ export class StaffIndexComponent implements OnInit {
     column: 'created_at',
     dir: 'desc',
   };
-
   columns = [
     { label: 'First Name', name: 'first_name', orderable: true },
     { label: 'Last Name', name: 'last_name', orderable: true },
@@ -40,8 +40,6 @@ export class StaffIndexComponent implements OnInit {
     { label: 'Actions', name: null },
   ];
 
-
-
   constructor(private staffService: StaffService,
     private toastr: ToastrService,) {
     this.columns.forEach((column: any) => {
@@ -50,10 +48,21 @@ export class StaffIndexComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.loadCollection(null);
-  }
+  ngOnInit(): void { }
 
+  ngAfterViewInit(): void {
+    const formValue = this.searchForm.valueChanges;
+    formValue?.pipe(
+      map(x => this.tableData.search = x.searchTerm),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(() => this.staffService.indexPaging(null, this.tableData))
+    ).subscribe(resp => {
+      this.staffs = resp.data;
+      this.meta = resp.meta;
+      this.links = resp.links;
+    });
+  }
 
   loadCollection(paging_url: string | null = null) {
     this.staffService.indexPaging(paging_url, this.tableData).subscribe(resp => {

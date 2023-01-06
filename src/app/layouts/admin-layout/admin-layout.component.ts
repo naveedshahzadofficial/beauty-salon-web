@@ -13,7 +13,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.isStaffLoggedIn$.subscribe(resp => this.isLogin = resp);
+    this.authService.isLoggedIn$.subscribe(resp => this.isLogin = resp);
   }
 
   ngAfterViewInit(): void {
