@@ -24,6 +24,9 @@ import { SidebarComponent } from './layouts/admin-layout/sidebar/sidebar.compone
 import { TopbarComponent } from './layouts/admin-layout/topbar/topbar.component';
 import { ToastrModule } from 'ngx-toastr';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
+
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   declarations: [
@@ -43,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({ closeButton: true }),
     HttpClientModule,
     NgxPaginationModule,
+    NgxSpinnerModule,
   ],
   providers: [
     CategoryService,

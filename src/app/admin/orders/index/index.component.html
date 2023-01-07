@@ -6,11 +6,11 @@
         <div
           class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
         >
-          <h2 class="font-medium text-base mr-auto">Clients</h2>
+          <h2 class="font-medium text-base mr-auto">Orders</h2>
 
           <div class="form-check w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
             <button
-              routerLink="/admin/clients/create"
+              routerLink="/admin/staffs/create"
               class="btn btn-success shadow-md mr-2"
             >
               <svg
@@ -96,31 +96,31 @@
                   [sortKey]="sortKey"
                   [sortOrders]="sortOrders"
                 >
-                  <ng-container *ngFor="let client of clients">
+                  <ng-container *ngFor="let staff of staffs">
                     <tr class="hover:bg-gray-200">
                       <td class="border-b dark:border-dark-5 text-center">
-                        {{ client.first_name }}
+                        {{ staff.first_name }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
-                        {{ client.last_name }}
+                        {{ staff.last_name }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
-                        {{ client.mobile }}
+                        {{ staff.mobile }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
                         {{
-                          client.roles && client.roles.length
-                            ? client.roles[0].name
+                          staff.roles && staff.roles.length
+                            ? staff.roles[0].name
                             : ""
                         }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
-                        {{ client.created_at }}
+                        {{ staff.created_at }}
                       </td>
                       <td class="border-b dark:border-dark-5 text-center">
                         <div
                           [ngClass]="
-                            client.is_active ? 'text-success' : 'text-danger'
+                            staff.is_active ? 'text-success' : 'text-danger'
                           "
                           class="flex items-center justify-cente"
                         >
@@ -143,18 +143,14 @@
                               d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
                             ></path>
                           </svg>
-                          {{ client.status }}
+                          {{ staff.status }}
                         </div>
                       </td>
 
                       <td class="border-b dark:border-dark-5 text-center">
                         <div class="flex justify-center items-center">
                           <a
-                            [routerLink]="[
-                              '/admin/clients/',
-                              client.id,
-                              'edit'
-                            ]"
+                            [routerLink]="['/admin/staffs/', staff.id, 'edit']"
                             class="text-theme-7"
                           >
                             <svg
@@ -178,7 +174,7 @@
                           </a>
                           <span
                             class="ml-3 text-theme-6 cursor-pointer"
-                            (click)="confirmDelete(client.id)"
+                            (click)="confirmDelete(staff.id)"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -208,10 +204,10 @@
                 </app-base-table>
               </div>
               <p
-                *ngIf="!clients.length"
+                *ngIf="!staffs.length"
                 class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
               >
-                Currently no client is added.
+                Currently no staff is added.
               </p>
             </div>
 

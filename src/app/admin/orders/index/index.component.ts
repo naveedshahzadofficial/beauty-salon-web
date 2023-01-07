@@ -1,4 +1,4 @@
-import { debounceTime, distinctUntilChanged, map, switchMap, filter, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, filter } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
 import { StaffService } from '@services/staff.service';
@@ -7,14 +7,13 @@ import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
 import { NgForm } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-staff-index',
+  selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class StaffIndexComponent implements OnInit, AfterViewInit {
+export class OrderIndexComponent implements OnInit {
   @ViewChild('searchForm') searchForm!: NgForm;
   isShowModel: boolean = false;
   deletingId: number = 0;
@@ -42,16 +41,14 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(private staffService: StaffService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService) {
+    private toastr: ToastrService,) {
     this.columns.forEach((column: any) => {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
     });
   }
 
-  ngOnInit(): void {
-    this.spinner.show();
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     const formValue = this.searchForm.valueChanges;
@@ -59,8 +56,7 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
       map(x => this.tableData.search = x.searchTerm),
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(() => this.staffService.indexPaging(null, this.tableData)),
-      tap(() => this.spinner.hide())
+      switchMap(() => this.staffService.indexPaging(null, this.tableData))
     ).subscribe(resp => {
       this.staffs = resp.data;
       this.meta = resp.meta;
@@ -69,10 +65,7 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
   }
 
   loadCollection(paging_url: string | null = null) {
-    this.spinner.show();
-    this.staffService.indexPaging(paging_url, this.tableData).pipe(
-      tap(() => this.spinner.hide())
-    ).subscribe(resp => {
+    this.staffService.indexPaging(paging_url, this.tableData).subscribe(resp => {
       this.staffs = resp.data;
       this.meta = resp.meta;
       this.links = resp.links;
@@ -98,5 +91,4 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
     }
 
   }
-
 }

@@ -1,12 +1,12 @@
-import { debounceTime, distinctUntilChanged, map, switchMap, filter } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
-import { StaffService } from '@services/staff.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
 import { NgForm } from '@angular/forms';
+import { ClientService } from '@services/client.service';
 
 @Component({
   selector: 'app-client-index',
@@ -22,7 +22,7 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
   sortKey = 'created_at';
   meta = {} as IMeta;
   links = {} as ILinks;
-  staffs: IUser[] = [];
+  clients: IUser[] = [];
   perPage = ['30', '50', '100', '200', '500', '1000', 'All'];
   tableData = {
     draw: 0,
@@ -41,7 +41,7 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
     { label: 'Actions', name: null },
   ];
 
-  constructor(private staffService: StaffService,
+  constructor(private clientService: ClientService,
     private toastr: ToastrService,) {
     this.columns.forEach((column: any) => {
       if (column.name != null)
@@ -57,32 +57,32 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
       map(x => this.tableData.search = x.searchTerm),
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(() => this.staffService.indexPaging(null, this.tableData))
+      switchMap(() => this.clientService.indexPaging(null, this.tableData))
     ).subscribe(resp => {
-      this.staffs = resp.data;
+      this.clients = resp.data;
       this.meta = resp.meta;
       this.links = resp.links;
     });
   }
 
   loadCollection(paging_url: string | null = null) {
-    this.staffService.indexPaging(paging_url, this.tableData).subscribe(resp => {
-      this.staffs = resp.data;
+    this.clientService.indexPaging(paging_url, this.tableData).subscribe(resp => {
+      this.clients = resp.data;
       this.meta = resp.meta;
       this.links = resp.links;
     });
   }
 
-  confirmDelete(staff_id: number) {
-    this.deletingId = staff_id;
+  confirmDelete(client_id: number) {
+    this.deletingId = client_id;
     this.isShowModel = true;
   }
 
   confirmEvent(confirmed: boolean) {
     if (confirmed) {
-      this.staffService.destroy(this.deletingId).subscribe((resp: IResponse<IUser>) => {
+      this.clientService.destroy(this.deletingId).subscribe((resp: IResponse<IUser>) => {
         this.toastr.success(resp.message, 'Success!');
-        this.staffs = this.staffs.filter(staff => staff.id !== this.deletingId);
+        this.clients = this.clients.filter(client => client.id !== this.deletingId);
         this.isShowModel = false;
         this.deletingId = 0;
       })

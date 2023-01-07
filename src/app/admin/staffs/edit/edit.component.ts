@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { StaffService } from '@services/staff.service';
 import { RoleService } from '@services/role.service';
 import { IUser } from '@interfaces/user.interface';
-import { IResponses } from '@interfaces/responses.interface';
 import { IRole } from '@interfaces/role.interface';
 import { IResponse } from '@interfaces/response.interface';
 import { CustomValidator } from '@common/custom-validator';
@@ -82,8 +81,8 @@ export class StaffEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getStaff();
     this.getRoles();
+    this.getStaff();
   }
 
   private getStaff() {
@@ -106,7 +105,7 @@ export class StaffEditComponent implements OnInit {
   }
 
   private getRoles() {
-    this.roleService.getAll().subscribe((resp: IResponses<IRole>) => this.roles = resp.data);
+    this.roleService.getRoles().subscribe((roles: IRole[]) => this.roles = roles);
   }
 
   private createForm(): void {

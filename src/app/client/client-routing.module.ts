@@ -24,7 +24,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard, HasRoleGuard],
     data: {
-      roles: ['Client'],
+      roles: ['Client', 'Guest'],
     },
   },
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthGuard, HasRoleGuard],
     data: {
-      roles: ['Client'],
+      roles: ['Client', 'Guest'],
     },
     children: [
       {
@@ -50,7 +50,7 @@ const routes: Routes = [
     component: RecipientComponent,
     canActivate: [AuthGuard, HasRoleGuard],
     data: {
-      roles: ['Client'],
+      roles: ['Client', 'Guest'],
     },
   },
 ];

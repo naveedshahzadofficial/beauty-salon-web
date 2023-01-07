@@ -1,1 +1,260 @@
-<p>create works!</p>
+<div>
+  <div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+      <!-- BEGIN: Form Validation -->
+      <div class="intro-y box">
+        <div
+          class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
+        >
+          <h2 class="font-medium text-base mr-auto">Add Client</h2>
+        </div>
+
+        <div class="p-5">
+          <div class="preview">
+            <form
+              [formGroup]="clientForm"
+              (ngSubmit)="onSubmit($event)"
+              class="validate-form lg:w-1/2"
+              autocomplete="off"
+            >
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('first_name') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('first_name') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  First Name <span class="text-primary-3">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  class="form-control"
+                  formControlName="first_name"
+                  required
+                />
+                <ng-container *ngFor="let error of error_messages.first_name">
+                  <div
+                    *ngIf="
+                      is_valid('first_name') &&
+                      errorType('first_name', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('last_name') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('last_name') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Last Name <span class="text-primary-3">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  class="form-control"
+                  formControlName="last_name"
+                  required
+                />
+                <ng-container *ngFor="let error of error_messages.last_name">
+                  <div
+                    *ngIf="
+                      is_valid('last_name') &&
+                      errorType('last_name', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('mobile') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('mobile') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Mobile No. <span class="text-primary-3">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Mobile No."
+                  class="form-control"
+                  [inputMask]="mobileInputMask"
+                  formControlName="mobile"
+                  required
+                />
+                <ng-container *ngFor="let error of error_messages.mobile">
+                  <div
+                    *ngIf="
+                      is_valid('mobile') && errorType('mobile', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('email') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('email') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Email <span class="text-primary-3"></span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  class="form-control"
+                  formControlName="email"
+                />
+                <ng-container *ngFor="let error of error_messages.email">
+                  <div
+                    *ngIf="is_valid('email') && errorType('email', error.type)"
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('password') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('password') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Password <span class="text-primary-3">*</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="form-control"
+                  formControlName="password"
+                  required
+                />
+                <ng-container *ngFor="let error of error_messages.password">
+                  <div
+                    *ngIf="
+                      is_valid('password') && errorType('password', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form mt-5"
+                [ngClass]="{ 'has-error': is_valid('role_id') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('role_id') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Role <span class="text-primary-3">*</span>
+                </label>
+                <select class="form-control" formControlName="role_id">
+                  <ng-container *ngFor="let role of roles">
+                    <option [value]="role.id">{{ role.name }}</option>
+                  </ng-container>
+                </select>
+                <ng-container *ngFor="let error of error_messages.role_id">
+                  <div
+                    *ngIf="
+                      is_valid('role_id') && errorType('role_id', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="input-form mt-5">
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('is_active') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Status <span class="text-primary-3">*</span>
+                </label>
+                <div class="flex flex-col sm:flex-row mt-2">
+                  <div class="form-check mr-2">
+                    <input
+                      id="radio-switch-4"
+                      class="form-check-input"
+                      type="radio"
+                      name="is_active"
+                      formControlName="is_active"
+                      value="1"
+                    />
+                    <label class="form-check-label" for="radio-switch-4"
+                      >Active</label
+                    >
+                  </div>
+                  <div class="form-check mr-2 mt-2 sm:mt-0">
+                    <input
+                      id="radio-switch-5"
+                      class="form-check-input"
+                      type="radio"
+                      name="is_active"
+                      formControlName="is_active"
+                      value="0"
+                    />
+                    <label class="form-check-label" for="radio-switch-5"
+                      >Inactive</label
+                    >
+                  </div>
+                </div>
+                <ng-container *ngFor="let error of error_messages.is_active">
+                  <div
+                    *ngIf="
+                      is_valid('is_active') &&
+                      errorType('is_active', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <button
+                [disabled]="clientForm.invalid"
+                type="submit"
+                class="btn btn-success mt-5 mr-3"
+              >
+                Save
+              </button>
+              <a
+                routerLink="/admin/clients/index"
+                class="btn btn-secondary mt-5"
+              >
+                Cancel
+              </a>
+            </form>
+          </div>
+        </div>
+        <!-- END: Form Validation -->
+      </div>
+    </div>
+  </div>
+</div>
