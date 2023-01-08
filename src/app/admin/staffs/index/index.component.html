@@ -90,7 +90,7 @@
                 </div>
               </div>
 
-              <div class="intro-y col-span-12 overflow-auto">
+              <div class="intro-y col-span-12 overflow-auto min-h-[200px]">
                 <app-base-table
                   [columns]="columns"
                   [sortKey]="sortKey"
@@ -202,13 +202,19 @@
                     </tr>
                   </ng-container>
                 </app-base-table>
+                <p
+                  *ngIf="!staffs.length"
+                  class="intro-y py-2 col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
+                >
+                  Currently no staff is added.
+                </p>
+                <ngx-spinner
+                  type="ball-square-clockwise-spin"
+                  color="#91C714"
+                  [fullScreen]="false"
+                >
+                </ngx-spinner>
               </div>
-              <p
-                *ngIf="!staffs.length"
-                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
-              >
-                Currently no staff is added.
-              </p>
             </div>
 
             <!-- BEGIN: Pagination -->
@@ -229,5 +235,4 @@
     *ngIf="isShowModel"
     (ConfirmEvent)="confirmEvent($event)"
   ></app-delete-modal>
-  <ngx-spinner type="ball-square-clockwise-spin" color="#91C714"> </ngx-spinner>
 </div>

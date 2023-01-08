@@ -4,11 +4,13 @@
       <div
         class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
       >
-        <h2 class="font-medium text-base mr-auto">Show Order</h2>
+        <h2 *ngIf="order" class="font-medium text-base mr-auto">
+          Order No: {{ order.order_no }}
+        </h2>
       </div>
       <div class="p-5">
         <div class="preview">
-          <div class="container my-12" *ngIf="order">
+          <div class="my-12" *ngIf="order">
             <!-- begin: Customer Detail -->
             <div
               class="py-[22px] px-[62px] bg-[#f3f1f0] flex rounded-[20px] content-between"
@@ -30,7 +32,7 @@
                       order.user.last_name
                     }}
                     <small class="text-xs text-other-blue"
-                      >(NS7528-3)</small
+                      >({{ order.user.code }})</small
                     ></label
                   >
                   <address>
@@ -183,68 +185,70 @@
               <div class="flex justify-between flex-row">
                 <!-- begin: Coupon Box -->
                 <div class="w-2/5">
-                  <label class="text-base font-medium"
-                    >Redeem Coupon/ Free Service</label
-                  >
+                  <ng-container *ngIf="false">
+                    <label class="text-base font-medium"
+                      >Redeem Coupon/ Free Service</label
+                    >
 
-                  <!-- begin: Coupon Fill Area -->
-                  <div
-                    *ngIf="false"
-                    style="
-                      background: transparent
-                        linear-gradient(99deg, #f3790b, #faa458 39%, #ffbb7e) 0
-                        0 no-repeat padding-box;
-                    "
-                    class="w-[90%] rounded-md text-white mt-4"
-                  >
-                    <!-- begin: Coupon Header -->
-                    <div class="flex justify-between p-2.5">
-                      <h5>15%</h5>
-                      <span>Discount</span>
-                    </div>
-                    <!-- end: Coupon Header -->
-                    <!-- begin: Coupon Body -->
-                    <div class="flex justify-between">
-                      <div class="body-left">
-                        <p class="pl-2">Coupon Code: GP15%off</p>
-                        <p class="pl-2">Redeemed: 0/ 1</p>
+                    <!-- begin: Coupon Fill Area -->
+                    <div
+                      *ngIf="false"
+                      style="
+                        background: transparent
+                          linear-gradient(99deg, #f3790b, #faa458 39%, #ffbb7e)
+                          0 0 no-repeat padding-box;
+                      "
+                      class="w-[90%] rounded-md text-white mt-4"
+                    >
+                      <!-- begin: Coupon Header -->
+                      <div class="flex justify-between p-2.5">
+                        <h5>15%</h5>
+                        <span>Discount</span>
                       </div>
-                      <div class="body-right pr-1.5 text-[35px]">15%</div>
-                    </div>
+                      <!-- end: Coupon Header -->
+                      <!-- begin: Coupon Body -->
+                      <div class="flex justify-between">
+                        <div class="body-left">
+                          <p class="pl-2">Coupon Code: GP15%off</p>
+                          <p class="pl-2">Redeemed: 0/ 1</p>
+                        </div>
+                        <div class="body-right pr-1.5 text-[35px]">15%</div>
+                      </div>
 
-                    <hr
-                      class="border-t-2 border-t-white border-dashed my-2.5 mx-auto w-[90%]"
-                    />
-                    <div class="bottom-sec flex justify-between w-full p-2.5">
-                      <p>Valid till: Valid till first order</p>
-                      <button
-                        class="btn coupon-remove-btn inline-block text-base px-3 py-2 bg-white rounded-md text-primary-heading"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                    <!-- end: Coupon Body -->
-                  </div>
-                  <!-- end: Coupon Fill Area -->
-
-                  <!-- begin: Empty Coupon Area -->
-                  <div class="w-[90%] bg-[#f6f5f4] rounded-md mt-4">
-                    <div class="image-coupon text-center flex justify-center">
-                      <img
-                        class="m-5 align-middle"
-                        src="assets/images/empty-coupon.png"
-                        alt=""
+                      <hr
+                        class="border-t-2 border-t-white border-dashed my-2.5 mx-auto w-[90%]"
                       />
+                      <div class="bottom-sec flex justify-between w-full p-2.5">
+                        <p>Valid till: Valid till first order</p>
+                        <button
+                          class="btn coupon-remove-btn inline-block text-base px-3 py-2 bg-white rounded-md text-primary-heading"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <!-- end: Coupon Body -->
                     </div>
-                    <div class="lower-section flex justify-center p-5">
-                      <button
-                        class="btn coupon-btn mr-1 px-3 py-2 border border-[#dfdfdf] rounded-md text-[.9rem] font-normal"
-                      >
-                        Apply Coupon
-                      </button>
+                    <!-- end: Coupon Fill Area -->
+
+                    <!-- begin: Empty Coupon Area -->
+                    <div class="w-[90%] bg-[#f6f5f4] rounded-md mt-4">
+                      <div class="image-coupon text-center flex justify-center">
+                        <img
+                          class="m-5 align-middle"
+                          src="assets/images/empty-coupon.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="lower-section flex justify-center p-5">
+                        <button
+                          class="btn coupon-btn mr-1 px-3 py-2 border border-[#dfdfdf] rounded-md text-[.9rem] font-normal"
+                        >
+                          Apply Coupon
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <!-- end: Empty Coupon Area -->
+                    <!-- end: Empty Coupon Area -->
+                  </ng-container>
                 </div>
                 <!-- end: Coupon Box -->
 
@@ -310,18 +314,6 @@
               <!-- end: Invoice Footer -->
             </div>
             <!-- end: Order Summery -->
-
-            <div class="text-right mt-12">
-              <span
-                class="cancel-btn pr-5 text-[#8d9296]"
-                style="cursor: pointer"
-                >Cancel Order</span
-              ><span
-                class="done-btn px-7 py-2 text-white bg-primary-heading rounded-md"
-                style="cursor: pointer"
-                >Submit Order</span
-              >
-            </div>
           </div>
         </div>
       </div>

@@ -56,6 +56,7 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const formValue = this.searchForm.valueChanges;
     formValue?.pipe(
+      tap(() => this.spinner.show()),
       map(x => this.tableData.search = x.searchTerm),
       debounceTime(500),
       distinctUntilChanged(),

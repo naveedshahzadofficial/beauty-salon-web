@@ -4,6 +4,7 @@ export interface IUser {
   id: number;
   first_name: string;
   last_name: string;
+  code: string;
   mobile: string;
   email?: string;
   is_active: boolean;

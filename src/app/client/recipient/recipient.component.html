@@ -17,7 +17,9 @@
       <div class="pl-[25px] flex flex-col justify-center text-sm">
         <label class="text-xl"
           >{{ order.user.first_name }}&nbsp;{{ order.user.last_name }}
-          <small class="text-xs text-other-blue">(NS7528-3)</small></label
+          <small class="text-xs text-other-blue"
+            >({{ order.user.code }})</small
+          ></label
         >
         <address>
           {{ order.address.address_1 }} {{ order.address.area.area }},&nbsp;{{
