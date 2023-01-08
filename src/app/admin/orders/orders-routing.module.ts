@@ -6,6 +6,7 @@ import { HasRoleAdminGuard } from '@app/guards/has-role-admin.guard';
 import { OrderIndexComponent } from '@app/admin/orders/index/index.component';
 import { OrderCreateComponent } from '@app/admin/orders/create/create.component';
 import { OrderEditComponent } from '@app/admin/orders/edit/edit.component';
+import { OrderShowComponent } from '@app/admin/orders/show/show.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: OrderCreateComponent
+      },
+      {
+        path: ':id/show',
+        component: OrderShowComponent
       },
       {
         path: ':id/edit',

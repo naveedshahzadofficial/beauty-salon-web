@@ -9,7 +9,6 @@ import { handleError } from '@common/handle-errors';
   providedIn: 'root'
 })
 export class OrderService extends DataService<IOrder>{
-
   constructor(http: HttpClient) {
     super('client/orders', http);
   }

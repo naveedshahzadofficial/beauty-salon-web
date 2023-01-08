@@ -14,7 +14,10 @@ import { IPagination } from '@interfaces/pagination.interface';
 export class DataService<T> {
   protected base_url = environment.base_url;
   constructor(protected resource: String, protected http: HttpClient) { }
-
+  setResource(resource: String) {
+    this.resource = resource;
+    return this;
+  }
   getAll(): Observable<IResponses<T>> {
     return this.http
       .get<IResponses<T>>(`${this.base_url}/${this.resource}`)

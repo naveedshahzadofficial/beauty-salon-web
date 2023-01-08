@@ -1,1 +1,330 @@
-<p>show works!</p>
+<div class="grid grid-cols-12 gap-6 mt-5">
+  <div class="intro-y col-span-12 lg:col-span-12">
+    <div class="intro-y box">
+      <div
+        class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
+      >
+        <h2 class="font-medium text-base mr-auto">Show Order</h2>
+      </div>
+      <div class="p-5">
+        <div class="preview">
+          <div class="container my-12" *ngIf="order">
+            <!-- begin: Customer Detail -->
+            <div
+              class="py-[22px] px-[62px] bg-[#f3f1f0] flex rounded-[20px] content-between"
+            >
+              <div class="flex">
+                <!-- begin: DateTime -->
+                <div
+                  class="flex flex-col max-w-[134px] p-[18px] bg-secondary-dark rounded-lg text-primary-heading"
+                >
+                  <label>{{ order.order_date }}</label>
+                  <label class="text-white">{{ order.order_time }}</label>
+                </div>
+                <!-- end: DateTime -->
+
+                <!-- begin: personal-detail -->
+                <div class="pl-[25px] flex flex-col justify-center text-sm">
+                  <label class="text-xl"
+                    >{{ order.user.first_name }}&nbsp;{{
+                      order.user.last_name
+                    }}
+                    <small class="text-xs text-other-blue"
+                      >(NS7528-3)</small
+                    ></label
+                  >
+                  <address>
+                    {{ order.address.address_1 }}
+                    {{ order.address.area.area }},&nbsp;{{
+                      order.address.city.city_name
+                    }}
+                  </address>
+                  <label class="text-primary-heading">{{ order.phone }}</label>
+                </div>
+                <!-- end: personal-detail -->
+              </div>
+            </div>
+            <!-- end: Customer Detail -->
+
+            <!-- begin: Order Summery -->
+            <div class="bg-white px-[62px] pt-[30px] pb-10">
+              <table class="min-w-full">
+                <thead class="bg-[#f8f2ec] leading-9 rounded-[10px]">
+                  <tr>
+                    <th scope="col" class="p-3 text-left">Categories</th>
+                    <th scope="col" class="p-3 text-left">Services</th>
+                    <th scope="col" class="p-3 text-left">Unit Price</th>
+                    <th scope="col" class="p-3 text-center">Qty</th>
+                    <th scope="col" class="p-3 text-left">Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let category of order.services_summary">
+                    <tr class="border-b-other-cart-light border-b">
+                      <td class="p-3 align-top">
+                        <small
+                          class="text-[12px] uppercase bg-other-cart-light w-[110px] block text-center leading-9 rounded font-normal"
+                          >{{ category.category_name }}</small
+                        >
+                      </td>
+                      <td class="p-3">
+                        <ul class="flex flex-col">
+                          <ng-container
+                            *ngFor="let service of category.order_services"
+                          >
+                            <li>{{ service.service_title }}</li>
+                            <ng-container
+                              *ngIf="service.order_service_addons?.length"
+                            >
+                              <li
+                                *ngFor="
+                                  let addon of service.order_service_addons
+                                "
+                                class="py-2.5"
+                              >
+                                <span class="text-[#8d9296] pl-2.5"
+                                  >- {{ addon.addon_title }}</span
+                                >
+                              </li>
+                            </ng-container>
+                          </ng-container>
+                        </ul>
+                      </td>
+                      <td class="p-3 text-left">
+                        <ul class="flex flex-col">
+                          <ng-container
+                            *ngFor="let service of category.order_services"
+                          >
+                            <li>{{ service.unit_price | currency : "Rs." }}</li>
+                            <ng-container
+                              *ngIf="service.order_service_addons?.length"
+                            >
+                              <li
+                                *ngFor="
+                                  let addon of service.order_service_addons
+                                "
+                                class="py-2.5"
+                              >
+                                {{ addon.unit_price | currency : "Rs." }}
+                              </li>
+                            </ng-container>
+                          </ng-container>
+                        </ul>
+                      </td>
+                      <td class="p-3 text-center">
+                        <ul class="flex flex-col">
+                          <ng-container
+                            *ngFor="let service of category.order_services"
+                          >
+                            <li>{{ service.unit_count }}</li>
+                            <ng-container
+                              *ngIf="service.order_service_addons?.length"
+                            >
+                              <li
+                                *ngFor="
+                                  let addon of service.order_service_addons
+                                "
+                                class="py-2.5"
+                              >
+                                {{ addon.unit_count }}
+                              </li>
+                            </ng-container>
+                          </ng-container>
+                        </ul>
+                      </td>
+                      <td class="p-3 text-left">
+                        <ul class="flex flex-col">
+                          <ng-container
+                            *ngFor="let service of category.order_services"
+                          >
+                            <li>
+                              {{ service.total_price | currency : "Rs." }}
+                            </li>
+                            <ng-container
+                              *ngIf="service.order_service_addons?.length"
+                            >
+                              <li
+                                *ngFor="
+                                  let addon of service.order_service_addons
+                                "
+                                class="py-2.5"
+                              >
+                                {{ addon.total_price | currency : "Rs." }}
+                              </li>
+                            </ng-container>
+                          </ng-container>
+                        </ul>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+
+              <!-- begin: Special Instructions -->
+              <div class="w-full mt-3">
+                <label class="text-base font-medium"
+                  >Special Instructions</label
+                >
+                <div class="form-group pb-4">
+                  <textarea
+                    disabled
+                    class="w-full p-[15px] text-sm font-normal bg-[#f6f5f4] border-dashed border-[#dfdfdf] rounded-md resize-none mt-2.5 focus:ring-secondary-dark"
+                    rows="2"
+                    id="comment"
+                    placeholder="special instructions"
+                    style="color: transparent; text-shadow: black 0px 0px 0px"
+                    >{{ order.special_notes }}</textarea
+                  >
+                </div>
+              </div>
+              <!-- end: Special Instructions -->
+
+              <!-- begin: Invoice Footer -->
+              <div class="flex justify-between flex-row">
+                <!-- begin: Coupon Box -->
+                <div class="w-2/5">
+                  <label class="text-base font-medium"
+                    >Redeem Coupon/ Free Service</label
+                  >
+
+                  <!-- begin: Coupon Fill Area -->
+                  <div
+                    *ngIf="false"
+                    style="
+                      background: transparent
+                        linear-gradient(99deg, #f3790b, #faa458 39%, #ffbb7e) 0
+                        0 no-repeat padding-box;
+                    "
+                    class="w-[90%] rounded-md text-white mt-4"
+                  >
+                    <!-- begin: Coupon Header -->
+                    <div class="flex justify-between p-2.5">
+                      <h5>15%</h5>
+                      <span>Discount</span>
+                    </div>
+                    <!-- end: Coupon Header -->
+                    <!-- begin: Coupon Body -->
+                    <div class="flex justify-between">
+                      <div class="body-left">
+                        <p class="pl-2">Coupon Code: GP15%off</p>
+                        <p class="pl-2">Redeemed: 0/ 1</p>
+                      </div>
+                      <div class="body-right pr-1.5 text-[35px]">15%</div>
+                    </div>
+
+                    <hr
+                      class="border-t-2 border-t-white border-dashed my-2.5 mx-auto w-[90%]"
+                    />
+                    <div class="bottom-sec flex justify-between w-full p-2.5">
+                      <p>Valid till: Valid till first order</p>
+                      <button
+                        class="btn coupon-remove-btn inline-block text-base px-3 py-2 bg-white rounded-md text-primary-heading"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <!-- end: Coupon Body -->
+                  </div>
+                  <!-- end: Coupon Fill Area -->
+
+                  <!-- begin: Empty Coupon Area -->
+                  <div class="w-[90%] bg-[#f6f5f4] rounded-md mt-4">
+                    <div class="image-coupon text-center flex justify-center">
+                      <img
+                        class="m-5 align-middle"
+                        src="assets/images/empty-coupon.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="lower-section flex justify-center p-5">
+                      <button
+                        class="btn coupon-btn mr-1 px-3 py-2 border border-[#dfdfdf] rounded-md text-[.9rem] font-normal"
+                      >
+                        Apply Coupon
+                      </button>
+                    </div>
+                  </div>
+                  <!-- end: Empty Coupon Area -->
+                </div>
+                <!-- end: Coupon Box -->
+
+                <!-- begin: Total Bill -->
+                <div class="total-bill">
+                  <table class="mt-2.5">
+                    <tr>
+                      <td class="py-4 px-6 font-medium text-base"></td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        Services Charges
+                      </td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        {{
+                          order.order_billing.actual_price | currency : "Rs. "
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 px-6 font-medium text-base"></td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        Travel Charges
+                      </td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        {{
+                          order.order_billing.travel_charges | currency : "Rs. "
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 px-6 font-medium text-base"></td>
+                      <td class="py-4 px-6 font-medium text-base text-red-600">
+                        Discount
+                      </td>
+                      <td class="py-4 px-6 font-medium text-base text-red-600">
+                        {{ order.order_billing.discount | currency : "Rs. " }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 px-6 font-medium text-base"></td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        Coupon Discount
+                      </td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        {{
+                          order.order_billing.coupon_discount
+                            | currency : "Rs. "
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 px-6 font-medium text-base"></td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        Grand Total
+                      </td>
+                      <td class="py-4 px-6 font-medium text-base">
+                        {{ order.order_billing.net_total | currency : "Rs. " }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <!-- end: Total Bill -->
+              </div>
+              <!-- end: Invoice Footer -->
+            </div>
+            <!-- end: Order Summery -->
+
+            <div class="text-right mt-12">
+              <span
+                class="cancel-btn pr-5 text-[#8d9296]"
+                style="cursor: pointer"
+                >Cancel Order</span
+              ><span
+                class="done-btn px-7 py-2 text-white bg-primary-heading rounded-md"
+                style="cursor: pointer"
+                >Submit Order</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

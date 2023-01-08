@@ -89,7 +89,6 @@ export class ClientEditComponent implements OnInit {
     ).subscribe((resp: IResponse<IUser>) => {
       this.client = resp.data;
       this.setFormValues();
-
     });
   }
 
