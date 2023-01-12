@@ -1,4 +1,4 @@
-import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
@@ -7,6 +7,7 @@ import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '@services/client.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-client-index',
@@ -42,22 +43,26 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(private clientService: ClientService,
-    private toastr: ToastrService,) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService) {
     this.columns.forEach((column: any) => {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.spinner.show();
+  }
 
   ngAfterViewInit(): void {
     const formValue = this.searchForm.valueChanges;
     formValue?.pipe(
+      tap(() => this.spinner.show()),
       map(x => this.tableData.search = x.searchTerm),
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(() => this.clientService.indexPaging(null, this.tableData))
+      switchMap(() => this.clientService.indexPaging(null, this.tableData)),
+      tap(() => this.spinner.hide()),
     ).subscribe(resp => {
       this.clients = resp.data;
       this.meta = resp.meta;
@@ -66,7 +71,10 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
   }
 
   loadCollection(paging_url: string | null = null) {
-    this.clientService.indexPaging(paging_url, this.tableData).subscribe(resp => {
+    this.spinner.show();
+    this.clientService.indexPaging(paging_url, this.tableData).pipe(
+      tap(() => this.spinner.hide())
+    ).subscribe(resp => {
       this.clients = resp.data;
       this.meta = resp.meta;
       this.links = resp.links;

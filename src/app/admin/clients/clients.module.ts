@@ -9,6 +9,7 @@ import { ClientEditComponent } from '@app/admin/clients/edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { SharedAdminModule } from '@app/admin/shared/shared-admin.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedAdminModule } from '@app/admin/shared/shared-admin.module';
     FormsModule,
     InputMaskModule,
     SharedAdminModule,
+    NgxSpinnerModule,
   ]
 })
 export class ClientsModule { }

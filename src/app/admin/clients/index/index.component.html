@@ -90,7 +90,7 @@
                 </div>
               </div>
 
-              <div class="intro-y col-span-12 overflow-auto">
+              <div class="intro-y col-span-12 overflow-auto min-h-[200px]">
                 <app-base-table
                   [columns]="columns"
                   [sortKey]="sortKey"
@@ -206,13 +206,19 @@
                     </tr>
                   </ng-container>
                 </app-base-table>
+                <p
+                  *ngIf="!clients.length"
+                  class="intro-y py-2 col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
+                >
+                  Currently no client is added.
+                </p>
+                <ngx-spinner
+                  type="ball-square-clockwise-spin"
+                  color="#91C714"
+                  [fullScreen]="false"
+                >
+                </ngx-spinner>
               </div>
-              <p
-                *ngIf="!clients.length"
-                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
-              >
-                Currently no client is added.
-              </p>
             </div>
 
             <!-- BEGIN: Pagination -->
