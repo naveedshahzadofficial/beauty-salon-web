@@ -1,1 +1,158 @@
-<p>edit works!</p>
+<div>
+  <div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+      <!-- BEGIN: Form Validation -->
+      <div class="intro-y box">
+        <div
+          class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
+        >
+          <h2 class="font-medium text-base mr-auto">Order No.</h2>
+        </div>
+
+        <div class="p-5">
+          <div class="preview">
+            <form
+              [formGroup]="orderForm"
+              (ngSubmit)="onSubmit($event)"
+              class="validate-form grid grid-cols-2 gap-6"
+              autocomplete="off"
+            >
+              <div
+                class="input-form"
+                [ngClass]="{ 'has-error': is_valid('status_id') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('status_id') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Status <span class="text-primary-3">*</span>
+                </label>
+                <select class="form-control" formControlName="status_id">
+                  <ng-container *ngFor="let status of statuses">
+                    <option [value]="status.id">
+                      {{ status.status_name }}
+                    </option>
+                  </ng-container>
+                </select>
+                <ng-container *ngFor="let error of error_messages.status_id">
+                  <div
+                    *ngIf="
+                      is_valid('status_id') &&
+                      errorType('status_id', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form"
+                [ngClass]="{ 'has-error': is_valid('user_id') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('user_id') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Staff <span class="text-primary-3">&nbsp;</span>
+                </label>
+                <select class="form-control" formControlName="user_id">
+                  <ng-container *ngFor="let staff of staffs">
+                    <option [value]="staff.id">
+                      {{ staff.first_name }}&nbsp;{{ staff.last_name }}
+                    </option>
+                  </ng-container>
+                </select>
+                <ng-container *ngFor="let error of error_messages.user_id">
+                  <div
+                    *ngIf="
+                      is_valid('user_id') && errorType('user_id', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form"
+                [ngClass]="{ 'has-error': is_valid('status_file') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('status_file') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Upload File <span class="text-primary-3">&nbsp;</span>
+                </label>
+                <input
+                  type="file"
+                  placeholder="Upload File"
+                  class="form-control"
+                  formControlName="status_file"
+                />
+                <ng-container *ngFor="let error of error_messages.status_file">
+                  <div
+                    *ngIf="
+                      is_valid('status_file') &&
+                      errorType('status_file', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="input-form col-span-2"
+                [ngClass]="{ 'has-error': is_valid('status_remark') }"
+              >
+                <label
+                  [ngClass]="{ 'text-primary-3': is_valid('status_remark') }"
+                  class="form-label w-full flex flex-col sm:flex-row"
+                >
+                  Remark <span class="text-primary-3">*</span>
+                </label>
+                <textarea
+                  placeholder="Please enter your remark..."
+                  class="form-control"
+                  formControlName="status_remark"
+                  required
+                ></textarea>
+                <ng-container
+                  *ngFor="let error of error_messages.status_remark"
+                >
+                  <div
+                    *ngIf="
+                      is_valid('status_remark') &&
+                      errorType('status_remark', error.type)
+                    "
+                    class="pristine-error text-primary-3 mt-2"
+                  >
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div>
+                <button
+                  [disabled]="orderForm.invalid"
+                  type="submit"
+                  class="btn btn-success mr-3"
+                >
+                  Save
+                </button>
+                <a routerLink="/admin/orders/index" class="btn btn-secondary">
+                  Cancel
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- END: Form Validation -->
+    </div>
+  </div>
+</div>
