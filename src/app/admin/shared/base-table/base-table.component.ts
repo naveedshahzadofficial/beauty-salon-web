@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-base-table',
@@ -10,6 +10,7 @@ export class BaseTableComponent implements OnInit {
   @Input() childColumns: any = [];
   @Input() sortKey: string = '';
   @Input() sortOrders = [];
+  @Output() sortBy: EventEmitter<string> = new EventEmitter<string>;
   constructor() { }
 
   ngOnInit(): void {

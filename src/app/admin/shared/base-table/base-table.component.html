@@ -5,6 +5,9 @@
         <ng-container *ngFor="let column of columns">
           <th
             class="whitespace-nowrap text-center cursor-pointer"
+            (click)="
+              column.orderable && sortBy.emit(column.name ? column.name : '')
+            "
             [ngClass]="
               column.orderable
                 ? sortKey === column.name
@@ -28,6 +31,9 @@
         <ng-container *ngFor="let column of childColumns">
           <th
             class="whitespace-nowrap text-center cursor-pointer"
+            (click)="
+              column.orderable && sortBy.emit(column.name ? column.name : '')
+            "
             [ngClass]="
               column.orderable
                 ? sortKey === column.name

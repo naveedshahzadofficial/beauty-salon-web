@@ -1,11 +1,10 @@
-import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
-import { NgForm } from '@angular/forms';
 import { ClientService } from '@services/client.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -14,9 +13,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class ClientIndexComponent implements OnInit, AfterViewInit {
+export class ClientIndexComponent implements OnInit {
 
-  @ViewChild('searchForm') searchForm!: NgForm;
   isShowModel: boolean = false;
   deletingId: number = 0;
   sortOrders: any = {};
@@ -48,27 +46,10 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
     });
+    this.loadCollection();
   }
 
-  ngOnInit(): void {
-    this.spinner.show();
-  }
-
-  ngAfterViewInit(): void {
-    const formValue = this.searchForm.valueChanges;
-    formValue?.pipe(
-      tap(() => this.spinner.show()),
-      map(x => this.tableData.search = x.searchTerm),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap(() => this.clientService.indexPaging(null, this.tableData)),
-      tap(() => this.spinner.hide()),
-    ).subscribe(resp => {
-      this.clients = resp.data;
-      this.meta = resp.meta;
-      this.links = resp.links;
-    });
-  }
+  ngOnInit(): void { }
 
   loadCollection(paging_url: string | null = null) {
     this.spinner.show();
@@ -79,6 +60,14 @@ export class ClientIndexComponent implements OnInit, AfterViewInit {
       this.meta = resp.meta;
       this.links = resp.links;
     });
+  }
+
+  sortBy(key: string) {
+    this.sortKey = key;
+    this.sortOrders[key] = this.sortOrders[key] * -1;
+    this.tableData.column = key;
+    this.tableData.dir = this.sortOrders[key] === 1 ? 'asc' : 'desc';
+    this.loadCollection();
   }
 
   confirmDelete(client_id: number) {

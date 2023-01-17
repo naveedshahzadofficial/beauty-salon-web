@@ -1,12 +1,11 @@
-import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '@interfaces/user.interface';
 import { StaffService } from '@services/staff.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
-import { NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -14,8 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class StaffIndexComponent implements OnInit, AfterViewInit {
-  @ViewChild('searchForm') searchForm!: NgForm;
+export class StaffIndexComponent implements OnInit {
   isShowModel: boolean = false;
   deletingId: number = 0;
   sortOrders: any = {};
@@ -47,27 +45,13 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
     });
+    this.loadCollection();
   }
 
   ngOnInit(): void {
-    this.spinner.show();
   }
 
-  ngAfterViewInit(): void {
-    const formValue = this.searchForm.valueChanges;
-    formValue?.pipe(
-      tap(() => this.spinner.show()),
-      map(x => this.tableData.search = x.searchTerm),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap(() => this.staffService.indexPaging(null, this.tableData)),
-      tap(() => this.spinner.hide())
-    ).subscribe(resp => {
-      this.staffs = resp.data;
-      this.meta = resp.meta;
-      this.links = resp.links;
-    });
-  }
+  ngAfterViewInit(): void { }
 
   loadCollection(paging_url: string | null = null) {
     this.spinner.show();
@@ -78,6 +62,14 @@ export class StaffIndexComponent implements OnInit, AfterViewInit {
       this.meta = resp.meta;
       this.links = resp.links;
     });
+  }
+
+  sortBy(key: string) {
+    this.sortKey = key;
+    this.sortOrders[key] = this.sortOrders[key] * -1;
+    this.tableData.column = key;
+    this.tableData.dir = this.sortOrders[key] === 1 ? 'asc' : 'desc';
+    this.loadCollection();
   }
 
   confirmDelete(staff_id: number) {

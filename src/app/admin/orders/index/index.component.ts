@@ -1,12 +1,13 @@
 import { IOrder } from '@interfaces/order.interface';
 import { OrderService } from '@services/order.service';
-import { debounceTime, distinctUntilChanged, map, switchMap, filter } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IResponse } from '@interfaces/response.interface';
 import { IMeta } from '@app/interfaces/meta.interface';
 import { ILinks } from '@app/interfaces/links.interface';
 import { NgForm } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-index',
@@ -14,7 +15,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./index.component.scss']
 })
 export class OrderIndexComponent implements OnInit {
-  @ViewChild('searchForm') searchForm!: NgForm;
   isShowModel: boolean = false;
   deletingId: number = 0;
   sortOrders: any = {};
@@ -34,7 +34,7 @@ export class OrderIndexComponent implements OnInit {
     { label: 'Order No.', name: 'order_no', orderable: true },
     { label: 'Order Date', name: 'order_date', orderable: true },
     { label: 'Order Time', name: 'order_time', orderable: true },
-    { label: 'Mobile No', name: 'mobile', orderable: true },
+    { label: 'Mobile No', name: 'phone', orderable: true },
     { label: 'Total Price', name: 'total_price', orderable: true },
     { label: 'Created Date', name: 'created_at', orderable: true },
     { label: 'Status', name: 'status', orderable: true },
@@ -42,22 +42,21 @@ export class OrderIndexComponent implements OnInit {
   ];
 
   constructor(private orderService: OrderService,
-    private toastr: ToastrService,) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService) {
     this.columns.forEach((column: any) => {
       if (column.name != null)
         this.sortOrders[column.name] = -1;
     });
+    this.loadCollection();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
-  ngAfterViewInit(): void {
-    const formValue = this.searchForm.valueChanges;
-    formValue?.pipe(
-      map(x => this.tableData.search = x.searchTerm),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap(() => this.orderService.setResource("admin/orders").indexPaging(null, this.tableData))
+  loadCollection(paging_url: string | null = null) {
+    this.spinner.show();
+    this.orderService.setResource("admin/orders").indexPaging(paging_url, this.tableData).pipe(
+      tap(() => this.spinner.hide())
     ).subscribe(resp => {
       this.orders = resp.data;
       this.meta = resp.meta;
@@ -65,12 +64,12 @@ export class OrderIndexComponent implements OnInit {
     });
   }
 
-  loadCollection(paging_url: string | null = null) {
-    this.orderService.setResource("admin/orders").indexPaging(paging_url, this.tableData).subscribe(resp => {
-      this.orders = resp.data;
-      this.meta = resp.meta;
-      this.links = resp.links;
-    });
+  sortBy(key: string) {
+    this.sortKey = key;
+    this.sortOrders[key] = this.sortOrders[key] * -1;
+    this.tableData.column = key;
+    this.tableData.dir = this.sortOrders[key] === 1 ? 'asc' : 'desc';
+    this.loadCollection();
   }
 
   confirmDelete(staff_id: number) {

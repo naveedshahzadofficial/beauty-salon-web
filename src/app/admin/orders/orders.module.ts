@@ -10,6 +10,7 @@ import { OrdersComponent } from '@app/admin/orders/orders.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { SharedAdminModule } from '../shared/shared-admin.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SharedAdminModule } from '../shared/shared-admin.module';
     FormsModule,
     InputMaskModule,
     SharedAdminModule,
+    NgxSpinnerModule,
   ]
 })
 export class OrdersModule { }

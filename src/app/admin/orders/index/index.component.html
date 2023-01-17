@@ -37,43 +37,41 @@
                 <div class="hidden md:block mx-auto text-gray-600"></div>
 
                 <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                  <form #searchForm="ngForm">
-                    <div class="w-56 relative text-gray-700 dark:text-gray-300">
-                      <input
-                        autocomplete="off"
-                        type="text"
-                        required
-                        name="searchTerm"
-                        ngModel
-                        class="form-control w-56 box pr-10 placeholder-theme-13 border-dark-2"
-                        placeholder="Search..."
-                      />
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="feather feather-search w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
-                        _ngcontent-srv-c82=""
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </div>
-                  </form>
+                  <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      required
+                      [(ngModel)]="tableData.search"
+                      (input)="loadCollection()"
+                      class="form-control w-56 box pr-10 placeholder-theme-13 border-dark-2"
+                      placeholder="Search..."
+                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="feather feather-search w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
+                    >
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                  </div>
                 </div>
               </div>
 
-              <div class="intro-y col-span-12 overflow-auto">
+              <div class="intro-y col-span-12 overflow-auto min-h-[200px]">
                 <app-base-table
                   [columns]="columns"
                   [sortKey]="sortKey"
                   [sortOrders]="sortOrders"
+                  (sortBy)="sortBy($event)"
                 >
                   <ng-container *ngFor="let order of orders">
                     <tr class="hover:bg-gray-200">
@@ -204,13 +202,21 @@
                     </tr>
                   </ng-container>
                 </app-base-table>
+
+                <p
+                  *ngIf="!orders.length"
+                  class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
+                >
+                  Currently you have not any order.
+                </p>
+
+                <ngx-spinner
+                  type="ball-square-clockwise-spin"
+                  color="#91C714"
+                  [fullScreen]="false"
+                >
+                </ngx-spinner>
               </div>
-              <p
-                *ngIf="!orders.length"
-                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
-              >
-                Currently you have not any order.
-              </p>
             </div>
 
             <!-- BEGIN: Pagination -->
