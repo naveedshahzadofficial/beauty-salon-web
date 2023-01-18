@@ -1,3 +1,5 @@
+import { IStatus } from './../../../interfaces/status.interface';
+import { StatusService } from '@services/status.service';
 import { IUser } from '@interfaces/user.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +8,8 @@ import { OrderService } from '@app/services/order.service';
 import { CustomValidator } from '@common/custom-validator';
 import { IOrder } from '@interfaces/order.interface';
 import { ToastrService } from 'ngx-toastr';
+import { StaffService } from '@services/staff.service';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +20,7 @@ export class OrderEditComponent implements OnInit {
 
   orderForm!: FormGroup;
   order = {} as IOrder;
-  statuses: any = [];
+  statuses: IStatus[] = [];
   staffs: IUser[] = [];
 
   error_messages = {
@@ -39,12 +43,18 @@ export class OrderEditComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
+    private statusService: StatusService,
+    private staffService: StaffService,
     private orderService: OrderService,
   ) {
     this.createForm();
+    this.getStatuses();
+    this.getStaffs();
+
   }
   ngOnInit(): void {
   }
+
   createForm() {
     this.orderForm = this.fb.group({
       status_id: new FormControl(null,
@@ -60,6 +70,15 @@ export class OrderEditComponent implements OnInit {
         Validators.required
       ),
     });
+  }
+
+  getStatuses() {
+    this.statusService.getAll()
+      .subscribe(resp => this.statuses = resp.data);
+  }
+
+  getStaffs() {
+    this.staffService.getAll().subscribe(resp => this.staffs = resp.data);
   }
 
   is_valid(field_name: string): boolean | undefined {
