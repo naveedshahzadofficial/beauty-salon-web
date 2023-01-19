@@ -7,10 +7,10 @@ export interface IService {
   service_slug: string;
   service_duration: number;
   service_price: number;
-  is_deal: number;
-  is_featured: number;
-  is_addon: number;
-  is_active: number;
+  is_deal: boolean;
+  is_featured: boolean;
+  is_addon: boolean;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
   addons?: IAddon[];

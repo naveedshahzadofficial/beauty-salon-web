@@ -3,7 +3,7 @@ export interface IArea {
   city_id: number
   area: string
   travel_charges: string
-  is_active: number
+  is_active: boolean
   created_at: string
   updated_at: string
 }

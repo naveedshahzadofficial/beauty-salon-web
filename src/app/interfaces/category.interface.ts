@@ -7,8 +7,8 @@ export interface ICategory {
   category_svg_icon: string;
   short_description: null | string;
   description: null | string;
-  is_deal: number;
-  is_active: number;
+  is_deal: boolean;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }
