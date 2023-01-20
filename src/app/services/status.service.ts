@@ -8,6 +8,6 @@ import { DataService } from '@services/data.service';
 })
 export class StatusService extends DataService<IStatus> {
   constructor(http: HttpClient) {
-    super('statuses', http);
+    super('admin/statuses', http);
   }
 }

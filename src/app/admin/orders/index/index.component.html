@@ -96,11 +96,7 @@
                       <td class="border-b dark:border-dark-5 text-center">
                         <div
                           [ngClass]="
-                            order.status === 'Rejected'
-                              ? 'text-danger'
-                              : order.status === 'In Complete'
-                              ? 'text-pending'
-                              : 'text-success'
+                            order.order_status.status.status_color_class
                           "
                           class="flex items-center justify-cente"
                         >
@@ -123,7 +119,7 @@
                               d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
                             ></path>
                           </svg>
-                          {{ order.status }}
+                          {{ order.order_status.status.status_name }}
                         </div>
                       </td>
 

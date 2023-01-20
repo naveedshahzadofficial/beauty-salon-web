@@ -6,7 +6,9 @@
         <div
           class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
         >
-          <h2 class="font-medium text-base mr-auto">Order No.</h2>
+          <h2 class="font-medium text-base mr-auto">
+            Order No. <b *ngIf="order">{{ order.order_no }}</b>
+          </h2>
         </div>
 
         <div class="p-5">
@@ -49,25 +51,26 @@
 
               <div
                 class="input-form"
-                [ngClass]="{ 'has-error': is_valid('user_id') }"
+                [ngClass]="{ 'has-error': is_valid('to_user_id') }"
               >
                 <label
-                  [ngClass]="{ 'text-primary-3': is_valid('user_id') }"
+                  [ngClass]="{ 'text-primary-3': is_valid('to_user_id') }"
                   class="form-label w-full flex flex-col sm:flex-row"
                 >
                   Staff <span class="text-primary-3">&nbsp;</span>
                 </label>
-                <select class="form-control" formControlName="user_id">
+                <select class="form-control" formControlName="to_user_id">
                   <ng-container *ngFor="let staff of staffs">
                     <option [value]="staff.id">
                       {{ staff.first_name }}&nbsp;{{ staff.last_name }}
                     </option>
                   </ng-container>
                 </select>
-                <ng-container *ngFor="let error of error_messages.user_id">
+                <ng-container *ngFor="let error of error_messages.to_user_id">
                   <div
                     *ngIf="
-                      is_valid('user_id') && errorType('user_id', error.type)
+                      is_valid('to_user_id') &&
+                      errorType('to_user_id', error.type)
                     "
                     class="pristine-error text-primary-3 mt-2"
                   >

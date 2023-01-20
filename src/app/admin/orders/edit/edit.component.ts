@@ -1,5 +1,4 @@
-import { IStatus } from './../../../interfaces/status.interface';
-import { StatusService } from '@services/status.service';
+import { IStatus } from '@interfaces/status.interface';
 import { IUser } from '@interfaces/user.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,8 +7,11 @@ import { OrderService } from '@app/services/order.service';
 import { CustomValidator } from '@common/custom-validator';
 import { IOrder } from '@interfaces/order.interface';
 import { ToastrService } from 'ngx-toastr';
-import { StaffService } from '@services/staff.service';
-import { filter, map } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { IOrderTransfer } from '@interfaces/order-transfer.interface';
+import { IResponse } from '@interfaces/response.interface';
+import { AppError } from '@common/app-error';
+import { ValidationError } from '@common/validation-error';
 
 @Component({
   selector: 'app-edit',
@@ -27,7 +29,7 @@ export class OrderEditComponent implements OnInit {
     status_id: [
       { type: 'required', message: 'Please select your status.' }
     ],
-    user_id: [
+    to_user_id: [
       { type: 'required', message: 'Please select your staff.' }
     ],
     status_file: [
@@ -43,13 +45,10 @@ export class OrderEditComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-    private statusService: StatusService,
-    private staffService: StaffService,
     private orderService: OrderService,
   ) {
     this.createForm();
-    this.getStatuses();
-    this.getStaffs();
+    this.getTransfer();
 
   }
   ngOnInit(): void {
@@ -60,7 +59,7 @@ export class OrderEditComponent implements OnInit {
       status_id: new FormControl(null,
         Validators.required
       ),
-      user_id: new FormControl(null,
+      to_user_id: new FormControl(null,
         Validators.nullValidator
       ),
       status_file: new FormControl(null,
@@ -72,13 +71,14 @@ export class OrderEditComponent implements OnInit {
     });
   }
 
-  getStatuses() {
-    this.statusService.getAll()
-      .subscribe(resp => this.statuses = resp.data);
-  }
-
-  getStaffs() {
-    this.staffService.getAll().subscribe(resp => this.staffs = resp.data);
+  getTransfer() {
+    this.route.params.pipe(
+      switchMap((resp: any) => this.orderService.getTransfer(resp.id)),
+    ).subscribe((resp: IOrderTransfer) => {
+      this.order = resp.order;
+      this.statuses = resp.statuses;
+      this.staffs = resp.staffs;
+    });
   }
 
   is_valid(field_name: string): boolean | undefined {
@@ -98,6 +98,29 @@ export class OrderEditComponent implements OnInit {
       });
       return;
     };
+
+    let formData = this.orderForm.value;
+    formData.order_id = this.order.id;
+    if (formData.to_user_id === null) {
+      formData.to_user_id = this.order.order_status.to_user_id;
+    }
+    this.orderService.storeTransfer(this.order.id, formData).subscribe({
+      next: (resp: IResponse<IOrder>) => {
+        this.orderForm.reset();
+        this.toastr.success(resp.message, 'Success!');
+        this.router.navigate(['admin/orders/index']);
+      },
+      error: (e: AppError) => {
+        if (e instanceof ValidationError) {
+          this.customValidator.extractErrors(
+            this.orderForm,
+            e.errors,
+            this.error_messages
+          );
+        } else throw e;
+      },
+    });
+
 
   }
 

@@ -33,4 +33,18 @@ export class OrderService extends DataService<IOrder>{
       .pipe(retry(1), catchError(handleError));
   }
 
+  getTransfer(order_id: number) {
+    return this.http
+      .post(`${this.base_url}/admin/orders/${order_id}/get-transfer`, {})
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
+  storeTransfer(order_id: number, formData: any) {
+    return this.http
+      .post(`${this.base_url}/admin/orders/${order_id}/store-transfer`, formData)
+      .pipe(map((response: any) => response.data))
+      .pipe(retry(1), catchError(handleError));
+  }
+
 }
