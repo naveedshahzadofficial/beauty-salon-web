@@ -101,6 +101,7 @@
                   placeholder="Upload File"
                   class="form-control"
                   formControlName="status_file"
+                  (change)="onFileSelect($event)"
                 />
                 <ng-container *ngFor="let error of error_messages.status_file">
                   <div

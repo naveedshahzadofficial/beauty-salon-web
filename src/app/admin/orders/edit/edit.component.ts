@@ -9,7 +9,6 @@ import { IOrder } from '@interfaces/order.interface';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 import { IOrderTransfer } from '@interfaces/order-transfer.interface';
-import { IResponse } from '@interfaces/response.interface';
 import { AppError } from '@common/app-error';
 import { ValidationError } from '@common/validation-error';
 
@@ -24,6 +23,8 @@ export class OrderEditComponent implements OnInit {
   order = {} as IOrder;
   statuses: IStatus[] = [];
   staffs: IUser[] = [];
+
+  status_file: any;
 
   error_messages = {
     status_id: [
@@ -99,12 +100,22 @@ export class OrderEditComponent implements OnInit {
       return;
     };
 
-    let formData = this.orderForm.value;
-    formData.order_id = this.order.id;
-    if (formData.to_user_id === null) {
-      formData.to_user_id = this.order.order_status.to_user_id;
+
+    let data = this.orderForm.value;
+    data.order_id = this.order.id;
+    if (data.to_user_id === null) {
+      data.to_user_id = this.order.order_status.to_user_id;
     }
-    this.orderService.storeTransfer(this.order.id, formData).subscribe({
+
+    const _formData: any = new FormData();
+    if (this.status_file)
+      _formData.append("status_file", this.status_file, this.status_file.name);
+    Object.entries(data).forEach(([key, value]) => {
+      _formData.append(key, value);
+    });
+
+
+    this.orderService.storeTransfer(this.order.id, _formData).subscribe({
       next: (resp: any) => {
         this.orderForm.reset();
         this.toastr.success(resp.message, 'Success!');
@@ -122,6 +133,14 @@ export class OrderEditComponent implements OnInit {
     });
 
 
+  }
+
+  onFileSelect(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      this.status_file = fileList[0];
+    }
   }
 
 }
