@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { SharedAdminModule } from '../shared/shared-admin.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FullnamePipe } from '@app/pipes/fullname.pipe';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     OrderIndexComponent,
     OrderShowComponent,
     OrderEditComponent,
-    OrdersComponent
+    OrdersComponent,
+    FullnamePipe
   ],
   imports: [
     CommonModule,

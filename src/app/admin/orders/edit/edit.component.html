@@ -9,6 +9,13 @@
           <h2 class="font-medium text-base mr-auto">
             Order No. <b *ngIf="order">{{ order.order_no }}</b>
           </h2>
+          <ng-container *ngIf="order && order.order_status">
+            <div class="form-check w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
+              <span [ngClass]="order.order_status.status.status_color_class">
+                {{ order.order_status.status.status_name }}</span
+              >
+            </div>
+          </ng-container>
         </div>
 
         <div class="p-5">
@@ -152,6 +159,57 @@
                 </a>
               </div>
             </form>
+
+            <div class="py-6">
+              <h4 class="font-medium text-lg my-4">Status Logs</h4>
+              <table class="table is-bordered data-table">
+                <thead>
+                  <tr class="bg-gray-700 dark:bg-dark-1 text-white">
+                    <th class="whitespace-nowrap text-center">Date</th>
+                    <th class="whitespace-nowrap text-left">From</th>
+                    <th class="whitespace-nowrap text-left">To</th>
+                    <th class="whitespace-nowrap text-left">Status</th>
+                    <th class="whitespace-nowrap text-center">Attachment</th>
+                    <th class="whitespace-nowrap text-center">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="order">
+                  <ng-container
+                    *ngFor="let order_status of order.order_statuses"
+                  >
+                    <tr class="hover:bg-gray-200">
+                      <th class="border-b dark:border-dark-5 text-center">
+                        {{ order_status.created_at }}
+                      </th>
+                      <th class="border-b dark:border-dark-5 text-left">
+                        {{
+                          order_status.from_user.first_name
+                            | fullname : order_status.from_user.last_name
+                        }}
+                      </th>
+                      <th class="border-b dark:border-dark-5 text-left">
+                        {{
+                          order_status.to_user.first_name
+                            | fullname : order_status.to_user.last_name
+                        }}
+                      </th>
+                      <th class="border-b dark:border-dark-5 text-left">
+                        <span
+                          [ngClass]="order_status.status.status_color_class"
+                          >{{ order_status.status.status_name }}</span
+                        >
+                      </th>
+                      <th class="border-b dark:border-dark-5 text-center">
+                        {{ order_status.status_file }}
+                      </th>
+                      <th class="border-b dark:border-dark-5 text-center">
+                        {{ order_status.status_remark }}
+                      </th>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -105,7 +105,7 @@ export class OrderEditComponent implements OnInit {
       formData.to_user_id = this.order.order_status.to_user_id;
     }
     this.orderService.storeTransfer(this.order.id, formData).subscribe({
-      next: (resp: IResponse<IOrder>) => {
+      next: (resp: any) => {
         this.orderForm.reset();
         this.toastr.success(resp.message, 'Success!');
         this.router.navigate(['admin/orders/index']);
