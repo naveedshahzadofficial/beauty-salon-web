@@ -11,6 +11,11 @@ import { InputMaskModule } from '@ngneat/input-mask';
 import { OrdersModule } from '@app/admin/orders/orders.module';
 import { StaffsModule } from '@app/admin/staffs/staffs.module';
 import { ClientsModule } from '@app/admin/clients/clients.module';
+import { ProfileComponent } from './profile/profile.component';
+import { PersonalComponent } from './profile/personal/personal.component';
+import { BeautyComponent } from './profile/beauty/beauty.component';
+import { AddressComponent } from './profile/address/address.component';
+import { PasswordComponent } from './profile/password/password.component';
 
 
 
@@ -18,6 +23,11 @@ import { ClientsModule } from '@app/admin/clients/clients.module';
   declarations: [
     DashboardComponent,
     LoginComponent,
+    ProfileComponent,
+    PersonalComponent,
+    BeautyComponent,
+    AddressComponent,
+    PasswordComponent,
 
   ],
   imports: [

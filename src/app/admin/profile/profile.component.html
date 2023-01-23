@@ -1,0 +1,136 @@
+<div class="intro-y flex items-center mt-8">
+  <h2 class="text-lg font-medium mr-auto">Update Profile</h2>
+</div>
+
+<div class="grid grid-cols-12 gap-6">
+  <!-- BEGIN: Profile Menu -->
+  <div
+    class="col-span-12 lg:col-span-4 2xl:col-span-3 flex lg:block flex-col-reverse"
+  >
+    <div class="intro-y box mt-5">
+      <div class="relative flex items-center p-5">
+        <div class="w-12 h-12 image-fit">
+          <img
+            alt="Midone - HTML Admin Template"
+            class="rounded-full"
+            src="assets/images/200x200.jpg"
+          />
+        </div>
+        <div class="ml-4 mr-auto">
+          <div class="font-medium text-base">Johnny Depp</div>
+          <div class="text-slate-500">DevOps Engineer</div>
+        </div>
+      </div>
+      <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
+        <a
+          routerLink="personal"
+          routerLinkActive="text-primary"
+          class="flex items-center font-medium"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            icon-name="activity"
+            data-lucide="activity"
+            class="lucide lucide-activity w-4 h-4 mr-2"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          Personal Profile
+        </a>
+        <a
+          routerLink="beauty"
+          routerLinkActive="text-primary"
+          class="flex items-center mt-5"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide bean-off w-4 h-4 mr-2"
+          >
+            <path
+              d="M9 9c-.64.64-1.521.954-2.402 1.165A6 6 0 0 0 8 22a13.96 13.96 0 0 0 9.9-4.1"
+            ></path>
+            <path
+              d="M10.75 5.093A6 6 0 0 1 22 8c0 2.411-.61 4.68-1.683 6.66"
+            ></path>
+            <path
+              d="M5.341 10.62a4 4 0 0 0 6.487 1.208M10.62 5.341a4.015 4.015 0 0 1 2.039 2.04"
+            ></path>
+            <line x1="2" y1="2" x2="22" y2="22"></line>
+          </svg>
+          Beauty Profile
+        </a>
+        <a
+          routerLink="address"
+          routerLinkActive="text-primary"
+          class="flex items-center mt-5"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            icon-name="box"
+            data-lucide="box"
+            class="lucide lucide-box w-4 h-4 mr-2"
+          >
+            <path
+              d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
+            ></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Address
+        </a>
+        <a
+          routerLink="change-password"
+          routerLinkActive="text-primary"
+          class="flex items-center mt-5"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            icon-name="lock"
+            data-lucide="lock"
+            class="lucide lucide-lock w-4 h-4 mr-2"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0110 0v4"></path>
+          </svg>
+          Change Password
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- END: Profile Menu -->
+  <div class="col-span-12 lg:col-span-8 2xl:col-span-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>
