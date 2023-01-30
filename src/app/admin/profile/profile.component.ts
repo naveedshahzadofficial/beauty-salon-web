@@ -1,3 +1,5 @@
+import { IUser } from './../../interfaces/user.interface';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor() { }
+  user = {} as IUser | null;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe(user => this.user = user);
   }
 
 }

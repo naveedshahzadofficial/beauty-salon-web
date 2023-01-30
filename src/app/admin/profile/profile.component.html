@@ -16,9 +16,13 @@
             src="assets/images/200x200.jpg"
           />
         </div>
-        <div class="ml-4 mr-auto">
-          <div class="font-medium text-base">Johnny Depp</div>
-          <div class="text-slate-500">DevOps Engineer</div>
+        <div class="ml-4 mr-auto" *ngIf="user">
+          <div class="font-medium text-base">
+            {{ user.first_name + " " + user.last_name }}
+          </div>
+          <div class="text-slate-500" *ngIf="user.roles">
+            {{ user.roles[0].name }}
+          </div>
         </div>
       </div>
       <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
