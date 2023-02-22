@@ -7,134 +7,147 @@
   </div>
 
   <div class="p-5">
-    <div class="flex flex-col-reverse xl:flex-row">
-      <div class="flex-1 mt-6 xl:mt-0">
-        <div class="grid grid-cols-12 gap-x-5">
-          <div class="col-span-12 2xl:col-span-6">
-            <div>
-              <label for="first_name" class="form-label">First Name</label>
-              <input
-                id="first_name"
-                type="text"
-                class="form-control"
-                placeholder="First Name"
-                value=""
-              />
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="onSubmit($event)"
+      class="validate-form"
+      autocomplete="off"
+    >
+      <div class="flex flex-col-reverse xl:flex-row">
+        <div class="flex-1 mt-6 xl:mt-0">
+          <div class="grid grid-cols-12 gap-x-5">
+            <div class="col-span-12 2xl:col-span-6">
+              <div>
+                <label for="first_name" class="form-label">First Name</label>
+                <input
+                  id="first_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="First Name"
+                  formControlName="first_name"
+                />
+              </div>
+              <div class="mt-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input
+                  id="last_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Last Name"
+                  formControlName="last_name"
+                />
+              </div>
             </div>
-            <div class="mt-3">
-              <label for="last_name" class="form-label">Last Name</label>
-              <input
-                id="last_name"
-                type="text"
-                class="form-control"
-                placeholder="Last Name"
-                value=""
-              />
+            <div class="col-span-12 2xl:col-span-6">
+              <div class="mt-3 2xl:mt-0">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Address"
+                  formControlName="email"
+                />
+              </div>
+              <div class="mt-3">
+                <label for="mobile" class="form-label">Mobile No.</label>
+                <input
+                  id="mobile"
+                  type="text"
+                  class="form-control"
+                  placeholder="Mobile No."
+                  formControlName="mobile"
+                  [inputMask]="mobileInputMask"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-span-12 2xl:col-span-6">
-            <div class="mt-3 2xl:mt-0">
-              <label for="email" class="form-label">Email</label>
-              <input
-                id="email"
-                type="email"
-                class="form-control"
-                placeholder="Email Address"
-                value=""
-              />
-            </div>
-            <div class="mt-3">
-              <label for="mobile" class="form-label">Mobile No.</label>
-              <input
-                id="mobile"
-                type="text"
-                class="form-control"
-                placeholder="Mobile No."
-                value=""
-              />
-            </div>
-          </div>
-          <div class="col-span-12">
-            <div class="mt-3">
-              <label for="gender" class="form-label">Gender</label>
-              <select id="gender" data-search="true" class="tom-select w-full">
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-              </select>
+            <div class="col-span-12">
+              <div class="mt-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select
+                  id="gender"
+                  data-search="true"
+                  class="tom-select w-full"
+                  formControlName="gender"
+                >
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+
+              <div class="mt-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input
+                  id="dob"
+                  type="text"
+                  class="form-control"
+                  placeholder="Date of Birth"
+                  formControlName="dob"
+                />
+              </div>
             </div>
 
-            <div class="mt-3">
-              <label for="dob" class="form-label">Date of Birth</label>
-              <input
-                id="dob"
-                type="text"
-                class="form-control"
-                placeholder="Date of Birth"
-                value=""
-              />
+            <div class="col-span-12">
+              <div class="mt-3">
+                <label for="cnic" class="form-label">CNIC</label>
+                <input
+                  id="cnic"
+                  type="text"
+                  class="form-control"
+                  placeholder="CNIC"
+                  formControlName="cnic"
+                />
+              </div>
             </div>
           </div>
-
-          <div class="col-span-12">
-            <div class="mt-3">
-              <label for="cnic" class="form-label">CNIC</label>
-              <input
-                id="cnic"
-                type="text"
-                class="form-control"
-                placeholder="CNIC"
-                value=""
-              />
-            </div>
-          </div>
+          <button type="button" class="btn btn-primary w-20 mt-3">Save</button>
         </div>
-        <button type="button" class="btn btn-primary w-20 mt-3">Save</button>
-      </div>
-      <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
-        <div
-          class="border-2 border-dashed shadow-sm border-slate-200/60 dark:border-darkmode-400 rounded-md p-5"
-        >
-          <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-            <img
-              class="rounded-md"
-              alt="Midone - HTML Admin Template"
-              src="assets/images/200x200.jpg"
-            />
-            <div
-              title="Remove this profile photo?"
-              class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                icon-name="x"
-                data-lucide="x"
-                class="lucide lucide-x w-4 h-4"
+        <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
+          <div
+            class="border-2 border-dashed shadow-sm border-slate-200/60 dark:border-darkmode-400 rounded-md p-5"
+          >
+            <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
+              <img
+                class="rounded-md"
+                alt="Profile Photo"
+                src="assets/images/200x200.jpg"
+              />
+              <div
+                title="Remove this profile photo?"
+                class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2"
               >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  icon-name="x"
+                  data-lucide="x"
+                  class="lucide lucide-x w-4 h-4"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </div>
             </div>
-          </div>
-          <div class="mx-auto cursor-pointer relative mt-5">
-            <button type="button" class="btn btn-primary w-full">
-              Change Photo
-            </button>
-            <input
-              type="file"
-              class="w-full h-full top-0 left-0 absolute opacity-0"
-            />
+            <div class="mx-auto cursor-pointer relative mt-5">
+              <button type="button" class="btn btn-primary w-full">
+                Change Photo
+              </button>
+              <input
+                type="file"
+                class="w-full h-full top-0 left-0 absolute opacity-0"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 <!-- END: Personal Information -->

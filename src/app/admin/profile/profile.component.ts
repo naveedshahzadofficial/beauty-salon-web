@@ -1,7 +1,6 @@
-import { IUser } from './../../interfaces/user.interface';
-import { AuthService } from './../../services/auth.service';
+import { IUser } from '@interfaces/user.interface';
+import { AuthService } from '@services/auth.service';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,5 +13,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe(user => this.user = user);
   }
+
 
 }
